@@ -32,9 +32,10 @@ async function getProduct(slug: string, locale: string) {
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string; slug: string };
+  params: Promise<{ locale: string; slug: string }>;
 }) {
-  const product = await getProduct(params.slug, params.locale);
+  const { locale, slug } = await params;
+  const product = await getProduct(slug, locale);
 
   if (!product) {
     return {
@@ -57,10 +58,11 @@ export async function generateMetadata({
 export default async function ProductDetailPage({
   params,
 }: {
-  params: { locale: string; slug: string };
+  params: Promise<{ locale: string; slug: string }>;
 }) {
-  const product = await getProduct(params.slug, params.locale);
-  const t = await getTranslations('products');
+  const { locale, slug } = await params;
+  const product = await getProduct(slug, locale);
+  const t = await getTranslations({ locale, namespace: 'products' });
 
   if (!product) {
     notFound();
@@ -86,7 +88,7 @@ export default async function ProductDetailPage({
         <div className="flex items-center justify-between mb-6">
           <div>
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
-              {t('price', { defaultMessage: 'Price' })}
+              {t('price')}
             </p>
             <p className="text-4xl font-bold text-gray-900 dark:text-white">
               {product.currency} {product.price.toString()}
@@ -95,7 +97,7 @@ export default async function ProductDetailPage({
           <BuyButton
             productId={product.id}
             stripePriceId={product.stripePriceId || ''}
-            locale={params.locale}
+            locale={locale}
           />
         </div>
 
@@ -103,7 +105,7 @@ export default async function ProductDetailPage({
         {features && features.length > 0 && (
           <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              {t('features', { defaultMessage: 'Features' })}
+              {t('features')}
             </h3>
             <ul className="space-y-3">
               {features.map((feature, index) => (
@@ -136,7 +138,7 @@ export default async function ProductDetailPage({
       {translation.content && (
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-            {t('details', { defaultMessage: 'Product Details' })}
+            {t('details')}
           </h2>
           <div
             className="prose dark:prose-invert max-w-none"

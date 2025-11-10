@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { db } from "./db";
+import { getRequiredEnv } from "./env";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -62,5 +63,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     }
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: getRequiredEnv('NEXTAUTH_SECRET'),
 });

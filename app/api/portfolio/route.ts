@@ -28,9 +28,17 @@ export async function GET(req: NextRequest) {
     }
 
     // Fetch projects with translations filtered by locale
+    // Only count projects that have translations for the requested locale
     const [projects, total] = await Promise.all([
       db.project.findMany({
-        where,
+        where: {
+          ...where,
+          translations: {
+            some: {
+              locale,
+            },
+          },
+        },
         include: {
           translations: {
             where: {
@@ -44,16 +52,20 @@ export async function GET(req: NextRequest) {
         skip,
         take: limit,
       }),
-      db.project.count({ where }),
+      db.project.count({
+        where: {
+          ...where,
+          translations: {
+            some: {
+              locale,
+            },
+          },
+        },
+      }),
     ]);
 
-    // Filter out projects that don't have translation for the requested locale
-    const projectsWithTranslation = projects.filter(
-      (project) => project.translations.length > 0
-    );
-
     return NextResponse.json({
-      projects: projectsWithTranslation,
+      projects,
       pagination: {
         page,
         limit,

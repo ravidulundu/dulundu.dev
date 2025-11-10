@@ -1,22 +1,23 @@
 'use client';
 
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import LanguageSwitcher from './LanguageSwitcher';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Navbar() {
   const t = useTranslations('nav');
+  const locale = useLocale();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navigation = [
-    { name: t('home'), href: '/' },
-    { name: t('services'), href: '/services' },
-    { name: t('products'), href: '/products' },
-    { name: t('portfolio'), href: '/portfolio' },
-    { name: t('blog'), href: '/blog' },
-    { name: t('contact'), href: '/contact' },
+    { name: t('home'), href: `/${locale}` },
+    { name: t('services'), href: `/${locale}/services` },
+    { name: t('products'), href: `/${locale}/products` },
+    { name: t('portfolio'), href: `/${locale}/portfolio` },
+    { name: t('blog'), href: `/${locale}/blog` },
+    { name: t('contact'), href: `/${locale}/contact` },
   ];
 
   return (
@@ -25,7 +26,7 @@ export default function Navbar() {
         <div className="flex justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/" className="flex items-center">
+            <Link href={`/${locale}`} className="flex items-center">
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Dulundu.dev
               </span>
@@ -51,6 +52,7 @@ export default function Navbar() {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100"
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { db } from '@/lib/db';
+import { getRequiredEnv } from '@/lib/env';
 import Stripe from 'stripe';
 
 export async function POST(req: NextRequest) {
@@ -14,10 +15,11 @@ export async function POST(req: NextRequest) {
   let event: Stripe.Event;
 
   try {
+    const webhookSecret = getRequiredEnv('STRIPE_WEBHOOK_SECRET');
     event = stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET!
+      webhookSecret
     );
   } catch (err) {
     console.error('Webhook signature verification failed:', err);

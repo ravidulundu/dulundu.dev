@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { requireAdmin } from '@/lib/auth-helpers';
+import { parseDate } from '@/lib/validation';
 
 // POST - Create new blog post
 export async function POST(req: NextRequest) {
@@ -37,7 +38,7 @@ export async function POST(req: NextRequest) {
         slug,
         status: status || 'draft',
         featured: featured || false,
-        publishedAt: publishedAt ? new Date(publishedAt) : null,
+        publishedAt: parseDate(publishedAt),
         translations: {
           create: translations.map((t: any) => ({
             locale: t.locale,

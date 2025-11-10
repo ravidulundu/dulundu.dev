@@ -5,13 +5,14 @@ import { requireAdmin } from '@/lib/auth-helpers';
 // GET - Get single project for editing
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await requireAdmin();
+    const { id } = await params;
 
     const project = await db.project.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         translations: true,
       },
@@ -34,17 +35,18 @@ export async function GET(
 // PUT - Update existing project
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await requireAdmin();
+    const { id } = await params;
 
     const body = await req.json();
     const { slug, category, status, featured, url, order, translations } = body;
 
     // Check if project exists
     const existing = await db.project.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!existing) {
@@ -67,7 +69,7 @@ export async function PUT(
 
     // Update project and translations
     const project = await db.project.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         slug: slug || existing.slug,
         category: category || existing.category,
@@ -106,14 +108,15 @@ export async function PUT(
 // DELETE - Delete project
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await requireAdmin();
+    const { id } = await params;
 
     // Check if project exists
     const existing = await db.project.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!existing) {
@@ -122,7 +125,7 @@ export async function DELETE(
 
     // Delete project (translations will be cascade deleted)
     await db.project.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({ success: true });

@@ -22,15 +22,28 @@ export default function LanguageSwitcher() {
   const pathname = usePathname();
 
   const switchLocale = (newLocale: string) => {
-    // Remove current locale from pathname
-    const pathnameWithoutLocale = pathname.replace(`/${locale}`, '');
-    // Navigate to new locale
-    router.push(`/${newLocale}${pathnameWithoutLocale || '/'}`);
+    // Extract path without locale prefix
+    // More robust: split by / and reconstruct without first locale segment
+    const segments = pathname.split('/').filter(Boolean);
+
+    // Remove current locale if it's the first segment
+    if (segments[0] && locales.includes(segments[0] as any)) {
+      segments.shift();
+    }
+
+    // Build new path with new locale
+    const pathWithoutLocale = segments.length > 0 ? `/${segments.join('/')}` : '';
+    const newPath = `/${newLocale}${pathWithoutLocale}`;
+
+    router.push(newPath);
   };
 
   return (
     <div className="relative group">
-      <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors">
+      <button
+        className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors"
+        aria-label="Switch language"
+      >
         <span>{localeFlags[locale]}</span>
         <span className="font-medium">{localeNames[locale]}</span>
         <svg
@@ -38,6 +51,7 @@ export default function LanguageSwitcher() {
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
+          aria-hidden="true"
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
@@ -51,11 +65,13 @@ export default function LanguageSwitcher() {
             className={`w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center gap-3 first:rounded-t-lg last:rounded-b-lg transition-colors ${
               locale === loc ? 'bg-blue-50 text-blue-600' : ''
             }`}
+            aria-label={`Switch to ${localeNames[loc]}`}
+            aria-current={locale === loc ? 'true' : 'false'}
           >
             <span className="text-xl">{localeFlags[loc]}</span>
             <span className="font-medium">{localeNames[loc]}</span>
             {locale === loc && (
-              <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
             )}

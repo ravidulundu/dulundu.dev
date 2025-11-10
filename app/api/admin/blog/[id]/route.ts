@@ -1,17 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { requireAdmin } from '@/lib/auth-helpers';
+import { parseDate } from '@/lib/validation';
 
 // GET - Get single post for editing
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await requireAdmin();
+    const { id } = await params;
 
     const post = await db.post.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         translations: true,
       },
@@ -34,17 +36,18 @@ export async function GET(
 // PUT - Update existing post
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await requireAdmin();
+    const { id } = await params;
 
     const body = await req.json();
     const { slug, status, featured, publishedAt, translations } = body;
 
     // Check if post exists
     const existing = await db.post.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!existing) {
@@ -67,12 +70,12 @@ export async function PUT(
 
     // Update post and translations
     const post = await db.post.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         slug: slug || existing.slug,
         status: status || existing.status,
         featured: featured !== undefined ? featured : existing.featured,
-        publishedAt: publishedAt ? new Date(publishedAt) : existing.publishedAt,
+        publishedAt: parseDate(publishedAt) || existing.publishedAt,
         translations: translations
           ? {
               deleteMany: {}, // Delete existing translations
@@ -104,14 +107,15 @@ export async function PUT(
 // DELETE - Delete post
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await requireAdmin();
+    const { id } = await params;
 
     // Check if post exists
     const existing = await db.post.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!existing) {
@@ -120,7 +124,7 @@ export async function DELETE(
 
     // Delete post (translations will be cascade deleted)
     await db.post.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({ success: true });

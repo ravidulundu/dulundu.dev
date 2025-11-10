@@ -1,5 +1,5 @@
 import createMiddleware from 'next-intl/middleware';
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { locales, defaultLocale } from './i18n';
 
 // IP-based locale detection function
@@ -22,7 +22,29 @@ function getLocaleFromIP(request: NextRequest): string | null {
 }
 
 export default function middleware(request: NextRequest) {
-  // Get locale from IP if not already set
+  // Check for IP-based locale detection BEFORE i18n routing
+  const pathname = request.nextUrl.pathname;
+  const hasLocaleInPath = locales.some(locale =>
+    pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  );
+
+  // Only auto-detect on first visit (when no locale is in path and no cookie)
+  if (!hasLocaleInPath && !request.cookies.has('NEXT_LOCALE')) {
+    const ipLocale = getLocaleFromIP(request);
+    if (ipLocale && locales.includes(ipLocale as any)) {
+      // Create redirect response with cookie
+      const url = request.nextUrl.clone();
+      url.pathname = `/${ipLocale}${pathname}`;
+      const response = NextResponse.redirect(url);
+      response.cookies.set('NEXT_LOCALE', ipLocale, {
+        maxAge: 60 * 60 * 24 * 365, // 1 year
+        path: '/',
+      });
+      return response;
+    }
+  }
+
+  // Handle i18n routing
   const handleI18nRouting = createMiddleware({
     locales,
     defaultLocale,
@@ -30,25 +52,7 @@ export default function middleware(request: NextRequest) {
     localePrefix: 'always' // Always show locale in URL
   });
 
-  const response = handleI18nRouting(request);
-
-  // If user hasn't explicitly chosen a locale, try to detect from IP
-  const pathname = request.nextUrl.pathname;
-  const hasLocaleInPath = locales.some(locale =>
-    pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  );
-
-  // Only auto-detect on first visit (when no locale is in path)
-  if (!hasLocaleInPath && !request.cookies.has('NEXT_LOCALE')) {
-    const ipLocale = getLocaleFromIP(request);
-    if (ipLocale && locales.includes(ipLocale as any)) {
-      const url = request.nextUrl.clone();
-      url.pathname = `/${ipLocale}${pathname}`;
-      response.cookies.set('NEXT_LOCALE', ipLocale);
-    }
-  }
-
-  return response;
+  return handleI18nRouting(request);
 }
 
 export const config = {

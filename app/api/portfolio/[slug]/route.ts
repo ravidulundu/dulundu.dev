@@ -3,16 +3,17 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
+    const { slug } = await params;
     const { searchParams } = new URL(req.url);
     const locale = searchParams.get('locale') || 'en';
 
     // Fetch project by slug
     const project = await db.project.findUnique({
       where: {
-        slug: params.slug,
+        slug,
       },
       include: {
         translations: {

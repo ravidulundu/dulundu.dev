@@ -12,6 +12,8 @@ interface BuyButtonProps {
 export default function BuyButton({ productId, stripePriceId, locale }: BuyButtonProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showEmailForm, setShowEmailForm] = useState(false);
+  const [email, setEmail] = useState('');
   const t = useTranslations('products');
 
   const handleBuyNow = async () => {
@@ -20,23 +22,19 @@ export default function BuyButton({ productId, stripePriceId, locale }: BuyButto
       return;
     }
 
+    // Show email form if email not provided
+    if (!email) {
+      setShowEmailForm(true);
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
     try {
-      // Get customer email (you might want to add an email input or get from session)
-      const customerEmail = prompt(
-        t('enterEmail', { defaultMessage: 'Please enter your email address' })
-      );
-
-      if (!customerEmail) {
-        setLoading(false);
-        return;
-      }
-
       // Validate email
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(customerEmail)) {
+      if (!emailRegex.test(email)) {
         setError(t('invalidEmail', { defaultMessage: 'Please enter a valid email address' }));
         setLoading(false);
         return;
@@ -47,7 +45,7 @@ export default function BuyButton({ productId, stripePriceId, locale }: BuyButto
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           productId,
-          customerEmail,
+          customerEmail: email,
           locale,
         }),
       });
@@ -77,12 +75,44 @@ export default function BuyButton({ productId, stripePriceId, locale }: BuyButto
   };
 
   return (
-    <div>
+    <div className="space-y-4">
+      {showEmailForm && !email && (
+        <div className="p-4 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800">
+          <label htmlFor="customer-email" className="block text-sm font-medium mb-2">
+            {t('emailLabel', { defaultMessage: 'Email Address' })}
+          </label>
+          <div className="flex gap-2">
+            <input
+              id="customer-email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  handleBuyNow();
+                }
+              }}
+              placeholder={t('emailPlaceholder', { defaultMessage: 'you@example.com' })}
+              className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+              autoFocus
+              required
+            />
+            <button
+              onClick={handleBuyNow}
+              disabled={!email}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+            >
+              {t('continue', { defaultMessage: 'Continue' })}
+            </button>
+          </div>
+        </div>
+      )}
+
       <button
         onClick={handleBuyNow}
         disabled={loading || !stripePriceId}
         className={`
-          px-8 py-4 text-lg font-semibold rounded-lg
+          w-full px-8 py-4 text-lg font-semibold rounded-lg
           transition-all duration-200
           ${
             loading || !stripePriceId
@@ -92,7 +122,7 @@ export default function BuyButton({ productId, stripePriceId, locale }: BuyButto
         `}
       >
         {loading ? (
-          <span className="flex items-center">
+          <span className="flex items-center justify-center">
             <svg
               className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
               xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +151,7 @@ export default function BuyButton({ productId, stripePriceId, locale }: BuyButto
       </button>
 
       {error && (
-        <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+        <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
           <p className="text-red-600 dark:text-red-400 text-sm">{error}</p>
         </div>
       )}
