@@ -1,8 +1,9 @@
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 
 export default function Footer() {
   const t = useTranslations('footer');
+  const locale = useLocale();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -23,17 +24,17 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-4">{t('services')}</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/services" className="hover:text-white transition-colors">
+                <Link href={`/${locale}/services`} className="hover:text-white transition-colors">
                   WordPress Optimization
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-white transition-colors">
+                <Link href={`/${locale}/services`} className="hover:text-white transition-colors">
                   Consulting
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-white transition-colors">
+                <Link href={`/${locale}/services`} className="hover:text-white transition-colors">
                   Digital Products
                 </Link>
               </li>
@@ -45,17 +46,17 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-4">{t('company')}</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/portfolio" className="hover:text-white transition-colors">
+                <Link href={`/${locale}/portfolio`} className="hover:text-white transition-colors">
                   Portfolio
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-white transition-colors">
+                <Link href={`/${locale}/blog`} className="hover:text-white transition-colors">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
+                <Link href={`/${locale}/contact`} className="hover:text-white transition-colors">
                   Contact
                 </Link>
               </li>
@@ -69,10 +70,10 @@ export default function Footer() {
             &copy; {currentYear} Dulundu.dev. {t('copyright')}
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">
+            <Link href={`/${locale}/privacy`} className="text-gray-400 hover:text-white text-sm transition-colors">
               {t('privacy')}
             </Link>
-            <Link href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">
+            <Link href={`/${locale}/terms`} className="text-gray-400 hover:text-white text-sm transition-colors">
               {t('terms')}
             </Link>
           </div>
