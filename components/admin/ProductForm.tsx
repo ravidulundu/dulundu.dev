@@ -41,9 +41,9 @@ const productTypes = [
 ];
 
 const currencies = [
-  { value: 'usd', label: 'USD ($)' },
-  { value: 'eur', label: 'EUR (€)' },
-  { value: 'try', label: 'TRY (₺)' },
+  { value: 'USD', label: 'USD ($)' },
+  { value: 'EUR', label: 'EUR (€)' },
+  { value: 'TRY', label: 'TRY (₺)' },
 ];
 
 export default function ProductForm({ initialData, mode }: ProductFormProps) {
@@ -56,7 +56,7 @@ export default function ProductForm({ initialData, mode }: ProductFormProps) {
   const [slug, setSlug] = useState(initialData?.slug || '');
   const [type, setType] = useState(initialData?.type || 'service');
   const [price, setPrice] = useState(initialData?.price?.toString() || '');
-  const [currency, setCurrency] = useState(initialData?.currency || 'usd');
+  const [currency, setCurrency] = useState(initialData?.currency || 'USD');
   const [status, setStatus] = useState(initialData?.status || 'draft');
 
   // Translations state

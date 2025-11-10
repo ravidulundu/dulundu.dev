@@ -5,13 +5,14 @@ import { NextRequest, NextResponse } from "next/server";
 // Get single product
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   await requireAdmin();
+  const { id } = await params;
 
   try {
     const product = await db.product.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         translations: true,
       },
@@ -37,16 +38,17 @@ export async function GET(
 // Update product
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   await requireAdmin();
+  const { id } = await params;
 
   try {
     const { slug, type, price, currency, status, translations } = await req.json();
 
     // Check if product exists
     const existingProduct = await db.product.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!existingProduct) {
@@ -72,11 +74,11 @@ export async function PUT(
 
     // Delete existing translations and create new ones
     await db.productTranslation.deleteMany({
-      where: { productId: params.id },
+      where: { productId: id },
     });
 
     const product = await db.product.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         slug,
         type,
@@ -111,13 +113,14 @@ export async function PUT(
 // Delete product
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   await requireAdmin();
+  const { id } = await params;
 
   try {
     const product = await db.product.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!product) {
@@ -128,7 +131,7 @@ export async function DELETE(
     }
 
     await db.product.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({ success: true });

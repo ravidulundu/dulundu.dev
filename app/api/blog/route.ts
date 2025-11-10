@@ -26,9 +26,17 @@ export async function GET(req: NextRequest) {
     }
 
     // Fetch posts with translations filtered by locale
+    // Only count posts that have translations for the requested locale
     const [posts, total] = await Promise.all([
       db.post.findMany({
-        where,
+        where: {
+          ...where,
+          translations: {
+            some: {
+              locale,
+            },
+          },
+        },
         include: {
           translations: {
             where: {
@@ -42,16 +50,20 @@ export async function GET(req: NextRequest) {
         skip,
         take: limit,
       }),
-      db.post.count({ where }),
+      db.post.count({
+        where: {
+          ...where,
+          translations: {
+            some: {
+              locale,
+            },
+          },
+        },
+      }),
     ]);
 
-    // Filter out posts that don't have translation for the requested locale
-    const postsWithTranslation = posts.filter(
-      (post) => post.translations.length > 0
-    );
-
     return NextResponse.json({
-      posts: postsWithTranslation,
+      posts,
       pagination: {
         page,
         limit,

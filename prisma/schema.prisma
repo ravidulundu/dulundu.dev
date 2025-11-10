@@ -97,6 +97,7 @@ model ProductTranslation {
   description String  @db.Text
   features    Json?   // Array of feature strings
   content     String? @db.Text // Long description/details
+  coverImage  String? // Product cover/feature image URL
 
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
