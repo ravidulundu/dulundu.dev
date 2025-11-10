@@ -1,0 +1,183 @@
+{
+  "metadata": {
+    "title": "Dulundu.dev - Professional WordPress & Web Development Services",
+    "description": "Expert WordPress optimization, consulting, and digital products. Boost your site performance and achieve your business goals."
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "products": "Products",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "contact": "Contact",
+    "admin": "Admin"
+  },
+  "hero": {
+    "title": "Professional WordPress & Web Development Services",
+    "subtitle": "Optimize, enhance, and grow your digital presence",
+    "cta": "Get Started",
+    "learnMore": "Learn More"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Professional solutions to boost your digital presence",
+    "cta": "Get Started",
+    "learnMore": "Learn More",
+    "wordpress": {
+      "title": "WordPress Optimization",
+      "description": "Speed up your WordPress site with professional optimization, caching, and performance enhancements.",
+      "features": [
+        "Performance audits and optimization",
+        "Caching implementation",
+        "Database optimization",
+        "Code minification and compression",
+        "CDN integration",
+        "Ongoing monitoring and maintenance"
+      ]
+    },
+    "consulting": {
+      "title": "Technical Consulting",
+      "description": "Expert guidance for your web development projects, architecture design, and technical decisions.",
+      "features": [
+        "Technical architecture design",
+        "Code review and best practices",
+        "Technology stack recommendations",
+        "Performance optimization strategies",
+        "Security assessments",
+        "Team mentoring and training"
+      ]
+    },
+    "products": {
+      "title": "Digital Products",
+      "description": "Premium WordPress themes, plugins, and tools to enhance your website functionality.",
+      "features": [
+        "WordPress plugins and themes",
+        "Custom development tools",
+        "API integrations",
+        "Documentation and support",
+        "Regular updates",
+        "Lifetime license options"
+      ]
+    },
+    "custom": {
+      "title": "Custom Development",
+      "description": "Tailored web solutions built to your exact specifications and business requirements.",
+      "features": [
+        "Full-stack web development",
+        "Custom WordPress solutions",
+        "API development and integration",
+        "E-commerce solutions",
+        "Progressive web apps (PWA)",
+        "Maintenance and support"
+      ]
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Dulundu.dev. All rights reserved.",
+    "services": "Services",
+    "company": "Company",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Insights, tutorials, and industry news",
+    "readMore": "Read More",
+    "readArticle": "Read Article",
+    "featured": "Featured",
+    "noPostsYet": "No blog posts available yet. Check back soon!",
+    "minuteRead": "min read",
+    "publishedOn": "Published on",
+    "author": "Author",
+    "share": "Share",
+    "relatedPosts": "Related Posts",
+    "backToBlog": "Back to Blog",
+    "latestPosts": "Latest Posts",
+    "allPosts": "All Posts",
+    "categories": "Categories",
+    "tags": "Tags"
+  },
+  "products": {
+    "title": "Products",
+    "subtitle": "Premium digital products and services to boost your business",
+    "allProducts": "All Products",
+    "noProductsYet": "No products available yet. Check back soon!",
+    "price": "Price",
+    "features": "Features",
+    "details": "Product Details",
+    "buyNow": "Buy Now",
+    "processing": "Processing...",
+    "enterEmail": "Please enter your email address",
+    "invalidEmail": "Please enter a valid email address",
+    "notAvailable": "This product is not available for purchase",
+    "checkoutError": "Failed to initiate checkout. Please try again."
+  },
+  "checkout": {
+    "thankYou": "Thank You!",
+    "orderConfirmed": "Your order has been confirmed and is being processed.",
+    "orderDetails": "Order Details",
+    "orderNumber": "Order Number",
+    "email": "Email",
+    "status": "Status",
+    "completed": "Completed",
+    "pending": "Pending",
+    "quantity": "Quantity",
+    "total": "Total",
+    "emailSent": "Confirmation Email Sent",
+    "emailSentDesc": "We sent a confirmation email to {email}. Please check your inbox.",
+    "continueShopping": "Continue Shopping",
+    "paymentCancelled": "Payment Cancelled",
+    "paymentCancelledDesc": "Your payment was cancelled and no charges were made.",
+    "whatHappened": "What Happened?",
+    "cancelledExplanation": "You cancelled the payment process before it was completed. No charges have been made to your account, and your order was not created.",
+    "nextSteps": "What Can You Do Next?",
+    "tryAgain": "Try purchasing again if you want to complete the order",
+    "browseProducts": "Browse other products that might interest you",
+    "contactSupport": "Contact us if you need help or have questions",
+    "backToHome": "Back to Home",
+    "tryAgainButton": "Try Again",
+    "needHelp": "Need help?",
+    "contactUs": "Contact us",
+    "sessionNotFound": "Session Not Found",
+    "sessionNotFoundDesc": "We could not find your order. Please contact support if you need assistance."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with us for any questions or inquiries",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "How can we help?",
+      "message": "Message",
+      "messagePlaceholder": "Tell us more about your project or inquiry...",
+      "send": "Send Message",
+      "sending": "Sending..."
+    },
+    "info": {
+      "title": "Contact Information",
+      "email": "Email",
+      "location": "Location",
+      "hours": "Business Hours"
+    },
+    "success": "Message sent successfully! We'll get back to you soon.",
+    "error": "Failed to send message. Please try again or email us directly."
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "Explore our completed projects and case studies",
+    "featured": "Featured Projects",
+    "allProjects": "All Projects",
+    "noProjects": "No projects available yet. Check back soon!",
+    "viewProject": "View Project",
+    "backToPortfolio": "Back to Portfolio",
+    "viewLive": "View Live Project",
+    "technologies": "Technologies Used",
+    "projectDetails": "Project Details",
+    "category": "Category",
+    "website": "Website"
+  }
+}

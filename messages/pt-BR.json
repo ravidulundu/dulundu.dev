@@ -1,0 +1,183 @@
+{
+  "metadata": {
+    "title": "Dulundu.dev - Serviços Profissionais de WordPress e Desenvolvimento Web",
+    "description": "Otimização especializada de WordPress, consultoria e produtos digitais. Aumente o desempenho do seu site e alcance seus objetivos de negócios."
+  },
+  "nav": {
+    "home": "Início",
+    "services": "Serviços",
+    "products": "Produtos",
+    "portfolio": "Portfólio",
+    "blog": "Blog",
+    "contact": "Contato",
+    "admin": "Admin"
+  },
+  "hero": {
+    "title": "Serviços Profissionais de WordPress e Desenvolvimento Web",
+    "subtitle": "Otimize, aprimore e expanda sua presença digital",
+    "cta": "Começar",
+    "learnMore": "Saiba Mais"
+  },
+  "services": {
+    "title": "Nossos Serviços",
+    "subtitle": "Soluções profissionais para impulsionar sua presença digital",
+    "cta": "Começar",
+    "learnMore": "Saiba Mais",
+    "wordpress": {
+      "title": "Otimização WordPress",
+      "description": "Acelere seu site WordPress com otimização profissional, cache e melhorias de desempenho.",
+      "features": [
+        "Auditorias e otimização de desempenho",
+        "Implementação de cache",
+        "Otimização de banco de dados",
+        "Minificação e compressão de código",
+        "Integração CDN",
+        "Monitoramento e manutenção contínuos"
+      ]
+    },
+    "consulting": {
+      "title": "Consultoria Técnica",
+      "description": "Orientação especializada para seus projetos de desenvolvimento web, design de arquitetura e decisões técnicas.",
+      "features": [
+        "Design de arquitetura técnica",
+        "Revisão de código e melhores práticas",
+        "Recomendações de stack tecnológico",
+        "Estratégias de otimização de desempenho",
+        "Avaliações de segurança",
+        "Mentoria e treinamento de equipe"
+      ]
+    },
+    "products": {
+      "title": "Produtos Digitais",
+      "description": "Temas, plugins e ferramentas premium para WordPress para aprimorar a funcionalidade do seu site.",
+      "features": [
+        "Plugins e temas WordPress",
+        "Ferramentas de desenvolvimento customizadas",
+        "Integrações de API",
+        "Documentação e suporte",
+        "Atualizações regulares",
+        "Opções de licença vitalícia"
+      ]
+    },
+    "custom": {
+      "title": "Desenvolvimento Personalizado",
+      "description": "Soluções web personalizadas construídas de acordo com suas especificações e requisitos de negócio.",
+      "features": [
+        "Desenvolvimento web full-stack",
+        "Soluções WordPress personalizadas",
+        "Desenvolvimento e integração de API",
+        "Soluções de e-commerce",
+        "Progressive web apps (PWA)",
+        "Manutenção e suporte"
+      ]
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Dulundu.dev. Todos os direitos reservados.",
+    "services": "Serviços",
+    "company": "Empresa",
+    "legal": "Jurídico",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Serviço"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Insights, tutoriais e notícias do setor",
+    "readMore": "Leia Mais",
+    "readArticle": "Ler Artigo",
+    "featured": "Destaque",
+    "noPostsYet": "Nenhuma postagem disponível ainda. Volte em breve!",
+    "minuteRead": "min de leitura",
+    "publishedOn": "Publicado em",
+    "author": "Autor",
+    "share": "Compartilhar",
+    "relatedPosts": "Posts Relacionados",
+    "backToBlog": "Voltar ao Blog",
+    "latestPosts": "Últimos Posts",
+    "allPosts": "Todos os Posts",
+    "categories": "Categorias",
+    "tags": "Tags"
+  },
+  "products": {
+    "title": "Produtos",
+    "subtitle": "Produtos e serviços digitais premium para impulsionar seu negócio",
+    "allProducts": "Todos os Produtos",
+    "noProductsYet": "Nenhum produto disponível ainda. Volte em breve!",
+    "price": "Preço",
+    "features": "Recursos",
+    "details": "Detalhes do Produto",
+    "buyNow": "Comprar Agora",
+    "processing": "Processando...",
+    "enterEmail": "Por favor, insira seu endereço de e-mail",
+    "invalidEmail": "Por favor, insira um endereço de e-mail válido",
+    "notAvailable": "Este produto não está disponível para compra",
+    "checkoutError": "Falha ao iniciar checkout. Por favor, tente novamente."
+  },
+  "checkout": {
+    "thankYou": "Obrigado!",
+    "orderConfirmed": "Seu pedido foi confirmado e está sendo processado.",
+    "orderDetails": "Detalhes do Pedido",
+    "orderNumber": "Número do Pedido",
+    "email": "E-mail",
+    "status": "Status",
+    "completed": "Concluído",
+    "pending": "Pendente",
+    "quantity": "Quantidade",
+    "total": "Total",
+    "emailSent": "E-mail de Confirmação Enviado",
+    "emailSentDesc": "Enviamos um e-mail de confirmação para {email}. Por favor, verifique sua caixa de entrada.",
+    "continueShopping": "Continuar Comprando",
+    "paymentCancelled": "Pagamento Cancelado",
+    "paymentCancelledDesc": "Seu pagamento foi cancelado e nenhuma cobrança foi feita.",
+    "whatHappened": "O Que Aconteceu?",
+    "cancelledExplanation": "Você cancelou o processo de pagamento antes de ser concluído. Nenhuma cobrança foi feita em sua conta e seu pedido não foi criado.",
+    "nextSteps": "O Que Você Pode Fazer Agora?",
+    "tryAgain": "Tente comprar novamente se quiser concluir o pedido",
+    "browseProducts": "Navegue por outros produtos que possam interessá-lo",
+    "contactSupport": "Entre em contato conosco se precisar de ajuda ou tiver dúvidas",
+    "backToHome": "Voltar ao Início",
+    "tryAgainButton": "Tentar Novamente",
+    "needHelp": "Precisa de ajuda?",
+    "contactUs": "Entre em contato",
+    "sessionNotFound": "Sessão Não Encontrada",
+    "sessionNotFoundDesc": "Não foi possível encontrar seu pedido. Por favor, entre em contato com o suporte se precisar de assistência."
+  },
+  "contact": {
+    "title": "Entre em Contato",
+    "subtitle": "Entre em contato conosco para quaisquer dúvidas ou perguntas",
+    "form": {
+      "name": "Nome",
+      "namePlaceholder": "Seu nome",
+      "email": "E-mail",
+      "emailPlaceholder": "seu@email.com",
+      "subject": "Assunto",
+      "subjectPlaceholder": "Como podemos ajudar?",
+      "message": "Mensagem",
+      "messagePlaceholder": "Conte-nos mais sobre seu projeto ou consulta...",
+      "send": "Enviar Mensagem",
+      "sending": "Enviando..."
+    },
+    "info": {
+      "title": "Informações de Contato",
+      "email": "E-mail",
+      "location": "Localização",
+      "hours": "Horário Comercial"
+    },
+    "success": "Mensagem enviada com sucesso! Entraremos em contato em breve.",
+    "error": "Falha ao enviar mensagem. Tente novamente ou envie um e-mail diretamente."
+  },
+  "portfolio": {
+    "title": "Portfólio",
+    "subtitle": "Explore nossos projetos concluídos e estudos de caso",
+    "featured": "Projetos em Destaque",
+    "allProjects": "Todos os Projetos",
+    "noProjects": "Nenhum projeto disponível ainda. Volte em breve!",
+    "viewProject": "Ver Projeto",
+    "backToPortfolio": "Voltar ao Portfólio",
+    "viewLive": "Ver Projeto ao Vivo",
+    "technologies": "Tecnologias Utilizadas",
+    "projectDetails": "Detalhes do Projeto",
+    "category": "Categoria",
+    "website": "Site"
+  }
+}

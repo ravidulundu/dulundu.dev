@@ -1,0 +1,183 @@
+{
+  "metadata": {
+    "title": "Dulundu.dev - Profesyonel WordPress & Web Geliştirme Hizmetleri",
+    "description": "Uzman WordPress optimizasyonu, danışmanlık ve dijital ürünler. Sitenizin performansını artırın ve iş hedeflerinize ulaşın."
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "services": "Hizmetler",
+    "products": "Ürünler",
+    "portfolio": "Portfolyo",
+    "blog": "Blog",
+    "contact": "İletişim",
+    "admin": "Yönetim"
+  },
+  "hero": {
+    "title": "Profesyonel WordPress & Web Geliştirme Hizmetleri",
+    "subtitle": "Dijital varlığınızı optimize edin, geliştirin ve büyütün",
+    "cta": "Başlayın",
+    "learnMore": "Daha Fazla Bilgi"
+  },
+  "services": {
+    "title": "Hizmetlerimiz",
+    "subtitle": "Dijital varlığınızı güçlendirmek için profesyonel çözümler",
+    "cta": "Başlayın",
+    "learnMore": "Daha Fazla Bilgi",
+    "wordpress": {
+      "title": "WordPress Optimizasyonu",
+      "description": "Profesyonel optimizasyon, önbellekleme ve performans iyileştirmeleriyle WordPress sitenizi hızlandırın.",
+      "features": [
+        "Performans denetimi ve optimizasyonu",
+        "Önbellekleme implementasyonu",
+        "Veritabanı optimizasyonu",
+        "Kod küçültme ve sıkıştırma",
+        "CDN entegrasyonu",
+        "Sürekli izleme ve bakım"
+      ]
+    },
+    "consulting": {
+      "title": "Teknik Danışmanlık",
+      "description": "Web geliştirme projeleriniz, mimari tasarım ve teknik kararlarınız için uzman rehberliği.",
+      "features": [
+        "Teknik mimari tasarımı",
+        "Kod inceleme ve en iyi uygulamalar",
+        "Teknoloji yığını önerileri",
+        "Performans optimizasyon stratejileri",
+        "Güvenlik değerlendirmeleri",
+        "Takım mentorluk ve eğitimi"
+      ]
+    },
+    "products": {
+      "title": "Dijital Ürünler",
+      "description": "Web sitenizin işlevselliğini artırmak için premium WordPress temaları, eklentileri ve araçlar.",
+      "features": [
+        "WordPress eklentileri ve temaları",
+        "Özel geliştirme araçları",
+        "API entegrasyonları",
+        "Dokümantasyon ve destek",
+        "Düzenli güncellemeler",
+        "Ömür boyu lisans seçenekleri"
+      ]
+    },
+    "custom": {
+      "title": "Özel Yazılım Geliştirme",
+      "description": "Tam ihtiyaçlarınıza ve iş gereksinimlerinize göre özel web çözümleri.",
+      "features": [
+        "Full-stack web geliştirme",
+        "Özel WordPress çözümleri",
+        "API geliştirme ve entegrasyon",
+        "E-ticaret çözümleri",
+        "Progressive web apps (PWA)",
+        "Bakım ve destek"
+      ]
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Dulundu.dev. Tüm hakları saklıdır.",
+    "services": "Hizmetler",
+    "company": "Şirket",
+    "legal": "Yasal",
+    "privacy": "Gizlilik Politikası",
+    "terms": "Kullanım Şartları"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "İçgörüler, eğitimler ve sektör haberleri",
+    "readMore": "Devamını Oku",
+    "readArticle": "Makaleyi Oku",
+    "featured": "Öne Çıkan",
+    "noPostsYet": "Henüz blog yazısı bulunmuyor. Yakında tekrar kontrol edin!",
+    "minuteRead": "dk okuma",
+    "publishedOn": "Yayınlanma tarihi",
+    "author": "Yazar",
+    "share": "Paylaş",
+    "relatedPosts": "İlgili Yazılar",
+    "backToBlog": "Blog'a Dön",
+    "latestPosts": "Son Yazılar",
+    "allPosts": "Tüm Yazılar",
+    "categories": "Kategoriler",
+    "tags": "Etiketler"
+  },
+  "products": {
+    "title": "Ürünler",
+    "subtitle": "İşinizi güçlendirecek premium dijital ürünler ve hizmetler",
+    "allProducts": "Tüm Ürünler",
+    "noProductsYet": "Henüz ürün bulunmuyor. Yakında tekrar kontrol edin!",
+    "price": "Fiyat",
+    "features": "Özellikler",
+    "details": "Ürün Detayları",
+    "buyNow": "Şimdi Satın Al",
+    "processing": "İşleniyor...",
+    "enterEmail": "Lütfen e-posta adresinizi girin",
+    "invalidEmail": "Lütfen geçerli bir e-posta adresi girin",
+    "notAvailable": "Bu ürün satın alınamıyor",
+    "checkoutError": "Ödeme başlatılamadı. Lütfen tekrar deneyin."
+  },
+  "checkout": {
+    "thankYou": "Teşekkürler!",
+    "orderConfirmed": "Siparişiniz onaylandı ve işleme alındı.",
+    "orderDetails": "Sipariş Detayları",
+    "orderNumber": "Sipariş Numarası",
+    "email": "E-posta",
+    "status": "Durum",
+    "completed": "Tamamlandı",
+    "pending": "Bekliyor",
+    "quantity": "Miktar",
+    "total": "Toplam",
+    "emailSent": "Onay E-postası Gönderildi",
+    "emailSentDesc": "{email} adresine onay e-postası gönderdik. Lütfen gelen kutunuzu kontrol edin.",
+    "continueShopping": "Alışverişe Devam Et",
+    "paymentCancelled": "Ödeme İptal Edildi",
+    "paymentCancelledDesc": "Ödemeniz iptal edildi ve herhangi bir ücret alınmadı.",
+    "whatHappened": "Ne Oldu?",
+    "cancelledExplanation": "Ödeme işlemi tamamlanmadan iptal ettiniz. Hesabınızdan herhangi bir ücret alınmadı ve siparişiniz oluşturulmadı.",
+    "nextSteps": "Bundan Sonra Ne Yapabilirsiniz?",
+    "tryAgain": "Siparişi tamamlamak istiyorsanız tekrar satın almayı deneyin",
+    "browseProducts": "İlginizi çekebilecek diğer ürünlere göz atın",
+    "contactSupport": "Yardıma ihtiyacınız varsa veya sorularınız varsa bizimle iletişime geçin",
+    "backToHome": "Ana Sayfaya Dön",
+    "tryAgainButton": "Tekrar Dene",
+    "needHelp": "Yardıma mı ihtiyacınız var?",
+    "contactUs": "Bize ulaşın",
+    "sessionNotFound": "Oturum Bulunamadı",
+    "sessionNotFoundDesc": "Siparişinizi bulamadık. Yardıma ihtiyacınız varsa lütfen destek ile iletişime geçin."
+  },
+  "contact": {
+    "title": "İletişim",
+    "subtitle": "Sorularınız ve talepleriniz için bizimle iletişime geçin",
+    "form": {
+      "name": "İsim",
+      "namePlaceholder": "Adınız",
+      "email": "E-posta",
+      "emailPlaceholder": "eposta@ornek.com",
+      "subject": "Konu",
+      "subjectPlaceholder": "Size nasıl yardımcı olabiliriz?",
+      "message": "Mesaj",
+      "messagePlaceholder": "Projeniz veya talebiniz hakkında daha fazla bilgi verin...",
+      "send": "Mesaj Gönder",
+      "sending": "Gönderiliyor..."
+    },
+    "info": {
+      "title": "İletişim Bilgileri",
+      "email": "E-posta",
+      "location": "Konum",
+      "hours": "Çalışma Saatleri"
+    },
+    "success": "Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.",
+    "error": "Mesaj gönderilemedi. Lütfen tekrar deneyin veya doğrudan e-posta gönderin."
+  },
+  "portfolio": {
+    "title": "Portfolyo",
+    "subtitle": "Tamamlanmış projelerimizi ve vaka çalışmalarımızı keşfedin",
+    "featured": "Öne Çıkan Projeler",
+    "allProjects": "Tüm Projeler",
+    "noProjects": "Henüz proje bulunmuyor. Yakında tekrar kontrol edin!",
+    "viewProject": "Projeyi Görüntüle",
+    "backToPortfolio": "Portfolyo'ya Dön",
+    "viewLive": "Canlı Projeyi Görüntüle",
+    "technologies": "Kullanılan Teknolojiler",
+    "projectDetails": "Proje Detayları",
+    "category": "Kategori",
+    "website": "Web Sitesi"
+  }
+}
