@@ -1,11 +1,11 @@
-import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import Link from 'next/link';
 import { Zap, Shield, Globe } from 'lucide-react';
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'metadata' });
 
   return {
@@ -14,9 +14,10 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   };
 }
 
-export default function HomePage() {
-  const t = useTranslations('hero');
-  const tServices = useTranslations('services');
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'hero' });
+  const tServices = await getTranslations({ locale, namespace: 'services' });
 
   return (
     <>
@@ -33,13 +34,13 @@ export default function HomePage() {
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Link
-              href="/services"
+              href={`/${locale}/services`}
               className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold"
             >
               {t('cta')}
             </Link>
             <Link
-              href="/portfolio"
+              href={`/${locale}/portfolio`}
               className="px-8 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-semibold"
             >
               {t('learnMore')}

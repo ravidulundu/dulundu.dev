@@ -34,9 +34,10 @@ async function getPost(slug: string, locale: string) {
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string; slug: string };
+  params: Promise<{ locale: string; slug: string }>;
 }) {
-  const post = await getPost(params.slug, params.locale);
+  const { locale, slug } = await params;
+  const post = await getPost(slug, locale);
 
   if (!post) {
     return {
@@ -60,13 +61,14 @@ export async function generateMetadata({
 export default async function BlogDetailPage({
   params,
 }: {
-  params: { locale: string; slug: string };
+  params: Promise<{ locale: string; slug: string }>;
 }) {
-  const post = await getPost(params.slug, params.locale);
+  const { locale, slug } = await params;
+  const post = await getPost(slug, locale);
 
   if (!post) {
     notFound();
   }
 
-  return <BlogPost post={post} locale={params.locale} />;
+  return <BlogPost post={post} locale={locale} />;
 }
