@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import type { ComponentType, SVGProps } from "react";
-import { BR, TR, US } from "country-flag-icons/react/1x1";
+import type { ComponentType } from "react";
+import { BR, TR, US, type FlagComponent } from "country-flag-icons/react/1x1";
 
 interface FlagIconProps {
   code: string;
@@ -9,7 +9,7 @@ interface FlagIconProps {
 
 const FLAG_COMPONENTS: Record<
   string,
-  ComponentType<SVGProps<SVGSVGElement>>
+  FlagComponent
 > = {
   US,
   TR,

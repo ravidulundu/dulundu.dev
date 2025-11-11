@@ -80,7 +80,7 @@ export default function ProductForm({ initialData, mode, redirectPath, onSuccess
   const [slug, setSlug] = useState(initialData?.slug || '');
   const [type, setType] = useState(initialData?.type || 'service');
   const [price, setPrice] = useState(initialData?.price?.toString() || '');
-  const [currency, setCurrency] = useState(initialCurrency);
+  const [currency, setCurrency] = useState<SupportedCurrency>(initialCurrency as SupportedCurrency);
   const [status, setStatus] = useState(initialData?.status || 'draft');
   const [priceOverrides, setPriceOverrides] = useState<Record<string, string>>(() => {
     const overrides: Record<string, string> = {};
@@ -165,7 +165,7 @@ export default function ProductForm({ initialData, mode, redirectPath, onSuccess
     }));
   };
 
-  const handleCurrencyChange = (nextCurrency: string) => {
+  const handleCurrencyChange = (nextCurrency: SupportedCurrency) => {
     if (nextCurrency === currency) return;
     setPriceOverrides((prev) => {
       const updated = { ...prev };
