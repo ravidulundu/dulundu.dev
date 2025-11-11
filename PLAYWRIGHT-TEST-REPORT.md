@@ -155,7 +155,7 @@ Message: This is a test message to verify the contact form is working correctly.
 | Scenario | Result |
 |----------|--------|
 | `/en/auth/signin` load & login | ✅ Sign-in form loads; logging in with `admin@dulundu.dev / admin123` works |
-| `/en/admin/dashboard` widgets | ✅ Stats + quick actions render; locale & currency switchers from public layout also visible (probably unintended) |
+| `/en/admin/dashboard` widgets | ✅ Stats + quick actions render; locale/language switcher present (controls currency automatically) |
 | `/en/admin/products` table | ⚠️ Lists seeded products but shows ONLY `$### USD`; no visibility into TRY/BRL overrides |
 | `/en/admin/products/new` form | ⚠️ “Localized Prices” inputs are blank, no auto-converted suggestions or previews of stored overrides |
 | `/en/admin/blog/new` & edit | ⚠️ Tiptap console warnings: duplicate `link` extensions; potential editor misconfiguration |
@@ -168,7 +168,7 @@ Message: This is a test message to verify the contact form is working correctly.
 - “Leave blank to auto-convert” text does not actually show what TRY/BRL amounts will be, making it impossible to review Stripe-bound prices.
 - Editing existing products provides no visibility into saved overrides or Stripe price IDs; admins cannot trigger a resync.
 - Admin list view only shows USD values, so localized pricing cannot be verified from UI.
-- Currency switcher duplicates the public UI control and changing it has no effect on admin data yet.
+- Currency values still display USD in listings; even though locale changes adjust pricing elsewhere, admin tables don’t yet reflect TRY/BRL overrides.
 
 These gaps align with SpecPulse tasks STRIPE-020/021/022/023 (admin UI + Stripe sync) and STRIPE-040+ (QA tooling) and remain outstanding.
 

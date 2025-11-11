@@ -5,6 +5,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useTransition } from 'react';
 import { locales } from '@/i18n';
 import { getCurrencyForLocale } from '@/lib/currency';
+import { FlagIcon } from '@/components/common/FlagIcon';
+import { useCurrency } from '@/components/providers/CurrencyProvider';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -19,10 +21,10 @@ const localeNames: Record<string, string> = {
   'pt-BR': 'Português (BR)'
 };
 
-const localeFlags: Record<string, string> = {
-  'en': '🇺🇸',
-  'tr': '🇹🇷',
-  'pt-BR': '🇧🇷'
+const localeToCountry: Record<string, string> = {
+  'en': 'US',
+  'tr': 'TR',
+  'pt-BR': 'BR'
 };
 
 export default function LanguageSwitcher() {
@@ -30,6 +32,7 @@ export default function LanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
+  const { setCurrency } = useCurrency();
 
   const switchLocale = (newLocale: string) => {
     // Extract path without locale prefix
@@ -46,14 +49,9 @@ export default function LanguageSwitcher() {
     const newPath = `/${newLocale}${pathWithoutLocale}`;
     const targetCurrency = getCurrencyForLocale(newLocale);
 
-    startTransition(async () => {
-      await fetch('/api/preferences/currency', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ currency: targetCurrency })
-      });
+    setCurrency(targetCurrency);
+
+    startTransition(() => {
       router.push(newPath);
     });
   };
@@ -69,7 +67,7 @@ export default function LanguageSwitcher() {
           aria-label="Switch language"
           disabled={isPending}
         >
-          <span className="text-lg leading-none">{localeFlags[locale]}</span>
+          <FlagIcon code={localeToCountry[locale]} className="w-5 h-5" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
@@ -83,7 +81,7 @@ export default function LanguageSwitcher() {
             className="flex items-center gap-3"
             disabled={isPending}
           >
-            <span className="text-lg">{localeFlags[loc]}</span>
+            <FlagIcon code={localeToCountry[loc]} className="w-5 h-5" />
             <span className="text-sm font-medium">{localeNames[loc]}</span>
             {locale === loc && (
               <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">

@@ -73,7 +73,11 @@ export default async function ProductDetailPage({
   }
 
   const translation = product.translations[0];
-  const features = translation.features as string[] | null;
+  const features = Array.isArray(translation.features)
+    ? translation.features.filter(
+        (feature): feature is string => typeof feature === "string" && feature.trim().length > 0,
+      )
+    : [];
   const preferredCurrency = getPreferredCurrencyForRequest(locale);
   const priceEntry =
     product.prices?.find((price) => price.currency === preferredCurrency) ||
@@ -133,7 +137,7 @@ export default async function ProductDetailPage({
         </div>
 
         {/* Features */}
-        {features && features.length > 0 && (
+        {features.length > 0 && (
           <div className="border-t border-border dark:border-border pt-6">
             <h3 className="text-lg font-semibold text-foreground dark:text-white mb-4">
               {t('features')}

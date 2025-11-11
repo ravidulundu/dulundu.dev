@@ -102,21 +102,16 @@ export function getCurrencyForCountry(country?: string | null): SupportedCurrenc
 
 export function resolvePreferredCurrency({
   locale,
-  country,
-  cookieCurrency
+  country
 }: {
   locale?: string
   country?: string | null
-  cookieCurrency?: string | null
 }) {
-  if (cookieCurrency) {
-    return normalizeCurrency(cookieCurrency)
+  if (locale) {
+    return getCurrencyForLocale(locale)
   }
   if (country) {
     return getCurrencyForCountry(country)
-  }
-  if (locale) {
-    return getCurrencyForLocale(locale)
   }
   return DEFAULT_CURRENCY
 }

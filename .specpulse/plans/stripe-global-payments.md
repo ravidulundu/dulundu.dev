@@ -26,9 +26,9 @@
 3. Snapshot current database schema (productPrice, order) for reference.
 
 ### Phase 2 – Currency Preference Pipeline (1h)
-1. Extract helper (`getPreferredCurrency(req)`) that reads cookie/IP/locale for use in API routes.
-2. Add user-facing currency switcher (dropdown near language selector) that updates `PREFERRED_CURRENCY` cookie.
-3. Ensure middleware only overrides cookie on first visit; otherwise respect manual override.
+1. Extract helper (`getPreferredCurrency(req)`) that reads locale/IP for use in API routes.
+2. Bind currency to the language switcher so locale changes immediately update currency (no extra UI or cookie state).
+3. Ensure middleware/layouts always derive currency from locale or geo fallback; remove the stale `PREFERRED_CURRENCY` cookie write path.
 
 ### Phase 3 – Admin Pricing UX (1.5h)
 1. Extend `ProductForm` to show expandable cards per supported currency (base + overrides).
@@ -48,10 +48,10 @@
 
 ---
 
-## ✅ Progress Notes (2025-11-11 02:55)
+## ✅ Progress Notes (2025-11-11 07:45)
 
-- `CurrencyProvider`, `/api/preferences/currency`, and the Navbar currency switcher are live. Playwright run (`/tmp/playwright-mcp-output/1762828851852/page-2025-11-11T02-50-30-431Z.png`) shows instant USD↔TRY↔BRL swaps on `/en/products` with correct formatting.
-- Middleware respects cookies and locale routes; language switcher keeps locale through navigation (see `/tmp/.../page-2025-11-11T02-49-26-766Z.png` and `/.../02-50-30-431Z.png`).
+- `CurrencyProvider` now mirrors the currently selected locale. Navbar currency switcher + `/api/preferences/currency` endpoint have been retired so UX stays focused on language selection.
+- Middleware/layout derive currency strictly from locale or geo headers; no cookies to fight with, matching the new “one control” stakeholder request.
 - Storefront CTA currently disables itself when `price` missing (verified earlier), but admin overrides + Stripe sync tooling still outstanding.
 - Next action: start **Phase 3 – Admin Pricing UX** so editors can see/edit TRY/BRL overrides without seeds, then tackle Phase 4–5 for Stripe automation & documentation.
 
@@ -59,7 +59,7 @@
 
 ## 📦 Deliverables Checklist
 
-- [ ] Currency preference helper + cookie override UX.
+- [ ] Locale-driven currency helper wired through layouts/APIs.
 - [ ] Admin multi-currency pricing UI + validation.
 - [ ] Storefront currency formatter + CTA guardrails.
 - [ ] Checkout API + webhook updates with currency analytics.

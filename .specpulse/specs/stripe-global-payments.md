@@ -31,7 +31,7 @@
 | Stripe CLI | ✅ Installed (`npm install -g stripe`), events logged in terminal |
 | Pricing model | ✅ `productPrice` table stores per-currency amounts |
 | Currency utilities | ✅ `lib/currency.ts` handles mapping, conversion, overrides |
-| Locale detection | ✅ `middleware.ts` sets `NEXT_LOCALE` + `PREFERRED_CURRENCY` cookie based on IP |
+| Locale detection | ✅ `middleware.ts` sets `NEXT_LOCALE` and derives currency from locale/geo headers |
 | Admin UI | 🟡 Product form shows currency selector but overrides UX is rough |
 | Storefront display | 🟡 Some cards still show `$` prefix even when currency is `BRL/TRY` |
 | QA | 🔴 No documented Stripe CLI + Playwright workflow for currencies |
@@ -41,9 +41,9 @@
 ## 📋 Functional Requirements
 
 1. **Currency Preference Pipeline**
-   - Detect preferred currency via `request.geo`, locale, or user-selected override.
-   - Persist preference in `PREFERRED_CURRENCY` cookie; expose hook/helper for React components.
-   - Provide manual override UI (dropdown or account setting) without forcing page reload loops.
+   - Detect preferred currency via locale path or geo headers (fallback).
+   - Keep currency in lockstep with the language selector; no extra manual override UI.
+   - Expose hook/helper for React components so pricing updates instantly when locale changes.
 
 2. **Storefront Display**
    - Product list/detail, checkout summary, and success pages must show correct symbol + ISO code.
@@ -88,7 +88,7 @@
 
 ## 📦 Deliverables
 
-1. Updated middleware + currency helpers (cookie + override API).
+1. Updated middleware + currency helpers (locale/geo driven, no manual override UI).
 2. Admin product form enhancements (multi-currency inputs, validation, hints).
 3. Storefront components (cards, detail, checkout success) using shared formatter utility.
 4. Checkout API + webhook adjustments for multi-currency reliability.

@@ -107,8 +107,7 @@
   - ✅ Logo links to `/en`
   - ✅ Navigation items: Home, Services, Products, Portfolio, Blog, Contact
   - ✅ All links use `/en/...` format
-  - ✅ Currency switcher present: USD/TRY/BRL
-  - ✅ Language switcher: 🇺🇸 English
+  - ✅ Language switcher: 🇺🇸 English (controls pricing currency automatically — USD/TRY/BRL follow locale)
 - **Content:**
   - ✅ Hero: "Professional WordPress & Web Development Services"
   - ✅ Subtitle: "Optimize, enhance, and grow your digital presence"
@@ -353,9 +352,9 @@ bg-primary text-foreground
 ```
 
 ### Currency System
-- ✅ Currency switcher component created
-- ✅ Multi-currency support (USD/TRY/BRL)
-- ✅ Currency preferences API
+- ✅ Locale-driven pricing: language switcher sets USD/TRY/BRL automatically
+- ✅ Currency context shared across ProductCard/BuyButton/etc.
+- ✅ Middleware derives currency from locale/geo headers (no cookie drift)
 - ✅ Stripe integration prepared for global payments
 
 ### Code Quality

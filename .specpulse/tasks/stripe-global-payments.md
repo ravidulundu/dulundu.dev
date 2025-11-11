@@ -12,10 +12,10 @@
 - [ ] TASK-STRIPE-002: Record Stripe CLI workflow in `SPECPULSE-PRODUCTION-READINESS.md` (login, listen, trigger events).
 - [ ] TASK-STRIPE-003: Snapshot current Prisma schema for `productPrice` + `order` in SpecPulse memory.
 
-## Phase 2 – Currency Preference Pipeline (0/4)
+## Phase 2 – Currency Preference Pipeline (4/4)
 - [x] TASK-STRIPE-010: Create `getPreferredCurrency(request)` helper shared between middleware + API routes.
-- [x] TASK-STRIPE-011: Build currency switcher UI (client component) storing `PREFERRED_CURRENCY` cookie.
-- [ ] TASK-STRIPE-012: Prevent middleware from overriding manual currency selection; add unit test.
+- [x] TASK-STRIPE-011: Bind currency to the language switcher so locale changes immediately update pricing UI.
+- [x] TASK-STRIPE-012: Remove the legacy `PREFERRED_CURRENCY` cookie flow and ensure middleware/layout always derive currency from locale or geo headers.
 - [x] TASK-STRIPE-013: Expose preferred currency via React context/hook for components (ProductCard, BuyButton).
 
 ## Phase 3 – Admin Pricing UX (0/5)

@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import LanguageSwitcher from './LanguageSwitcher';
-import CurrencySwitcher from './CurrencySwitcher';
 import ThemeToggle from './ThemeToggle';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
@@ -48,7 +47,6 @@ export default function Navbar() {
             ))}
             <div className="flex items-center gap-2 ml-2">
               <ThemeToggle />
-              <CurrencySwitcher />
               <LanguageSwitcher />
             </div>
           </div>
@@ -84,7 +82,6 @@ export default function Navbar() {
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <ThemeToggle />
-                  <CurrencySwitcher />
                   <LanguageSwitcher />
                 </div>
               </div>
