@@ -26,7 +26,7 @@ export function IconBadge({
   variant = 'primary',
   size = 'md',
   className,
-  strokeWidth = 1.8,
+  strokeWidth = 1.5,
 }: IconBadgeProps) {
   return (
     <div

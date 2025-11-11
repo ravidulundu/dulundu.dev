@@ -40,7 +40,7 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
           />
           {post.featured && (
             <div className="absolute top-4 right-4 z-10">
-              <Badge variant="default" className="bg-yellow-400 text-yellow-900 hover:bg-yellow-400/90 gap-1">
+              <Badge variant="secondary" className="gap-1">
                 <Star className="w-3 h-3 fill-current" />
                 Featured
               </Badge>
@@ -48,13 +48,13 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
           )}
         </div>
       ) : (
-        <div className="relative h-48 bg-gradient-to-br from-primary/20 to-accent flex items-center justify-center">
-          <div className="text-white text-6xl font-bold opacity-20">
+        <div className="relative h-48 bg-primary/10 flex items-center justify-center">
+          <div className="text-primary/30 text-6xl font-bold">
             {translation.title.charAt(0).toUpperCase()}
           </div>
           {post.featured && (
             <div className="absolute top-4 right-4">
-              <Badge variant="default" className="bg-yellow-400 text-yellow-900 hover:bg-yellow-400/90 gap-1">
+              <Badge variant="secondary" className="gap-1">
                 <Star className="w-3 h-3 fill-current" />
                 Featured
               </Badge>

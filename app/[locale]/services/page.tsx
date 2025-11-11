@@ -38,12 +38,12 @@ export default async function ServicesPage({
     <PageWrapper>
       <div className="min-h-screen bg-muted">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-primary via-primary to-accent text-white py-20">
+      <div className="bg-primary text-primary-foreground py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             {t('title')}
           </h1>
-          <p className="text-xl md:text-2xl text-primary/80 max-w-3xl mx-auto mb-8">
+          <p className="text-xl md:text-2xl text-primary-foreground/80 max-w-3xl mx-auto mb-8">
             {t('subtitle')}
           </p>
           <Link
@@ -106,9 +106,9 @@ export default async function ServicesPage({
       </div>
 
       {/* CTA Section */}
-      <div className="bg-gradient-to-r from-primary to-accent py-16">
+      <div className="bg-primary py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
             Ready to get started?
           </h2>
           <p className="text-xl text-primary/80 mb-8">

@@ -22,9 +22,9 @@ export default async function AdminSettingsPage({ params }: { params: { locale: 
   const colorClasses = {
     blue: 'bg-primary/10 text-primary',
     green: 'bg-primary/10 text-primary',
-    red: 'bg-red-100 text-red-600',
-    purple: 'bg-purple-100 text-accent',
-    orange: 'bg-orange-100 text-accent',
+    red: 'bg-destructive/10 text-destructive',
+    purple: 'bg-accent/10 text-accent-foreground',
+    orange: 'bg-secondary text-secondary-foreground',
     gray: 'bg-muted text-muted-foreground',
   };
 

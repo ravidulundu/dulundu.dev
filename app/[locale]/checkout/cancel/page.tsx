@@ -15,9 +15,9 @@ export default function CheckoutCancelPage() {
       <div className="container mx-auto px-4 py-12 max-w-2xl">
       {/* Cancel Header */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-20 h-20 bg-yellow-100 dark:bg-yellow-900/20 rounded-full mb-6">
+        <div className="inline-flex items-center justify-center w-20 h-20 bg-secondary rounded-full mb-6">
           <svg
-            className="w-12 h-12 text-yellow-600 dark:text-yellow-400"
+            className="w-12 h-12 text-secondary-foreground"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

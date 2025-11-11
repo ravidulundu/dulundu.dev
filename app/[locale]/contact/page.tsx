@@ -147,7 +147,7 @@ export default function ContactPage() {
                     </div>
                   )}
                   {status === 'error' && (
-                    <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
+                    <div className="p-4 bg-destructive/10 border border-destructive/30 rounded-lg text-destructive">
                       {t('error')}
                     </div>
                   )}

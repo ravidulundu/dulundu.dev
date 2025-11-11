@@ -119,12 +119,12 @@ export default async function OrdersPage({
                     <span
                       className={`px-2 py-1 text-xs font-medium rounded ${
                         order.status === 'completed'
-                          ? 'bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary/80'
+                          ? 'bg-primary/10 text-primary'
                           : order.status === 'pending'
-                            ? 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200'
+                            ? 'bg-secondary text-secondary-foreground'
                             : order.status === 'failed'
-                              ? 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
-                              : 'bg-muted dark:bg-muted text-foreground dark:text-foreground'
+                              ? 'bg-destructive/10 text-destructive'
+                              : 'bg-muted text-foreground'
                       }`}
                     >
                       {t(`statusLabels.${order.status}`)}

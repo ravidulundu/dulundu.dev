@@ -23,7 +23,7 @@ export default function AdminHeader() {
           {/* Notifications */}
           <button className="relative" aria-label={t('notifications')}>
             <IconBadge icon={Bell} variant="neutral" className="mr-0" />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+            <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full"></span>
           </button>
 
           {/* User Menu */}
@@ -35,7 +35,7 @@ export default function AdminHeader() {
 
             <button
               onClick={() => signOut({ callbackUrl: '/' })}
-              className="p-2 text-muted-foreground hover:text-red-600 hover:bg-red-50 rounded-lg"
+              className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg"
               title={t('signOut')}
             >
               <LogOut className="w-5 h-5" />

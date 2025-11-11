@@ -72,8 +72,8 @@ export default async function CheckoutSuccessPage({
     return (
       <PageWrapper>
         <div className="container mx-auto px-4 py-12 max-w-2xl">
-        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-8 text-center">
-          <h1 className="text-2xl font-bold text-red-600 dark:text-red-400 mb-4">
+        <div className="bg-destructive/10 border border-destructive/30 rounded-lg p-8 text-center">
+          <h1 className="text-2xl font-bold text-destructive mb-4">
             {t('sessionNotFound', { defaultMessage: 'Session Not Found' })}
           </h1>
           <p className="text-muted-foreground dark:text-muted-foreground/70 mb-6">

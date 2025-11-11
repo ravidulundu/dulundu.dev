@@ -31,8 +31,8 @@ function AuthErrorContent() {
       <div className="min-h-screen flex items-center justify-center bg-muted py-12 px-4">
         <div className="max-w-md w-full space-y-8">
           <div className="text-center">
-            <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
-              <AlertCircle className="h-6 w-6 text-red-600" />
+            <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-destructive/10">
+              <AlertCircle className="h-6 w-6 text-destructive" />
             </div>
             <h2 className="mt-6 text-3xl font-extrabold text-foreground">
               {t('title')}

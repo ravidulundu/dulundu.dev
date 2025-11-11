@@ -25,12 +25,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <Navbar />
 
       {/* Hero Section */}
-      <main className="flex min-h-[80vh] flex-col items-center justify-center p-8 md:p-24 bg-gradient-to-b from-background to-card">
+      <main className="flex min-h-[80vh] flex-col items-center justify-center p-8 md:p-24 bg-card">
         <div className="z-10 max-w-5xl w-full items-center justify-center text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-primary">
             {t('title')}
           </h1>
-          <p className="text-xl md:text-2xl mb-8 text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl mb-8 text-muted-foreground max-w-3xl mx-auto">
             {t('subtitle')}
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
@@ -80,7 +80,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             ].map((card) => (
               <div
                 key={card.title}
-                className="p-8 border border-border rounded-2xl hover:shadow-xl transition-shadow"
+                className="p-6 border border-border rounded-xl hover:shadow-xl transition-shadow"
               >
                 <IconBadge
                   icon={card.icon}

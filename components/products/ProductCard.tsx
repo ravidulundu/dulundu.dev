@@ -67,8 +67,8 @@ export default function ProductCard({ product, locale, preferredCurrency }: Prod
   return (
     <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300">
       {/* Header with Icon & Badges */}
-      <CardHeader className="relative h-48 bg-gradient-to-br from-primary/40 via-primary to-accent flex items-center justify-center p-0">
-        <Package className="w-20 h-20 text-white/20" strokeWidth={1.5} />
+      <CardHeader className="relative h-48 bg-primary/10 flex items-center justify-center p-0">
+        <Package className="w-20 h-20 text-primary/30" strokeWidth={1.5} />
 
         {/* Badges positioned absolutely */}
         <div className="absolute top-4 left-4">

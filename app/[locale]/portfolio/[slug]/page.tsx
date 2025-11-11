@@ -93,7 +93,7 @@ export default async function ProjectDetailPage({
             {project.category.replace('-', ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
           </span>
           {project.featured && (
-            <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded-full text-sm font-medium">
+            <span className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm font-medium">
               ⭐ Featured
             </span>
           )}

@@ -104,7 +104,7 @@ export default async function PortfolioPage({
                     </TableCell>
                     <TableCell>
                       {project.featured ? (
-                        <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+                        <Star className="w-5 h-5 text-accent fill-accent" />
                       ) : (
                         <Star className="w-5 h-5 text-muted-foreground/70" />
                       )}
@@ -113,7 +113,7 @@ export default async function PortfolioPage({
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-2">
                         <ProjectEditDialog initialData={formData} locale={params.locale} />
-                        <button className="text-red-600 hover:text-red-900" aria-label="Delete">
+                        <button className="text-destructive hover:text-destructive/80" aria-label="Delete">
                           <Trash2 className="w-4 h-4 inline" />
                         </button>
                       </div>
