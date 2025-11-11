@@ -1,15 +1,17 @@
 import BlogForm from "@/components/admin/BlogForm";
+import { getTranslations } from "next-intl/server";
 
-export default function NewBlogPostPage() {
+export default async function NewBlogPostPage({ params }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'admin.blog' });
   return (
-    <div>
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Create New Blog Post</h1>
-        <p className="text-gray-500 mt-2">Write your blog post in multiple languages</p>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold text-foreground">{t('createTitle')}</h1>
+        <p className="text-muted-foreground mt-2">{t('subtitle')}</p>
       </div>
 
-      <div className="bg-white rounded-lg shadow p-6">
-        <BlogForm mode="create" />
+      <div className="bg-card rounded-lg shadow p-6">
+        <BlogForm mode="create" redirectPath={`/${params.locale}/admin/blog`} />
       </div>
     </div>
   );

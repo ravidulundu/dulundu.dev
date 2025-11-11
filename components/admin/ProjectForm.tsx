@@ -2,12 +2,22 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Input from '../ui/Input';
-import Textarea from '../ui/Textarea';
-import Select from '../ui/Select';
-import Button from '../ui/Button';
+import { useTranslations } from 'next-intl';
+import { Input } from '../ui/input';
+import { Textarea } from '../ui/textarea';
+import { Button } from '../ui/button';
+import { Label } from '../ui/label';
+import { Switch } from '../ui/switch';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 
-interface Translation {
+export interface ProjectTranslationInput {
   locale: string;
   title: string;
   description: string;
@@ -15,18 +25,22 @@ interface Translation {
   images: string[];
 }
 
+export type ProjectFormInitialData = {
+  id?: string;
+  slug: string;
+  category: string;
+  status: string;
+  featured: boolean;
+  url: string | null;
+  order: number;
+  translations: ProjectTranslationInput[];
+};
+
 interface ProjectFormProps {
-  initialData?: {
-    id?: string;
-    slug: string;
-    category: string;
-    status: string;
-    featured: boolean;
-    url: string | null;
-    order: number;
-    translations: Translation[];
-  };
+  initialData?: ProjectFormInitialData;
   mode: 'create' | 'edit';
+  redirectPath?: string;
+  onSuccess?: () => void;
 }
 
 const locales = [
@@ -43,8 +57,10 @@ const categories = [
   { value: 'optimization', label: 'Optimization' },
 ];
 
-export default function ProjectForm({ initialData, mode }: ProjectFormProps) {
+export default function ProjectForm({ initialData, mode, redirectPath, onSuccess }: ProjectFormProps) {
   const router = useRouter();
+  const t = useTranslations('admin.forms.project');
+  const tCommon = useTranslations('admin.forms.common');
   const [activeTab, setActiveTab] = useState('en');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -58,9 +74,9 @@ export default function ProjectForm({ initialData, mode }: ProjectFormProps) {
   const [order, setOrder] = useState(initialData?.order || 0);
 
   // Translations state
-  const [translations, setTranslations] = useState<Record<string, Translation>>(
+  const [translations, setTranslations] = useState<Record<string, ProjectTranslationInput>>(
     () => {
-      const initial: Record<string, Translation> = {};
+      const initial: Record<string, ProjectTranslationInput> = {};
       locales.forEach((locale) => {
         const existing = initialData?.translations.find(
           (t) => t.locale === locale.code
@@ -116,16 +132,16 @@ export default function ProjectForm({ initialData, mode }: ProjectFormProps) {
     try {
       // Validate required fields
       if (!slug) {
-        throw new Error('Slug is required');
+        throw new Error(t('errors.slugRequired'));
       }
 
       if (!category) {
-        throw new Error('Category is required');
+        throw new Error(t('errors.categoryRequired'));
       }
 
       // Check if at least English translation is filled
       if (!translations.en.title || !translations.en.description) {
-        throw new Error('English title and description are required');
+        throw new Error(t('errors.titleDescription'));
       }
 
       const data = {
@@ -162,9 +178,9 @@ export default function ProjectForm({ initialData, mode }: ProjectFormProps) {
         throw new Error(error.error || 'Failed to save project');
       }
 
-      // Redirect to portfolio list
-      router.push('/admin/portfolio');
+      router.push(redirectPath ?? '/admin/portfolio');
       router.refresh();
+      onSuccess?.();
     } catch (err: any) {
       setError(err.message);
       setLoading(false);
@@ -180,155 +196,179 @@ export default function ProjectForm({ initialData, mode }: ProjectFormProps) {
       )}
 
       {/* Global Fields */}
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
-        <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Global Settings</h3>
-        <div className="space-y-4">
-          <Input
-            label="Slug"
-            value={slug}
-            onChange={(e) => setSlug(e.target.value)}
-            required
-            placeholder="project-slug"
-          />
-
-          <Select
-            label="Category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            options={categories}
-            required
-          />
-
-          <Select
-            label="Status"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            options={[
-              { value: 'draft', label: 'Draft' },
-              { value: 'published', label: 'Published' },
-              { value: 'archived', label: 'Archived' },
-            ]}
-          />
-
-          <Input
-            label="Project URL (Optional)"
-            type="url"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            placeholder="https://example.com"
-          />
-
-          <Input
-            label="Display Order"
-            type="number"
-            value={order}
-            onChange={(e) => setOrder(parseInt(e.target.value) || 0)}
-            placeholder="0"
-          />
-
-          <label className="flex items-center space-x-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={featured}
-              onChange={(e) => setFeatured(e.target.checked)}
-              className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+      <div className="bg-card dark:bg-card p-6 rounded-lg shadow space-y-4">
+        <h3 className="text-lg font-semibold text-foreground dark:text-white">{t('globalTitle')}</h3>
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="space-y-2">
+            <Label htmlFor="slug">{t('slugLabel')}</Label>
+            <Input
+              id="slug"
+              value={slug}
+              onChange={(e) => setSlug(e.target.value)}
+              required
+              placeholder={t('placeholders.slug')}
             />
-            <span className="text-gray-700 dark:text-gray-300">Featured Project</span>
-          </label>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="category">{t('categoryLabel')}</Label>
+            <Select value={category} onValueChange={setCategory}>
+              <SelectTrigger id="category">
+                <SelectValue placeholder={t('categoryLabel')} />
+              </SelectTrigger>
+              <SelectContent>
+                {categories.map((cat) => (
+                  <SelectItem key={cat.value} value={cat.value}>
+                    {t(`categoryOptions.${cat.value}`)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="space-y-2">
+            <Label htmlFor="status">{t('statusLabel')}</Label>
+            <Select value={status} onValueChange={setStatus}>
+              <SelectTrigger id="status">
+                <SelectValue placeholder={t('statusLabel')} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="draft">{t('statusOptions.draft')}</SelectItem>
+                <SelectItem value="published">{t('statusOptions.published')}</SelectItem>
+                <SelectItem value="archived">{t('statusOptions.archived')}</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="order">{t('orderLabel')}</Label>
+            <Input
+              id="order"
+              type="number"
+              value={order}
+              onChange={(e) => setOrder(parseInt(e.target.value) || 0)}
+              placeholder={t('placeholders.order')}
+            />
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="space-y-2">
+            <Label htmlFor="url">{t('urlLabel')}</Label>
+            <Input
+              id="url"
+              type="url"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              placeholder={t('placeholders.url')}
+            />
+          </div>
+
+          <div className="flex items-center justify-between rounded-lg border border-border p-4">
+            <div>
+              <p className="text-sm font-medium text-foreground">Featured Project</p>
+              <p className="text-sm text-muted-foreground">Highlight this project on listings</p>
+            </div>
+            <Switch checked={featured} onCheckedChange={setFeatured} id="featured" />
+          </div>
         </div>
       </div>
 
       {/* Language Tabs */}
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
-        <div className="flex space-x-2 mb-6 border-b border-gray-200 dark:border-gray-700">
+      <div className="bg-card dark:bg-card p-6 rounded-lg shadow">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
+          <TabsList className="w-full justify-start">
+            {locales.map((locale) => (
+              <TabsTrigger key={locale.code} value={locale.code} className="gap-2">
+                <span>{locale.flag}</span>
+                <span>{locale.name}</span>
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
           {locales.map((locale) => (
-            <button
-              key={locale.code}
-              type="button"
-              onClick={() => setActiveTab(locale.code)}
-              className={`px-4 py-2 font-medium transition-colors ${
-                activeTab === locale.code
-                  ? 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400'
-                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-              }`}
-            >
-              {locale.flag} {locale.name}
-            </button>
-          ))}
-        </div>
-
-        {/* Translation Fields */}
-        {locales.map(
-          (locale) =>
-            activeTab === locale.code && (
-              <div key={locale.code} className="space-y-4">
+            <TabsContent key={locale.code} value={locale.code} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor={`title-${locale.code}`}>
+                  {t('languageFields.title', {
+                    language: locale.name,
+                    required: locale.code === 'en' ? tCommon('requiredIndicator') : ''
+                  })}
+                </Label>
                 <Input
-                  label="Project Title"
+                  id={`title-${locale.code}`}
                   value={translations[locale.code].title}
-                  onChange={(e) =>
-                    updateTranslation(locale.code, 'title', e.target.value)
-                  }
+                  onChange={(e) => updateTranslation(locale.code, 'title', e.target.value)}
                   required={locale.code === 'en'}
-                  placeholder="My Awesome Project"
+                  placeholder={t('placeholders.title')}
                 />
+              </div>
 
+              <div className="space-y-2">
+                <Label htmlFor={`description-${locale.code}`}>
+                  {t('languageFields.description', {
+                    language: locale.name,
+                    required: locale.code === 'en' ? tCommon('requiredIndicator') : ''
+                  })}
+                </Label>
                 <Textarea
-                  label="Description"
+                  id={`description-${locale.code}`}
                   value={translations[locale.code].description}
-                  onChange={(e) =>
-                    updateTranslation(locale.code, 'description', e.target.value)
-                  }
+                  onChange={(e) => updateTranslation(locale.code, 'description', e.target.value)}
                   required={locale.code === 'en'}
                   rows={4}
-                  placeholder="Brief description of the project..."
+                  placeholder={t('placeholders.description')}
                 />
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Technologies (comma-separated)
-                  </label>
-                  <Input
-                    value={translations[locale.code].technologies.join(', ')}
-                    onChange={(e) =>
-                      handleTechnologiesChange(locale.code, e.target.value)
-                    }
-                    placeholder="React, Next.js, TypeScript, Tailwind CSS"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Image URLs (one per line)
-                  </label>
-                  <Textarea
-                    value={translations[locale.code].images.join('\n')}
-                    onChange={(e) =>
-                      handleImagesChange(locale.code, e.target.value)
-                    }
-                    rows={5}
-                    placeholder="https://example.com/image1.jpg"
-                  />
-                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                    Enter one image URL per line
-                  </p>
-                </div>
               </div>
-            )
-        )}
+
+              <div className="space-y-2">
+                <Label htmlFor={`technologies-${locale.code}`}>
+                  {t('languageFields.technologies', { language: locale.name, required: '' })}
+                </Label>
+                <Input
+                  id={`technologies-${locale.code}`}
+                  value={translations[locale.code].technologies.join(', ')}
+                  onChange={(e) => handleTechnologiesChange(locale.code, e.target.value)}
+                  placeholder={t('placeholders.technologies')}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor={`images-${locale.code}`}>
+                  {t('languageFields.images', { language: locale.name, required: '' })}
+                </Label>
+                <Textarea
+                  id={`images-${locale.code}`}
+                  value={translations[locale.code].images.join('\n')}
+                  onChange={(e) => handleImagesChange(locale.code, e.target.value)}
+                  rows={5}
+                  placeholder={t('placeholders.images')}
+                />
+                <p className="text-sm text-muted-foreground">{t('placeholders.imagesHelper')}</p>
+              </div>
+            </TabsContent>
+          ))}
+        </Tabs>
       </div>
 
       {/* Actions */}
-      <div className="flex justify-end space-x-4">
+      <div className="flex justify-end space-x-3">
         <Button
           type="button"
-          variant="secondary"
-          onClick={() => router.push('/admin/portfolio')}
+          variant="outline"
+          onClick={() => router.push(redirectPath ?? '/admin/portfolio')}
           disabled={loading}
         >
-          Cancel
+          {t('buttons.cancel')}
         </Button>
         <Button type="submit" disabled={loading}>
-          {loading ? 'Saving...' : mode === 'create' ? 'Create Project' : 'Update Project'}
+          {loading
+            ? t('buttons.saving')
+            : mode === 'create'
+            ? t('buttons.create')
+            : t('buttons.update')}
         </Button>
       </div>
     </form>

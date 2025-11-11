@@ -13,6 +13,16 @@ RUN npm ci
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
+
+# Provide required environment variables during build (Next.js/Prisma validation)
+ARG DATABASE_URL="postgresql://user:password@localhost:5432/postgres"
+ARG NEXTAUTH_URL="http://localhost:3000"
+ARG NEXTAUTH_SECRET="change-me"
+
+ENV DATABASE_URL=${DATABASE_URL}
+ENV NEXTAUTH_URL=${NEXTAUTH_URL}
+ENV NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 

@@ -29,6 +29,8 @@ export default function RichTextEditor({
   placeholder = 'Start writing...',
 }: RichTextEditorProps) {
   const editor = useEditor({
+    // Disable immediate render to avoid TipTap SSR errors in Next.js
+    immediatelyRender: false,
     extensions: [
       StarterKit.configure({
         heading: {
@@ -38,7 +40,7 @@ export default function RichTextEditor({
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {
-          class: 'text-blue-600 underline',
+          class: 'text-primary underline',
         },
       }),
       Image.configure({
@@ -90,15 +92,15 @@ export default function RichTextEditor({
   }
 
   return (
-    <div className="border border-gray-300 rounded-lg overflow-hidden">
+    <div className="border border-border rounded-lg overflow-hidden">
       {/* Toolbar */}
-      <div className="bg-gray-50 border-b border-gray-300 p-2 flex flex-wrap gap-1">
+      <div className="bg-muted border-b border-border p-2 flex flex-wrap gap-1">
         {/* Headings */}
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            editor.isActive('heading', { level: 2 }) ? 'bg-gray-300' : ''
+          className={`p-2 rounded hover:bg-muted transition-colors ${
+            editor.isActive('heading', { level: 2 }) ? 'bg-muted/60' : ''
           }`}
           title="Heading 2"
         >
@@ -107,22 +109,22 @@ export default function RichTextEditor({
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            editor.isActive('heading', { level: 3 }) ? 'bg-gray-300' : ''
+          className={`p-2 rounded hover:bg-muted transition-colors ${
+            editor.isActive('heading', { level: 3 }) ? 'bg-muted/60' : ''
           }`}
           title="Heading 3"
         >
           <Heading3 className="w-4 h-4" />
         </button>
 
-        <div className="w-px bg-gray-300 mx-1" />
+        <div className="w-px bg-border mx-1" />
 
         {/* Text Formatting */}
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBold().run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            editor.isActive('bold') ? 'bg-gray-300' : ''
+          className={`p-2 rounded hover:bg-muted transition-colors ${
+            editor.isActive('bold') ? 'bg-muted/60' : ''
           }`}
           title="Bold"
         >
@@ -131,22 +133,22 @@ export default function RichTextEditor({
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            editor.isActive('italic') ? 'bg-gray-300' : ''
+          className={`p-2 rounded hover:bg-muted transition-colors ${
+            editor.isActive('italic') ? 'bg-muted/60' : ''
           }`}
           title="Italic"
         >
           <Italic className="w-4 h-4" />
         </button>
 
-        <div className="w-px bg-gray-300 mx-1" />
+        <div className="w-px bg-border mx-1" />
 
         {/* Lists */}
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            editor.isActive('bulletList') ? 'bg-gray-300' : ''
+          className={`p-2 rounded hover:bg-muted transition-colors ${
+            editor.isActive('bulletList') ? 'bg-muted/60' : ''
           }`}
           title="Bullet List"
         >
@@ -155,36 +157,36 @@ export default function RichTextEditor({
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            editor.isActive('orderedList') ? 'bg-gray-300' : ''
+          className={`p-2 rounded hover:bg-muted transition-colors ${
+            editor.isActive('orderedList') ? 'bg-muted/60' : ''
           }`}
           title="Ordered List"
         >
           <ListOrdered className="w-4 h-4" />
         </button>
 
-        <div className="w-px bg-gray-300 mx-1" />
+        <div className="w-px bg-border mx-1" />
 
         {/* Code */}
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            editor.isActive('codeBlock') ? 'bg-gray-300' : ''
+          className={`p-2 rounded hover:bg-muted transition-colors ${
+            editor.isActive('codeBlock') ? 'bg-muted/60' : ''
           }`}
           title="Code Block"
         >
           <Code className="w-4 h-4" />
         </button>
 
-        <div className="w-px bg-gray-300 mx-1" />
+        <div className="w-px bg-border mx-1" />
 
         {/* Link & Image */}
         <button
           type="button"
           onClick={setLink}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            editor.isActive('link') ? 'bg-gray-300' : ''
+          className={`p-2 rounded hover:bg-muted transition-colors ${
+            editor.isActive('link') ? 'bg-muted/60' : ''
           }`}
           title="Add Link"
         >
@@ -193,7 +195,7 @@ export default function RichTextEditor({
         <button
           type="button"
           onClick={addImage}
-          className="p-2 rounded hover:bg-gray-200 transition-colors"
+          className="p-2 rounded hover:bg-muted transition-colors"
           title="Add Image"
         >
           <ImageIcon className="w-4 h-4" />
@@ -201,7 +203,7 @@ export default function RichTextEditor({
       </div>
 
       {/* Editor */}
-      <div className="bg-white">
+      <div className="bg-card">
         <EditorContent editor={editor} placeholder={placeholder} />
       </div>
     </div>

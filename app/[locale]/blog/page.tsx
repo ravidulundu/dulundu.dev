@@ -2,6 +2,7 @@ import { db } from "@/lib/db";
 import BlogCard from "@/components/blog/BlogCard";
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
+import PageWrapper from '@/components/layout/PageWrapper';
 
 export const dynamic = 'force-dynamic';
 
@@ -55,14 +56,15 @@ export default async function BlogPage({
   const t = await getTranslations({ locale: params.locale, namespace: 'blog' });
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <PageWrapper>
+      <div className="min-h-screen bg-muted py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             {t('title')}
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             {t('subtitle')}
           </p>
         </div>
@@ -70,7 +72,7 @@ export default async function BlogPage({
         {/* Blog Grid */}
         {posts.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">{t('noPostsYet')}</p>
+            <p className="text-muted-foreground text-lg">{t('noPostsYet')}</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -81,5 +83,6 @@ export default async function BlogPage({
         )}
       </div>
     </div>
+    </PageWrapper>
   );
 }

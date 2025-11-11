@@ -1,11 +1,24 @@
 import { db } from "@/lib/db";
 import Link from "next/link";
-import { Plus, Edit, Trash2, Star } from "lucide-react";
+import { Plus, Trash2, Star } from "lucide-react";
 import { format } from "date-fns";
+import { getTranslations } from "next-intl/server";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import BlogEditDialog from "@/components/admin/BlogEditDialog";
+import { mapPostToFormData, type AdminPostWithRelations } from "@/lib/admin/blog-form-mapper";
 
 export const dynamic = 'force-dynamic';
 
-async function getPosts() {
+async function getPosts(): Promise<AdminPostWithRelations[]> {
   const posts = await db.post.findMany({
     include: {
       translations: true,
@@ -15,110 +28,103 @@ async function getPosts() {
     },
   });
 
-  return posts;
+  return posts as AdminPostWithRelations[];
 }
 
-export default async function BlogPage() {
+export default async function BlogPage({
+  params,
+}: {
+  params: { locale: string };
+}) {
   const posts = await getPosts();
+  const t = await getTranslations({ locale: params.locale, namespace: 'admin.blog' });
+  const adminBasePath = `/${params.locale}/admin`;
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Blog Posts</h1>
-          <p className="text-gray-500 mt-2">Manage your blog posts in multiple languages</p>
+          <h1 className="text-3xl font-bold text-foreground">{t('title')}</h1>
+          <p className="text-muted-foreground mt-2">{t('subtitle')}</p>
         </div>
-        <Link
-          href="/admin/blog/new"
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          <Plus className="w-5 h-5" />
-          Create New Post
-        </Link>
+        <Button asChild>
+          <Link href={`${adminBasePath}/blog/new`}>
+            <Plus className="w-5 h-5 mr-2" />
+            {t('createTitle')}
+          </Link>
+        </Button>
       </div>
 
       {/* Blog Posts Table */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Post
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Status
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Featured
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Publish Date
-              </th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+      <div className="bg-card rounded-lg shadow border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t('table.post')}</TableHead>
+              <TableHead>{t('table.status')}</TableHead>
+              <TableHead>{t('table.featured')}</TableHead>
+              <TableHead>{t('table.publishedAt')}</TableHead>
+              <TableHead className="text-right">{t('table.actions')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {posts.length === 0 ? (
-              <tr>
-                <td colSpan={5} className="px-6 py-12 text-center text-gray-500">
-                  No blog posts yet. Create your first post!
-                </td>
-              </tr>
+              <TableRow>
+                <TableCell colSpan={5} className="h-24 text-center">
+                  {t('empty')}
+                </TableCell>
+              </TableRow>
             ) : (
               posts.map((post) => {
                 const enTranslation = post.translations.find(t => t.locale === 'en');
+                const formData = mapPostToFormData(post);
                 return (
-                  <tr key={post.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4">
-                      <div className="text-sm font-medium text-gray-900">
+                  <TableRow key={post.id}>
+                    <TableCell>
+                      <div className="font-medium">
                         {enTranslation?.title || 'Untitled'}
                       </div>
-                      <div className="text-sm text-gray-500">{post.slug}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span
-                        className={`px-2 py-1 text-xs font-medium rounded ${
+                      <div className="text-sm text-muted-foreground">{post.slug}</div>
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={
                           post.status === 'published'
-                            ? 'bg-green-100 text-green-800'
+                            ? 'default'
                             : post.status === 'draft'
-                            ? 'bg-gray-100 text-gray-800'
-                            : 'bg-yellow-100 text-yellow-800'
-                        }`}
+                              ? 'secondary'
+                              : 'outline'
+                        }
                       >
-                        {post.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                        {t(`statusOptions.${post.status}`)}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
                       {post.featured ? (
                         <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
                       ) : (
-                        <Star className="w-5 h-5 text-gray-300" />
+                        <Star className="w-5 h-5 text-muted-foreground/70" />
                       )}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    </TableCell>
+                    <TableCell>
                       {post.publishedAt
                         ? format(new Date(post.publishedAt), 'MMM dd, yyyy')
                         : '-'}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <Link
-                        href={`/admin/blog/${post.id}`}
-                        className="text-blue-600 hover:text-blue-900 mr-4"
-                      >
-                        <Edit className="w-4 h-4 inline" />
-                      </Link>
-                      <button className="text-red-600 hover:text-red-900">
-                        <Trash2 className="w-4 h-4 inline" />
-                      </button>
-                    </td>
-                  </tr>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex items-center justify-end gap-2">
+                        <BlogEditDialog initialData={formData} locale={params.locale} />
+                        <button className="text-red-600 hover:text-red-900" aria-label="Delete">
+                          <Trash2 className="w-4 h-4 inline" />
+                        </button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
                 );
               })
             )}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

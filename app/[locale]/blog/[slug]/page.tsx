@@ -2,6 +2,7 @@ import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
 import BlogPost from "@/components/blog/BlogPost";
 import { getTranslations } from 'next-intl/server';
+import PageWrapper from '@/components/layout/PageWrapper';
 
 async function getPost(slug: string, locale: string) {
   const post = await db.post.findUnique({
@@ -70,5 +71,9 @@ export default async function BlogDetailPage({
     notFound();
   }
 
-  return <BlogPost post={post} locale={locale} />;
+  return (
+    <PageWrapper>
+      <BlogPost post={post} locale={locale} />
+    </PageWrapper>
+  );
 }

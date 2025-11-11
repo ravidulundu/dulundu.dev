@@ -10,7 +10,8 @@
     "portfolio": "Portfólio",
     "blog": "Blog",
     "contact": "Contato",
-    "admin": "Admin"
+    "admin": "Admin",
+    "currency": "Moeda"
   },
   "hero": {
     "title": "Serviços Profissionais de WordPress e Desenvolvimento Web",
@@ -73,12 +74,23 @@
     }
   },
   "footer": {
-    "copyright": "© 2024 Dulundu.dev. Todos os direitos reservados.",
+    "description": "Serviços Profissionais de WordPress e Desenvolvimento Web. Otimize, aprimore e expanda sua presença digital.",
+    "copyright": "Todos os direitos reservados.",
     "services": "Serviços",
     "company": "Empresa",
     "legal": "Jurídico",
     "privacy": "Política de Privacidade",
-    "terms": "Termos de Serviço"
+    "terms": "Termos de Serviço",
+    "servicesLinks": {
+      "wordpress": "Otimização WordPress",
+      "consulting": "Consultoria",
+      "products": "Produtos Digitais"
+    },
+    "companyLinks": {
+      "portfolio": "Portfólio",
+      "blog": "Blog",
+      "contact": "Contato"
+    }
   },
   "blog": {
     "title": "Blog",
@@ -111,6 +123,8 @@
     "enterEmail": "Por favor, insira seu endereço de e-mail",
     "invalidEmail": "Por favor, insira um endereço de e-mail válido",
     "notAvailable": "Este produto não está disponível para compra",
+    "currencyUnavailable": "Este produto não está disponível em {currency}.",
+    "chooseAnotherCurrency": "Selecione outra moeda para habilitar o checkout.",
     "checkoutError": "Falha ao iniciar checkout. Por favor, tente novamente."
   },
   "checkout": {
@@ -179,5 +193,359 @@
     "projectDetails": "Detalhes do Projeto",
     "category": "Categoria",
     "website": "Site"
+  },
+  "auth": {
+    "signin": {
+      "title": "Entrar no Painel Administrativo",
+      "email": "E-mail",
+      "password": "Senha",
+      "submit": "Entrar",
+      "loading": "Entrando...",
+      "backToHome": "Voltar ao Início",
+      "invalidCredentials": "E-mail ou senha inválidos",
+      "error": "Ocorreu um erro. Por favor, tente novamente."
+    },
+    "error": {
+      "title": "Erro de Autenticação",
+      "description": "Encontramos um erro ao tentar fazer login.",
+      "tryAgain": "Tentar Novamente",
+      "backToHome": "Voltar ao Início",
+      "invalidCredentials": "E-mail ou senha inválidos.",
+      "accessDenied": "Acesso negado. Você não tem permissão.",
+      "verification": "Falha na verificação. Por favor, tente novamente.",
+      "default": "Ocorreu um erro inesperado."
+    }
+  },
+  "legal": {
+    "lastUpdated": "Última Atualização",
+    "tableOfContents": "Índice"
+  },
+  "admin": {
+    "sidebar": {
+      "title": "Painel Admin",
+      "links": {
+        "dashboard": "Painel",
+        "products": "Produtos",
+        "blog": "Blog",
+        "portfolio": "Portfólio",
+        "orders": "Pedidos",
+        "settings": "Configurações"
+      }
+    },
+    "header": {
+      "title": "Painel Administrativo",
+      "notifications": "Notificações",
+      "profile": "Admin",
+      "signOut": "Sair"
+    },
+    "dashboard": {
+      "title": "Painel",
+      "subtitle": "Bem-vindo ao painel administrativo",
+      "cards": {
+        "products": "Produtos",
+        "posts": "Posts",
+        "portfolio": "Portfólio",
+        "orders": "Pedidos"
+      },
+      "quickActions": {
+        "title": "Ações rápidas",
+        "addProduct": {
+          "title": "Adicionar produto",
+          "description": "Crie um novo produto ou serviço"
+        },
+        "writePost": {
+          "title": "Escrever post",
+          "description": "Crie um novo post para o blog"
+        },
+        "addProject": {
+          "title": "Adicionar projeto",
+          "description": "Mostre um novo projeto no portfólio"
+        }
+      }
+    },
+    "products": {
+      "title": "Produtos e Serviços",
+      "subtitle": "Gerencie seus produtos, serviços e itens digitais",
+      "createTitle": "Criar novo produto",
+      "editTitle": "Editar produto",
+      "table": {
+        "product": "Produto",
+        "type": "Tipo",
+        "usd": "USD",
+        "try": "TRY",
+        "brl": "BRL",
+        "summary": "Resumo",
+        "status": "Status",
+        "actions": "Ações"
+      },
+      "badge": {
+        "base": "Base",
+        "manual": "Manual",
+        "auto": "Auto"
+      },
+      "popover": {
+        "title": "Resumo de preço",
+        "description": "IDs do Stripe aparecem aqui. Campos vazios indicam preços ainda não sincronizados.",
+        "auto": "Conversão automática",
+        "base": "Preço base",
+        "manual": "Sobrescrito",
+        "noStripe": "Sem ID Stripe"
+      },
+      "empty": "Ainda não há produtos. Crie o primeiro!",
+      "editDialog": {
+        "title": "Editar produto",
+        "description": "Atualize preços e traduções sem sair da lista."
+      },
+      "statusOptions": {
+        "draft": "Rascunho",
+        "published": "Publicado",
+        "archived": "Arquivado"
+      }
+    },
+    "blog": {
+      "title": "Posts do Blog",
+      "subtitle": "Gerencie os posts em vários idiomas",
+      "createTitle": "Criar novo post",
+      "editTitle": "Editar post",
+      "table": {
+        "post": "Post",
+        "status": "Status",
+        "featured": "Em destaque",
+        "publishedAt": "Data de publicação",
+        "actions": "Ações"
+      },
+      "empty": "Ainda não há posts. Crie o primeiro!",
+      "dialogTitle": "Editar post do blog",
+      "dialogDescription": "Atualize traduções e configurações sem sair da lista.",
+      "statusOptions": {
+        "draft": "Rascunho",
+        "published": "Publicado"
+      }
+    },
+    "portfolio": {
+      "title": "Projetos do Portfólio",
+      "subtitle": "Gerencie seus projetos em vários idiomas",
+      "createTitle": "Criar novo projeto",
+      "editTitle": "Editar projeto",
+      "table": {
+        "project": "Projeto",
+        "category": "Categoria",
+        "status": "Status",
+        "featured": "Destaque",
+        "order": "Ordem",
+        "actions": "Ações"
+      },
+      "empty": "Ainda não há projetos. Crie o primeiro!",
+      "dialogTitle": "Editar projeto",
+      "dialogDescription": "Atualize o conteúdo do portfólio sem sair da lista.",
+      "statusOptions": {
+        "draft": "Rascunho",
+        "published": "Publicado",
+        "archived": "Arquivado"
+      }
+    },
+    "orders": {
+      "title": "Pedidos",
+      "subtitle": "Gerencie pedidos e pagamentos dos clientes",
+      "table": {
+        "orderId": "Pedido",
+        "customer": "Cliente",
+        "products": "Produtos",
+        "total": "Total",
+        "status": "Status",
+        "date": "Data"
+      },
+      "empty": "Nenhum pedido ainda.",
+      "statusLabels": {
+        "completed": "Concluído",
+        "pending": "Pendente",
+        "failed": "Falhou"
+      }
+    },
+    "settings": {
+      "title": "Configurações",
+      "subtitle": "Gerencie as preferências e integrações do app",
+      "comingSoonTitle": "Painel de configurações em breve",
+      "comingSoonDescription": "Opções avançadas de configuração estarão disponíveis em breve.",
+      "quickActions": "Ações rápidas",
+      "sections": {
+        "profile": {
+          "title": "Configurações de perfil",
+          "description": "Gerencie informações e preferências da conta"
+        },
+        "notifications": {
+          "title": "Notificações",
+          "description": "Configure alertas por e-mail e sistema"
+        },
+        "security": {
+          "title": "Segurança",
+          "description": "Senha, autenticação em duas etapas e logs"
+        },
+        "database": {
+          "title": "Banco de dados",
+          "description": "Opções de backup, restauração e manutenção"
+        },
+        "localization": {
+          "title": "Localização",
+          "description": "Idioma padrão, fuso horário e opções regionais"
+        },
+        "system": {
+          "title": "Sistema",
+          "description": "Configurações avançadas e integrações"
+        }
+      },
+      "cardBadge": "Em breve",
+      "quickButtons": {
+        "clearCache": "Limpar cache",
+        "runBackup": "Executar backup",
+        "exportData": "Exportar dados",
+        "systemInfo": "Info do sistema"
+      }
+    },
+    "forms": {
+      "common": {
+        "requiredIndicator": " *"
+      },
+      "product": {
+        "globalTitle": "Configurações Gerais",
+        "languageFields": {
+          "title": "Título ({language}){required}",
+          "description": "Descrição ({language})",
+          "features": "Recursos ({language})",
+          "coverImage": "URL da imagem ({language})"
+        },
+        "placeholders": {
+          "title": "Digite o título do produto",
+          "description": "Descrição detalhada do produto",
+          "features": "Um recurso por linha (opcional)",
+          "coverImage": "https://exemplo.com/imagem.jpg",
+          "price": "99.99",
+          "override": "Auto"
+        },
+        "slugLabel": "Slug",
+        "slugPlaceholder": "produto-slug (gerado automaticamente)",
+        "typeLabel": "Tipo de produto",
+        "typeOptions": {
+          "service": "Serviço",
+          "digital_product": "Produto digital",
+          "consulting": "Consultoria"
+        },
+        "statusLabel": "Status",
+        "statusOptions": {
+          "draft": "Rascunho",
+          "published": "Publicado",
+          "archived": "Arquivado"
+        },
+        "priceLabel": "Preço ({currencySymbol})",
+        "currencyLabel": "Moeda",
+        "localizedTitle": "Preços por moeda",
+        "localizedDescription": "Deixe em branco para converter automaticamente de {currency}. Preencha para sobrescrever o valor base.",
+        "overrideLabel": "Sobrescrever",
+        "autoSuggestion": "Sugestão: {value} (com base em {currency})",
+        "errors": {
+          "slugPrice": "Slug e preço são obrigatórios.",
+          "englishTitle": "O título em inglês é obrigatório.",
+          "pricePositive": "O preço deve ser positivo."
+        },
+        "buttons": {
+          "cancel": "Cancelar",
+          "create": "Criar produto",
+          "update": "Atualizar produto",
+          "saving": "Salvando..."
+        },
+        "badge": {
+          "base": "Base",
+          "manual": "Manual",
+          "auto": "Auto"
+        }
+      },
+      "blog": {
+        "languageFields": {
+          "title": "Título ({language}){required}",
+          "excerpt": "Resumo ({language}){required}",
+          "content": "Conteúdo ({language})",
+          "coverImage": "URL da imagem ({language})"
+        },
+        "placeholders": {
+          "title": "Digite o título do post",
+          "excerpt": "Resumo exibido nas listagens",
+          "content": "Escreva o conteúdo em {language}...",
+          "coverImage": "https://exemplo.com/imagem.jpg",
+          "slug": "post-slug",
+          "publishedAt": "2024-01-01 10:00"
+        },
+        "slugLabel": "Slug",
+        "statusLabel": "Status",
+        "statusOptions": {
+          "draft": "Rascunho",
+          "published": "Publicado",
+          "archived": "Arquivado"
+        },
+        "featuredLabel": "Destaque",
+        "publishedAtLabel": "Data de publicação",
+        "errors": {
+          "slugRequired": "Slug é obrigatório.",
+          "englishTitleExcerpt": "Título e resumo em inglês são obrigatórios."
+        },
+        "buttons": {
+          "cancel": "Cancelar",
+          "create": "Criar post",
+          "update": "Atualizar post",
+          "saving": "Salvando..."
+        },
+        "globalTitle": "Configurações Gerais",
+        "excerptCounter": "{count}/{max} caracteres"
+      },
+      "project": {
+        "languageFields": {
+          "title": "Título ({language}){required}",
+          "description": "Descrição ({language}){required}",
+          "technologies": "Tecnologias ({language})",
+          "images": "Imagens ({language})"
+        },
+        "placeholders": {
+          "title": "Digite o título do projeto",
+          "description": "Descreva o projeto",
+          "technologies": "React, Next.js, Tailwind",
+          "images": "https://exemplo.com/imagem.jpg",
+          "slug": "projeto-slug",
+          "order": "0",
+          "url": "https://projeto.com",
+          "imagesHelper": "Digite um URL por linha"
+        },
+        "slugLabel": "Slug",
+        "categoryLabel": "Categoria",
+        "categoryOptions": {
+          "wordpress": "WordPress",
+          "web-development": "Desenvolvimento Web",
+          "consulting": "Consultoria",
+          "mobile": "Aplicativo Mobile",
+          "optimization": "Otimização"
+        },
+        "statusLabel": "Status",
+        "statusOptions": {
+          "draft": "Rascunho",
+          "published": "Publicado",
+          "archived": "Arquivado"
+        },
+        "featuredLabel": "Destaque",
+        "urlLabel": "URL do projeto",
+        "orderLabel": "Ordem de exibição",
+        "errors": {
+          "slugRequired": "Slug é obrigatório.",
+          "englishTitle": "O título em inglês é obrigatório.",
+          "englishDescription": "A descrição em inglês é obrigatória.",
+          "categoryRequired": "Categoria é obrigatória.",
+          "titleDescription": "Título e descrição em inglês são obrigatórios."
+        },
+        "buttons": {
+          "cancel": "Cancelar",
+          "create": "Criar projeto",
+          "update": "Atualizar projeto",
+          "saving": "Salvando..."
+        },
+        "globalTitle": "Configurações Gerais"
+      }
+    }
   }
 }

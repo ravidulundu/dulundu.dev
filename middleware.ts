@@ -1,24 +1,26 @@
 import createMiddleware from 'next-intl/middleware';
 import { NextRequest, NextResponse } from 'next/server';
 import { locales, defaultLocale } from './i18n';
+import { CURRENCY_COOKIE, DEFAULT_CURRENCY, getCurrencyForCountry, getCurrencyForLocale } from './lib/currency';
 
-// IP-based locale detection function
-function getLocaleFromIP(request: NextRequest): string | null {
-  // Get client's country from headers (Vercel provides this automatically)
-  const country = request.geo?.country || request.headers.get('x-vercel-ip-country');
+const countryLocaleMap: Record<string, string> = {
+  'TR': 'tr',
+  'BR': 'pt-BR',
+  'PT': 'pt-BR',
+  'US': 'en',
+  'GB': 'en',
+  'CA': 'en',
+  'AU': 'en'
+};
 
-  // Map countries to locales
-  const countryLocaleMap: Record<string, string> = {
-    'TR': 'tr',      // Turkey
-    'BR': 'pt-BR',   // Brazil
-    'PT': 'pt-BR',   // Portugal (using pt-BR as fallback)
-    'US': 'en',      // United States
-    'GB': 'en',      // United Kingdom
-    'CA': 'en',      // Canada
-    'AU': 'en',      // Australia
-  };
-
+function getLocaleFromCountry(country: string | null): string | null {
   return country ? countryLocaleMap[country] || null : null;
+}
+
+function getLocaleFromPath(pathname: string): string | null {
+  const segments = pathname.split('/').filter(Boolean);
+  const localeCandidate = segments[0];
+  return localeCandidate && locales.includes(localeCandidate as any) ? localeCandidate : null;
 }
 
 export default function middleware(request: NextRequest) {
@@ -27,10 +29,12 @@ export default function middleware(request: NextRequest) {
   const hasLocaleInPath = locales.some(locale =>
     pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
+  const detectedCountry = request.geo?.country || request.headers.get('x-vercel-ip-country');
+  const existingCurrency = request.cookies.get(CURRENCY_COOKIE)?.value;
 
   // Only auto-detect on first visit (when no locale is in path and no cookie)
   if (!hasLocaleInPath && !request.cookies.has('NEXT_LOCALE')) {
-    const ipLocale = getLocaleFromIP(request);
+    const ipLocale = getLocaleFromCountry(detectedCountry);
     if (ipLocale && locales.includes(ipLocale as any)) {
       // Create redirect response with cookie
       const url = request.nextUrl.clone();
@@ -40,6 +44,15 @@ export default function middleware(request: NextRequest) {
         maxAge: 60 * 60 * 24 * 365, // 1 year
         path: '/',
       });
+      const currency = detectedCountry
+        ? getCurrencyForCountry(detectedCountry)
+        : getCurrencyForLocale(ipLocale);
+      if (!existingCurrency) {
+        response.cookies.set(CURRENCY_COOKIE, currency || DEFAULT_CURRENCY, {
+          maxAge: 60 * 60 * 24 * 365,
+          path: '/',
+        });
+      }
       return response;
     }
   }
@@ -52,7 +65,16 @@ export default function middleware(request: NextRequest) {
     localePrefix: 'always' // Always show locale in URL
   });
 
-  return handleI18nRouting(request);
+  const response = handleI18nRouting(request);
+  const localeFromPath = getLocaleFromPath(pathname);
+  if (localeFromPath && !existingCurrency) {
+    const currency = getCurrencyForLocale(localeFromPath) || DEFAULT_CURRENCY;
+    response.cookies.set(CURRENCY_COOKIE, currency, {
+      maxAge: 60 * 60 * 24 * 365,
+      path: '/',
+    });
+  }
+  return response;
 }
 
 export const config = {

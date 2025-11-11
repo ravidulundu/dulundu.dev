@@ -1,6 +1,8 @@
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import ProjectForm from "@/components/admin/ProjectForm";
+import { mapProjectToFormData } from "@/lib/admin/project-form-mapper";
 
 async function getProject(id: string) {
   const project = await db.project.findUnique({
@@ -16,40 +18,30 @@ async function getProject(id: string) {
 export default async function EditPortfolioProjectPage({
   params,
 }: {
-  params: { id: string };
+  params: { id: string; locale: string };
 }) {
   const project = await getProject(params.id);
+  const t = await getTranslations({ locale: params.locale, namespace: 'admin.portfolio' });
 
   if (!project) {
     notFound();
   }
 
   // Format data for ProjectForm
-  const initialData = {
-    id: project.id,
-    slug: project.slug,
-    category: project.category,
-    status: project.status,
-    featured: project.featured,
-    url: project.url,
-    order: project.order,
-    translations: project.translations.map((t) => ({
-      locale: t.locale,
-      title: t.title,
-      description: t.description,
-      technologies: (t.technologies as string[]) || [],
-      images: (t.images as string[]) || [],
-    })),
-  };
+  const initialData = mapProjectToFormData(project);
 
   return (
-    <div>
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Edit Project</h1>
-        <p className="text-gray-500 dark:text-gray-400 mt-2">Update your project details and settings</p>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold text-foreground dark:text-white">{t('editTitle')}</h1>
+        <p className="text-muted-foreground dark:text-muted-foreground mt-2">{t('subtitle')}</p>
       </div>
 
-      <ProjectForm mode="edit" initialData={initialData} />
+      <ProjectForm
+        mode="edit"
+        initialData={initialData}
+        redirectPath={`/${params.locale}/admin/portfolio`}
+      />
     </div>
   );
 }

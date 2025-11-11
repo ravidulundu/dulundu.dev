@@ -1,5 +1,8 @@
+import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { db } from "@/lib/db";
 import { Package, FileText, Briefcase, ShoppingCart } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 async function getStats() {
   const [productsCount, postsCount, projectsCount, ordersCount] = await Promise.all([
@@ -17,90 +20,102 @@ async function getStats() {
   };
 }
 
-export default async function AdminDashboard() {
+export default async function AdminDashboard({
+  params,
+}: {
+  params: { locale: string };
+}) {
   const stats = await getStats();
+  const t = await getTranslations({ locale: params.locale, namespace: 'admin.dashboard' });
+  const adminBasePath = `/${params.locale}/admin`;
 
   const cards = [
     {
-      title: 'Products',
+      title: t('cards.products'),
       value: stats.products,
       icon: Package,
-      color: 'bg-blue-500',
+      color: 'bg-muted0',
     },
     {
-      title: 'Blog Posts',
+      title: t('cards.posts'),
       value: stats.posts,
       icon: FileText,
-      color: 'bg-green-500',
+      color: 'bg-muted0',
     },
     {
-      title: 'Portfolio',
+      title: t('cards.portfolio'),
       value: stats.projects,
       icon: Briefcase,
-      color: 'bg-purple-500',
+      color: 'bg-accent/100',
     },
     {
-      title: 'Orders',
+      title: t('cards.orders'),
       value: stats.orders,
       icon: ShoppingCart,
-      color: 'bg-orange-500',
+      color: 'bg-accent/100',
     },
   ];
 
   return (
-    <div>
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-500 mt-2">Welcome to your admin dashboard</p>
+    <div className="space-y-8">
+      <div>
+        <h1 className="text-3xl font-bold text-foreground">{t('title')}</h1>
+        <p className="text-muted-foreground mt-2">{t('subtitle')}</p>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
         {cards.map((card) => (
-          <div key={card.title} className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">{card.title}</p>
-                <p className="text-3xl font-bold text-gray-900 mt-2">{card.value}</p>
+          <Card key={card.title}>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">{card.title}</p>
+                  <p className="text-3xl font-bold text-foreground mt-2">{card.value}</p>
+                </div>
+                <div className={`${card.color} p-3 rounded-lg`}>
+                  <card.icon className="w-6 h-6 text-white" />
+                </div>
               </div>
-              <div className={`${card.color} p-3 rounded-lg`}>
-                <card.icon className="w-6 h-6 text-white" />
-              </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         ))}
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <a
-            href="/admin/products"
-            className="p-4 border border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors"
-          >
-            <Package className="w-8 h-8 text-blue-600 mb-2" />
-            <h3 className="font-semibold text-gray-900">Add Product</h3>
-            <p className="text-sm text-gray-500 mt-1">Create a new product or service</p>
-          </a>
-          <a
-            href="/admin/blog"
-            className="p-4 border border-gray-200 rounded-lg hover:border-green-500 hover:bg-green-50 transition-colors"
-          >
-            <FileText className="w-8 h-8 text-green-600 mb-2" />
-            <h3 className="font-semibold text-gray-900">Write Post</h3>
-            <p className="text-sm text-gray-500 mt-1">Create a new blog post</p>
-          </a>
-          <a
-            href="/admin/portfolio"
-            className="p-4 border border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-colors"
-          >
-            <Briefcase className="w-8 h-8 text-purple-600 mb-2" />
-            <h3 className="font-semibold text-gray-900">Add Project</h3>
-            <p className="text-sm text-gray-500 mt-1">Showcase a new portfolio project</p>
-          </a>
-        </div>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>{t('quickActions.title')}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Link
+              href={`${adminBasePath}/products`}
+              className="p-4 border border-border rounded-lg hover:border-primary hover:bg-muted transition-colors"
+            >
+              <Package className="w-8 h-8 text-primary mb-2" />
+              <h3 className="font-semibold text-foreground">{t('quickActions.addProduct.title')}</h3>
+              <p className="text-sm text-muted-foreground mt-1">{t('quickActions.addProduct.description')}</p>
+            </Link>
+            <Link
+              href={`${adminBasePath}/blog`}
+              className="p-4 border border-border rounded-lg hover:border-primary hover:bg-muted transition-colors"
+            >
+              <FileText className="w-8 h-8 text-primary mb-2" />
+              <h3 className="font-semibold text-foreground">{t('quickActions.writePost.title')}</h3>
+              <p className="text-sm text-muted-foreground mt-1">{t('quickActions.writePost.description')}</p>
+            </Link>
+            <Link
+              href={`${adminBasePath}/portfolio`}
+              className="p-4 border border-border rounded-lg hover:border-purple-500 hover:bg-accent/10 transition-colors"
+            >
+              <Briefcase className="w-8 h-8 text-accent mb-2" />
+              <h3 className="font-semibold text-foreground">{t('quickActions.addProject.title')}</h3>
+              <p className="text-sm text-muted-foreground mt-1">{t('quickActions.addProject.description')}</p>
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

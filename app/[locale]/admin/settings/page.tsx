@@ -1,53 +1,31 @@
 import { Settings, User, Bell, Shield, Database, Globe } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
-export default async function AdminSettingsPage() {
+const sectionConfig = [
+  { icon: User, key: 'profile', color: 'blue' },
+  { icon: Bell, key: 'notifications', color: 'green' },
+  { icon: Shield, key: 'security', color: 'red' },
+  { icon: Database, key: 'database', color: 'purple' },
+  { icon: Globe, key: 'localization', color: 'orange' },
+  { icon: Settings, key: 'system', color: 'gray' }
+];
 
-  const settingsSections = [
-    {
-      icon: User,
-      title: 'Profile Settings',
-      description: 'Manage your account information and preferences',
-      color: 'blue',
-    },
-    {
-      icon: Bell,
-      title: 'Notifications',
-      description: 'Configure email and system notifications',
-      color: 'green',
-    },
-    {
-      icon: Shield,
-      title: 'Security',
-      description: 'Password, two-factor authentication, and access logs',
-      color: 'red',
-    },
-    {
-      icon: Database,
-      title: 'Database',
-      description: 'Backup, restore, and maintenance options',
-      color: 'purple',
-    },
-    {
-      icon: Globe,
-      title: 'Localization',
-      description: 'Default language, timezone, and regional settings',
-      color: 'orange',
-    },
-    {
-      icon: Settings,
-      title: 'System',
-      description: 'Advanced system configuration and integrations',
-      color: 'gray',
-    },
-  ];
+export default async function AdminSettingsPage({ params }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'admin.settings' });
+  const settingsSections = sectionConfig.map((section) => ({
+    icon: section.icon,
+    color: section.color,
+    title: t(`sections.${section.key}.title`),
+    description: t(`sections.${section.key}.description`)
+  }));
 
   const colorClasses = {
-    blue: 'bg-blue-100 text-blue-600',
-    green: 'bg-green-100 text-green-600',
+    blue: 'bg-primary/10 text-primary',
+    green: 'bg-primary/10 text-primary',
     red: 'bg-red-100 text-red-600',
-    purple: 'bg-purple-100 text-purple-600',
-    orange: 'bg-orange-100 text-orange-600',
-    gray: 'bg-gray-100 text-gray-600',
+    purple: 'bg-purple-100 text-accent',
+    orange: 'bg-orange-100 text-accent',
+    gray: 'bg-muted text-muted-foreground',
   };
 
   return (
@@ -55,24 +33,23 @@ export default async function AdminSettingsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-          <p className="text-gray-600 mt-1">
-            Manage your application settings and preferences
+          <h1 className="text-3xl font-bold text-foreground">{t('title')}</h1>
+          <p className="text-muted-foreground mt-1">
+            {t('subtitle')}
           </p>
         </div>
       </div>
 
       {/* Coming Soon Banner */}
-      <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-xl p-6">
+      <div className="bg-gradient-to-r from-muted to-accent/20 border border-primary/30 rounded-xl p-6">
         <div className="flex items-center gap-3 mb-2">
-          <Settings className="w-6 h-6 text-blue-600" />
-          <h2 className="text-xl font-semibold text-gray-900">
-            Settings Panel Coming Soon
+          <Settings className="w-6 h-6 text-primary" />
+          <h2 className="text-xl font-semibold text-foreground">
+            {t('comingSoonTitle')}
           </h2>
         </div>
-        <p className="text-gray-600">
-          Advanced settings and configuration options will be available in a future update.
-          For now, you can manage your content through the other admin sections.
+        <p className="text-muted-foreground">
+          {t('comingSoonDescription')}
         </p>
       </div>
 
@@ -85,19 +62,19 @@ export default async function AdminSettingsPage() {
           return (
             <div
               key={section.title}
-              className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow cursor-not-allowed opacity-60"
+              className="bg-card border border-border rounded-xl p-6 hover:shadow-md transition-shadow cursor-not-allowed opacity-60"
             >
               <div className={`inline-flex p-3 ${colorClass} rounded-lg mb-4`}>
                 <Icon className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <h3 className="text-lg font-semibold text-foreground mb-2">
                 {section.title}
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-muted-foreground text-sm">
                 {section.description}
               </p>
-              <div className="mt-4 text-xs text-gray-500 italic">
-                Coming soon
+              <div className="mt-4 text-xs text-muted-foreground italic">
+                {t('cardBadge')}
               </div>
             </div>
           );
@@ -105,32 +82,32 @@ export default async function AdminSettingsPage() {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white border border-gray-200 rounded-xl p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h2>
+      <div className="bg-card border border-border rounded-xl p-6">
+        <h2 className="text-lg font-semibold text-foreground mb-4">{t('quickActions')}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <button
             disabled
-            className="px-4 py-3 bg-gray-100 text-gray-400 rounded-lg font-medium cursor-not-allowed"
+            className="px-4 py-3 bg-muted text-muted-foreground rounded-lg font-medium cursor-not-allowed"
           >
-            Clear Cache
+            {t('quickButtons.clearCache')}
           </button>
           <button
             disabled
-            className="px-4 py-3 bg-gray-100 text-gray-400 rounded-lg font-medium cursor-not-allowed"
+            className="px-4 py-3 bg-muted text-muted-foreground rounded-lg font-medium cursor-not-allowed"
           >
-            Run Backup
+            {t('quickButtons.runBackup')}
           </button>
           <button
             disabled
-            className="px-4 py-3 bg-gray-100 text-gray-400 rounded-lg font-medium cursor-not-allowed"
+            className="px-4 py-3 bg-muted text-muted-foreground rounded-lg font-medium cursor-not-allowed"
           >
-            Export Data
+            {t('quickButtons.exportData')}
           </button>
           <button
             disabled
-            className="px-4 py-3 bg-gray-100 text-gray-400 rounded-lg font-medium cursor-not-allowed"
+            className="px-4 py-3 bg-muted text-muted-foreground rounded-lg font-medium cursor-not-allowed"
           >
-            System Info
+            {t('quickButtons.systemInfo')}
           </button>
         </div>
       </div>

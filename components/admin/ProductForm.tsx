@@ -1,13 +1,30 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import Input from '../ui/Input';
-import Textarea from '../ui/Textarea';
-import Select from '../ui/Select';
-import Button from '../ui/Button';
+import { useTranslations } from 'next-intl';
+import { Input } from '../ui/input';
+import { Textarea } from '../ui/textarea';
+import { Label } from '../ui/label';
+import { Button } from '../ui/button';
+import { Badge } from '../ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select';
+import {
+  SUPPORTED_CURRENCIES,
+  getCurrencySymbol,
+  generatePriceMap,
+  formatCurrencyAmount,
+  type SupportedCurrency,
+} from '@/lib/currency';
 
-interface Translation {
+export interface ProductTranslationInput {
   locale: string;
   title: string;
   description: string;
@@ -15,17 +32,22 @@ interface Translation {
   coverImage: string;
 }
 
+export type ProductFormInitialData = {
+  id?: string;
+  slug: string;
+  type: string;
+  price: string | number;
+  currency: string;
+  status: string;
+  translations: ProductTranslationInput[];
+  prices?: { currency: string; amount: string | number }[];
+};
+
 interface ProductFormProps {
-  initialData?: {
-    id?: string;
-    slug: string;
-    type: string;
-    price: string | number;
-    currency: string;
-    status: string;
-    translations: Translation[];
-  };
+  initialData?: ProductFormInitialData;
   mode: 'create' | 'edit';
+  redirectPath?: string;
+  onSuccess?: () => void;
 }
 
 const locales = [
@@ -40,29 +62,72 @@ const productTypes = [
   { value: 'consulting', label: 'Consulting' },
 ];
 
-const currencies = [
-  { value: 'USD', label: 'USD ($)' },
-  { value: 'EUR', label: 'EUR (€)' },
-  { value: 'TRY', label: 'TRY (₺)' },
-];
+const currencyOptions = SUPPORTED_CURRENCIES.map((code) => ({
+  value: code,
+  label: `${code} (${getCurrencySymbol(code)})`,
+}));
 
-export default function ProductForm({ initialData, mode }: ProductFormProps) {
+export default function ProductForm({ initialData, mode, redirectPath, onSuccess }: ProductFormProps) {
   const router = useRouter();
+  const t = useTranslations('admin.forms.product');
+  const tCommon = useTranslations('admin.forms.common');
   const [activeTab, setActiveTab] = useState('en');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const initialCurrency = initialData?.currency || SUPPORTED_CURRENCIES[0];
 
   // Form state
   const [slug, setSlug] = useState(initialData?.slug || '');
   const [type, setType] = useState(initialData?.type || 'service');
   const [price, setPrice] = useState(initialData?.price?.toString() || '');
-  const [currency, setCurrency] = useState(initialData?.currency || 'USD');
+  const [currency, setCurrency] = useState(initialCurrency);
   const [status, setStatus] = useState(initialData?.status || 'draft');
+  const [priceOverrides, setPriceOverrides] = useState<Record<string, string>>(() => {
+    const overrides: Record<string, string> = {};
+    SUPPORTED_CURRENCIES.forEach((code) => {
+      if (code === initialCurrency) return;
+      const match = initialData?.prices?.find((p) => p.currency === code);
+      overrides[code] = match ? match.amount.toString() : '';
+    });
+    return overrides;
+  });
+  const normalizedOverrides = useMemo<Partial<Record<SupportedCurrency, string>>>(() => {
+    const normalized: Partial<Record<SupportedCurrency, string>> = {};
+    Object.entries(priceOverrides).forEach(([code, value]) => {
+      if (code === currency) return;
+      if (value && value.trim() !== '') {
+        normalized[code as SupportedCurrency] = value.trim();
+      }
+    });
+    return normalized;
+  }, [priceOverrides, currency]);
+
+  const computedPriceMap = useMemo(() => {
+    const baseInput = price && price.toString().trim() !== '' ? price : '0';
+    return generatePriceMap(baseInput, currency, normalizedOverrides);
+  }, [price, currency, normalizedOverrides]);
+
+  const basePriceValue = useMemo(() => {
+    const parsed = parseFloat(computedPriceMap[currency] ?? '0');
+    return Number.isFinite(parsed) ? parsed : 0;
+  }, [computedPriceMap, currency]);
+
+  const formattedPriceMap = useMemo(() => {
+    const map: Record<string, string> = {};
+    SUPPORTED_CURRENCIES.forEach((code) => {
+      map[code] = formatCurrencyAmount({
+        amount: computedPriceMap[code] ?? '0',
+        currency: code,
+        locale: 'en-US',
+      });
+    });
+    return map;
+  }, [computedPriceMap]);
 
   // Translations state
-  const [translations, setTranslations] = useState<Record<string, Translation>>(
+  const [translations, setTranslations] = useState<Record<string, ProductTranslationInput>>(
     () => {
-      const initial: Record<string, Translation> = {};
+      const initial: Record<string, ProductTranslationInput> = {};
       locales.forEach((locale) => {
         const existing = initialData?.translations.find(
           (t) => t.locale === locale.code
@@ -100,6 +165,32 @@ export default function ProductForm({ initialData, mode }: ProductFormProps) {
     }));
   };
 
+  const handleCurrencyChange = (nextCurrency: string) => {
+    if (nextCurrency === currency) return;
+    setPriceOverrides((prev) => {
+      const updated = { ...prev };
+      if (price && price.trim() !== '') {
+        updated[currency] = price;
+      } else {
+        delete updated[currency];
+      }
+      const overrideForNext = updated[nextCurrency];
+      if (overrideForNext) {
+        setPrice(overrideForNext);
+        delete updated[nextCurrency];
+      }
+      return updated;
+    });
+    setCurrency(nextCurrency);
+  };
+
+  const handleOverrideChange = (code: string, value: string) => {
+    setPriceOverrides((prev) => ({
+      ...prev,
+      [code]: value,
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -108,19 +199,33 @@ export default function ProductForm({ initialData, mode }: ProductFormProps) {
     try {
       // Validate required fields
       if (!slug || !price) {
-        throw new Error('Slug and price are required');
+        throw new Error(t('errors.slugPrice'));
       }
 
       if (!translations.en.title) {
-        throw new Error('English title is required');
+        throw new Error(t('errors.englishTitle'));
       }
+
+      if (!basePriceValue || basePriceValue <= 0) {
+        throw new Error(t('errors.pricePositive'));
+      }
+
+      const overridesPayload: Record<string, string> = {};
+      SUPPORTED_CURRENCIES.forEach((code) => {
+        if (code === currency) return;
+        const overrideValue = priceOverrides[code];
+        if (overrideValue && overrideValue.trim() !== '') {
+          overridesPayload[code] = overrideValue.trim();
+        }
+      });
 
       const payload = {
         slug,
         type,
-        price: parseFloat(price),
+        price: basePriceValue,
         currency,
         status,
+        priceOverrides: overridesPayload,
         translations: Object.values(translations).filter((t) => t.title),
       };
 
@@ -142,8 +247,9 @@ export default function ProductForm({ initialData, mode }: ProductFormProps) {
         throw new Error(data.error || 'Failed to save product');
       }
 
-      router.push('/admin/products');
+      router.push(redirectPath ?? '/admin/products');
       router.refresh();
+      onSuccess?.();
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -154,136 +260,226 @@ export default function ProductForm({ initialData, mode }: ProductFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded">
+        <div className="bg-destructive/10 border border-destructive/30 text-destructive px-4 py-3 rounded">
           {error}
         </div>
       )}
 
       {/* Language Tabs */}
-      <div className="border-b border-gray-200">
-        <nav className="-mb-px flex space-x-8">
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList>
           {locales.map((locale) => (
-            <button
-              key={locale.code}
-              type="button"
-              onClick={() => setActiveTab(locale.code)}
-              className={`
-                py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap
-                ${
-                  activeTab === locale.code
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }
-              `}
-            >
+            <TabsTrigger key={locale.code} value={locale.code}>
               <span className="mr-2">{locale.flag}</span>
               {locale.name}
-            </button>
+            </TabsTrigger>
           ))}
-        </nav>
-      </div>
+        </TabsList>
 
-      {/* Tab Content */}
-      {locales.map((locale) => (
-        <div
-          key={locale.code}
-          className={`space-y-6 ${activeTab === locale.code ? '' : 'hidden'}`}
-        >
-          <Input
-            label={`Title (${locale.name})`}
-            value={translations[locale.code].title}
-            onChange={(e) =>
-              updateTranslation(locale.code, 'title', e.target.value)
-            }
-            required={locale.code === 'en'}
-            placeholder="Enter product title"
-          />
+        {locales.map((locale) => (
+          <TabsContent key={locale.code} value={locale.code} className="space-y-6 mt-6">
+            <div className="space-y-2">
+              <Label htmlFor={`title-${locale.code}`}>
+                {t('languageFields.title', {
+                  language: locale.name,
+                  required: locale.code === 'en' ? tCommon('requiredIndicator') : ''
+                })}
+              </Label>
+              <Input
+                id={`title-${locale.code}`}
+                value={translations[locale.code].title}
+                onChange={(e) =>
+                  updateTranslation(locale.code, 'title', e.target.value)
+                }
+                required={locale.code === 'en'}
+                placeholder={t('placeholders.title')}
+              />
+            </div>
 
-          <Textarea
-            label={`Description (${locale.name})`}
-            value={translations[locale.code].description}
-            onChange={(e) =>
-              updateTranslation(locale.code, 'description', e.target.value)
-            }
-            rows={6}
-            placeholder="Detailed product description"
-          />
+            <div className="space-y-2">
+              <Label htmlFor={`description-${locale.code}`}>
+                {t('languageFields.description', { language: locale.name, required: '' })}
+              </Label>
+              <Textarea
+                id={`description-${locale.code}`}
+                value={translations[locale.code].description}
+                onChange={(e) =>
+                  updateTranslation(locale.code, 'description', e.target.value)
+                }
+                rows={6}
+                placeholder={t('placeholders.description')}
+              />
+            </div>
 
-          <Textarea
-            label={`Features (${locale.name})`}
-            value={translations[locale.code].features}
-            onChange={(e) =>
-              updateTranslation(locale.code, 'features', e.target.value)
-            }
-            rows={4}
-            placeholder="One feature per line (optional)"
-          />
+            <div className="space-y-2">
+              <Label htmlFor={`features-${locale.code}`}>
+                {t('languageFields.features', { language: locale.name, required: '' })}
+              </Label>
+              <Textarea
+                id={`features-${locale.code}`}
+                value={translations[locale.code].features}
+                onChange={(e) =>
+                  updateTranslation(locale.code, 'features', e.target.value)
+                }
+                rows={4}
+                placeholder={t('placeholders.features')}
+              />
+            </div>
 
-          <Input
-            label={`Cover Image URL (${locale.name})`}
-            value={translations[locale.code].coverImage}
-            onChange={(e) =>
-              updateTranslation(locale.code, 'coverImage', e.target.value)
-            }
-            type="url"
-            placeholder="https://example.com/image.jpg"
-          />
-        </div>
-      ))}
+            <div className="space-y-2">
+              <Label htmlFor={`coverImage-${locale.code}`}>
+                {t('languageFields.coverImage', { language: locale.name, required: '' })}
+              </Label>
+              <Input
+                id={`coverImage-${locale.code}`}
+                value={translations[locale.code].coverImage}
+                onChange={(e) =>
+                  updateTranslation(locale.code, 'coverImage', e.target.value)
+                }
+                type="url"
+                placeholder={t('placeholders.coverImage')}
+              />
+            </div>
+          </TabsContent>
+        ))}
+      </Tabs>
 
       {/* Global Fields */}
-      <div className="border-t border-gray-200 pt-8 space-y-6">
-        <h3 className="text-lg font-medium text-gray-900">Global Settings</h3>
+      <div className="border-t border-border pt-8 space-y-6">
+        <h3 className="text-lg font-medium text-foreground">Global Settings</h3>
 
-        <Input
-          label="Slug"
-          value={slug}
-          onChange={(e) => setSlug(e.target.value)}
-          required
-          placeholder="product-slug (auto-generated)"
-        />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Select
-            label="Product Type"
-            value={type}
-            onChange={(e) => setType(e.target.value)}
+        <div className="space-y-2">
+          <Label htmlFor="slug">{t('slugLabel')}</Label>
+          <Input
+            id="slug"
+            value={slug}
+            onChange={(e) => setSlug(e.target.value)}
             required
-            options={productTypes}
-          />
-
-          <Select
-            label="Status"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            required
-            options={[
-              { value: 'draft', label: 'Draft' },
-              { value: 'published', label: 'Published' },
-              { value: 'archived', label: 'Archived' },
-            ]}
+            placeholder={t('slugPlaceholder')}
           />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Input
-            label="Price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            type="number"
-            step="0.01"
-            min="0"
-            required
-            placeholder="99.99"
-          />
+          <div className="space-y-2">
+            <Label htmlFor="type">{t('typeLabel')}</Label>
+            <Select value={type} onValueChange={setType} required>
+              <SelectTrigger id="type">
+                <SelectValue placeholder={t('typeLabel')} />
+              </SelectTrigger>
+              <SelectContent>
+                {productTypes.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {t(`typeOptions.${option.value}`)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
-          <Select
-            label="Currency"
-            value={currency}
-            onChange={(e) => setCurrency(e.target.value)}
-            required
-            options={currencies}
-          />
+          <div className="space-y-2">
+            <Label htmlFor="status">{t('statusLabel')}</Label>
+            <Select value={status} onValueChange={setStatus} required>
+              <SelectTrigger id="status">
+                <SelectValue placeholder={t('statusLabel')} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="draft">{t('statusOptions.draft')}</SelectItem>
+                <SelectItem value="published">{t('statusOptions.published')}</SelectItem>
+                <SelectItem value="archived">{t('statusOptions.archived')}</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="price">
+              {t('priceLabel', { currencySymbol: getCurrencySymbol(currency) })}
+            </Label>
+            <Input
+              id="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              type="number"
+              step="0.01"
+              min="0"
+              required
+              placeholder={t('placeholders.price')}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="currency">{t('currencyLabel')}</Label>
+            <Select value={currency} onValueChange={handleCurrencyChange} required>
+              <SelectTrigger id="currency">
+                <SelectValue placeholder={t('currencyLabel')} />
+              </SelectTrigger>
+              <SelectContent>
+                {currencyOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div>
+            <h4 className="text-md font-medium text-foreground">{t('localizedTitle')}</h4>
+            <p className="text-sm text-muted-foreground">
+              {t('localizedDescription', { currency })}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {SUPPORTED_CURRENCIES.map((code) => {
+              const isBase = code === currency;
+              const overrideValue = priceOverrides[code] ?? '';
+              const hasManualOverride = overrideValue.trim().length > 0;
+              const formatted = formattedPriceMap[code];
+
+              return (
+                <div key={code} className="rounded-2xl border border-border bg-card p-4 space-y-4 shadow-sm">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <p className="text-sm text-muted-foreground">
+                        {code} ({getCurrencySymbol(code)})
+                      </p>
+                      <p className="text-2xl font-semibold text-foreground">{formatted}</p>
+                    </div>
+                    <Badge variant={isBase ? 'default' : hasManualOverride ? 'secondary' : 'outline'}>
+                      {isBase
+                        ? t('badge.base')
+                        : hasManualOverride
+                        ? t('badge.manual')
+                        : t('badge.auto')}
+                    </Badge>
+                  </div>
+
+                  {!isBase && (
+                    <div className="space-y-2">
+                      <Label htmlFor={`price-${code}`}>{t('overrideLabel')}</Label>
+                      <Input
+                        id={`price-${code}`}
+                        value={overrideValue}
+                        onChange={(e) => handleOverrideChange(code, e.target.value)}
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        placeholder={t('placeholders.override')}
+                      />
+                      {!hasManualOverride && (
+                        <p className="text-xs text-muted-foreground">
+                          {t('autoSuggestion', { value: formatted, currency })}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -291,18 +487,18 @@ export default function ProductForm({ initialData, mode }: ProductFormProps) {
       <div className="flex justify-end gap-4 pt-6">
         <Button
           type="button"
-          variant="secondary"
-          onClick={() => router.push('/admin/products')}
+          variant="outline"
+          onClick={() => router.push(redirectPath ?? '/admin/products')}
           disabled={loading}
         >
-          Cancel
+          {t('buttons.cancel')}
         </Button>
-        <Button type="submit" variant="primary" disabled={loading}>
+        <Button type="submit" disabled={loading}>
           {loading
-            ? 'Saving...'
+            ? t('buttons.saving')
             : mode === 'create'
-            ? 'Create Product'
-            : 'Update Product'}
+            ? t('buttons.create')
+            : t('buttons.update')}
         </Button>
       </div>
     </form>

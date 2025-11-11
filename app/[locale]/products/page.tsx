@@ -2,6 +2,8 @@ import { db } from "@/lib/db";
 import ProductCard from "@/components/products/ProductCard";
 import { getTranslations } from 'next-intl/server';
 import { Package } from "lucide-react";
+import PageWrapper from '@/components/layout/PageWrapper';
+import { getPreferredCurrencyForRequest } from '@/lib/currency-preferences';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,6 +24,7 @@ async function getProducts(locale: string, category?: string) {
           locale,
         },
       },
+      prices: true,
     },
     orderBy: [
       { featured: 'desc' },
@@ -55,6 +58,7 @@ export default async function ProductsPage({
   const category = searchParams.category;
   const products = await getProducts(params.locale, category);
   const t = await getTranslations({ locale: params.locale, namespace: 'products' });
+  const preferredCurrency = getPreferredCurrencyForRequest(params.locale);
 
   // Get unique product types for filter
   const allProducts = await db.product.findMany({
@@ -65,17 +69,18 @@ export default async function ProductsPage({
   const categories = allProducts.map((p) => p.type);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <PageWrapper>
+      <div className="min-h-screen bg-muted py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
-            <Package className="w-12 h-12 text-blue-600 mr-3" />
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
+            <Package className="w-12 h-12 text-primary mr-3" />
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground">
               {t('title')}
             </h1>
           </div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             {t('subtitle')}
           </p>
         </div>
@@ -87,8 +92,8 @@ export default async function ProductsPage({
               href={`/${params.locale}/products`}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 !category || category === 'all'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                  ? 'bg-primary text-white'
+                  : 'bg-card text-muted-foreground hover:bg-muted'
               }`}
             >
               {t('allProducts')}
@@ -99,8 +104,8 @@ export default async function ProductsPage({
                 href={`/${params.locale}/products?category=${cat}`}
                 className={`px-4 py-2 rounded-lg font-medium transition-colors capitalize ${
                   category === cat
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-100'
+                    ? 'bg-primary text-white'
+                    : 'bg-card text-muted-foreground hover:bg-muted'
                 }`}
               >
                 {cat.replace('-', ' ')}
@@ -112,17 +117,23 @@ export default async function ProductsPage({
         {/* Products Grid */}
         {products.length === 0 ? (
           <div className="text-center py-12">
-            <Package className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-500 text-lg">{t('noProductsYet')}</p>
+            <Package className="w-16 h-16 text-muted-foreground/70 mx-auto mb-4" />
+            <p className="text-muted-foreground text-lg">{t('noProductsYet')}</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {products.map((product) => (
-              <ProductCard key={product.id} product={product} locale={params.locale} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                locale={params.locale}
+                preferredCurrency={preferredCurrency}
+              />
             ))}
           </div>
         )}
       </div>
     </div>
+    </PageWrapper>
   );
 }

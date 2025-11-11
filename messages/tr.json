@@ -7,10 +7,11 @@
     "home": "Ana Sayfa",
     "services": "Hizmetler",
     "products": "Ürünler",
-    "portfolio": "Portfolyo",
+    "portfolio": "Portföy",
     "blog": "Blog",
     "contact": "İletişim",
-    "admin": "Yönetim"
+    "admin": "Yönetim",
+    "currency": "Para Birimi"
   },
   "hero": {
     "title": "Profesyonel WordPress & Web Geliştirme Hizmetleri",
@@ -73,12 +74,23 @@
     }
   },
   "footer": {
-    "copyright": "© 2024 Dulundu.dev. Tüm hakları saklıdır.",
+    "description": "Profesyonel WordPress & Web Geliştirme Hizmetleri. Dijital varlığınızı optimize edin, geliştirin ve büyütün.",
+    "copyright": "Tüm hakları saklıdır.",
     "services": "Hizmetler",
     "company": "Şirket",
     "legal": "Yasal",
     "privacy": "Gizlilik Politikası",
-    "terms": "Kullanım Şartları"
+    "terms": "Kullanım Şartları",
+    "servicesLinks": {
+      "wordpress": "WordPress Optimizasyonu",
+      "consulting": "Danışmanlık",
+      "products": "Dijital Ürünler"
+    },
+    "companyLinks": {
+      "portfolio": "Portföy",
+      "blog": "Blog",
+      "contact": "İletişim"
+    }
   },
   "blog": {
     "title": "Blog",
@@ -111,6 +123,8 @@
     "enterEmail": "Lütfen e-posta adresinizi girin",
     "invalidEmail": "Lütfen geçerli bir e-posta adresi girin",
     "notAvailable": "Bu ürün satın alınamıyor",
+    "currencyUnavailable": "Bu ürün {currency} fiyatıyla kullanıma hazır değil.",
+    "chooseAnotherCurrency": "Ödeme yapabilmek için farklı bir para birimi seçin.",
     "checkoutError": "Ödeme başlatılamadı. Lütfen tekrar deneyin."
   },
   "checkout": {
@@ -179,5 +193,359 @@
     "projectDetails": "Proje Detayları",
     "category": "Kategori",
     "website": "Web Sitesi"
+  },
+  "auth": {
+    "signin": {
+      "title": "Yönetim Paneline Giriş",
+      "email": "E-posta",
+      "password": "Şifre",
+      "submit": "Giriş Yap",
+      "loading": "Giriş yapılıyor...",
+      "backToHome": "Ana Sayfaya Dön",
+      "invalidCredentials": "Geçersiz e-posta veya şifre",
+      "error": "Bir hata oluştu. Lütfen tekrar deneyin."
+    },
+    "error": {
+      "title": "Kimlik Doğrulama Hatası",
+      "description": "Giriş yaparken bir hata ile karşılaştık.",
+      "tryAgain": "Tekrar Dene",
+      "backToHome": "Ana Sayfaya Dön",
+      "invalidCredentials": "Geçersiz e-posta veya şifre.",
+      "accessDenied": "Erişim reddedildi. Yetkiniz yok.",
+      "verification": "Doğrulama başarısız. Lütfen tekrar deneyin.",
+      "default": "Beklenmeyen bir hata oluştu."
+    }
+  },
+  "legal": {
+    "lastUpdated": "Son Güncelleme",
+    "tableOfContents": "İçindekiler"
+  },
+  "admin": {
+    "sidebar": {
+      "title": "Yönetim Paneli",
+      "links": {
+        "dashboard": "Gösterge Paneli",
+        "products": "Ürünler",
+        "blog": "Blog",
+        "portfolio": "Portföy",
+        "orders": "Siparişler",
+        "settings": "Ayarlar"
+      }
+    },
+    "header": {
+      "title": "Yönetim Paneli",
+      "notifications": "Bildirimler",
+      "profile": "Admin",
+      "signOut": "Çıkış Yap"
+    },
+    "dashboard": {
+      "title": "Gösterge Paneli",
+      "subtitle": "Yönetim panelinize hoş geldiniz",
+      "cards": {
+        "products": "Ürünler",
+        "posts": "Blog Yazıları",
+        "portfolio": "Portföy",
+        "orders": "Siparişler"
+      },
+      "quickActions": {
+        "title": "Hızlı İşlemler",
+        "addProduct": {
+          "title": "Ürün Ekle",
+          "description": "Yeni bir ürün veya hizmet oluşturun"
+        },
+        "writePost": {
+          "title": "Yazı Yaz",
+          "description": "Yeni bir blog yazısı oluşturun"
+        },
+        "addProject": {
+          "title": "Proje Ekle",
+          "description": "Yeni bir portföy projesi ekleyin"
+        }
+      }
+    },
+    "products": {
+      "title": "Ürünler ve Hizmetler",
+      "subtitle": "Ürünlerinizi, hizmetlerinizi ve dijital içeriklerinizi yönetin",
+      "createTitle": "Yeni Ürün Oluştur",
+      "editTitle": "Ürünü Düzenle",
+      "table": {
+        "product": "Ürün",
+        "type": "Tür",
+        "usd": "USD",
+        "try": "TRY",
+        "brl": "BRL",
+        "summary": "Özet",
+        "status": "Durum",
+        "actions": "İşlemler"
+      },
+      "badge": {
+        "base": "Temel",
+        "manual": "Manuel",
+        "auto": "Otomatik"
+      },
+      "popover": {
+        "title": "Fiyat özeti",
+        "description": "Stripe kimlikleri burada gösterilir. Boş alanlar henüz senkronize edilmemiş fiyatları ifade eder.",
+        "auto": "Otomatik kur",
+        "base": "Temel fiyat",
+        "manual": "Manuel değer",
+        "noStripe": "Stripe ID yok"
+      },
+      "empty": "Henüz ürün yok. İlk ürününüzü oluşturun!",
+      "editDialog": {
+        "title": "Ürünü Düzenle",
+        "description": "Ürün detaylarını ve fiyatlarını listeden ayrılmadan güncelleyin."
+      },
+      "statusOptions": {
+        "draft": "Taslak",
+        "published": "Yayında",
+        "archived": "Arşivde"
+      }
+    },
+    "blog": {
+      "title": "Blog Yazıları",
+      "subtitle": "Blog içeriklerinizi çok dilli olarak yönetin",
+      "createTitle": "Yeni Blog Yazısı",
+      "editTitle": "Blog Yazısını Düzenle",
+      "table": {
+        "post": "Yazı",
+        "status": "Durum",
+        "featured": "Öne Çıkan",
+        "publishedAt": "Yayın Tarihi",
+        "actions": "İşlemler"
+      },
+      "empty": "Henüz blog yazısı yok. İlk yazınızı oluşturun!",
+      "dialogTitle": "Blog Yazısını Düzenle",
+      "dialogDescription": "Tabloyu terk etmeden çevirileri ve yayın ayarlarını güncelleyin.",
+      "statusOptions": {
+        "draft": "Taslak",
+        "published": "Yayında"
+      }
+    },
+    "portfolio": {
+      "title": "Portföy Projeleri",
+      "subtitle": "Portföy projelerinizi çok dilli olarak yönetin",
+      "createTitle": "Yeni Proje Oluştur",
+      "editTitle": "Projeyi Düzenle",
+      "table": {
+        "project": "Proje",
+        "category": "Kategori",
+        "status": "Durum",
+        "featured": "Öne Çıkan",
+        "order": "Sıra",
+        "actions": "İşlemler"
+      },
+      "empty": "Henüz proje yok. İlk projenizi ekleyin!",
+      "dialogTitle": "Projeyi Düzenle",
+      "dialogDescription": "Portföy içeriğini tablodan ayrılmadan güncelleyin.",
+      "statusOptions": {
+        "draft": "Taslak",
+        "published": "Yayında",
+        "archived": "Arşivde"
+      }
+    },
+    "orders": {
+      "title": "Siparişler",
+      "subtitle": "Müşteri siparişlerini ve ödemelerini yönetin",
+      "table": {
+        "orderId": "Sipariş ID",
+        "customer": "Müşteri",
+        "products": "Ürünler",
+        "total": "Toplam",
+        "status": "Durum",
+        "date": "Tarih"
+      },
+      "empty": "Henüz sipariş yok.",
+      "statusLabels": {
+        "completed": "Tamamlandı",
+        "pending": "Bekliyor",
+        "failed": "Başarısız"
+      }
+    },
+    "settings": {
+      "title": "Ayarlar",
+      "subtitle": "Uygulama ayarlarınızı ve tercihlerinizi yönetin",
+      "comingSoonTitle": "Ayarlar paneli çok yakında",
+      "comingSoonDescription": "İleri seviye ayarlar ve yapılandırmalar yakında sunulacak.",
+      "quickActions": "Hızlı İşlemler",
+      "sections": {
+        "profile": {
+          "title": "Profil Ayarları",
+          "description": "Hesap bilgilerini ve tercihlerini yönetin"
+        },
+        "notifications": {
+          "title": "Bildirimler",
+          "description": "E-posta ve sistem bildirimlerini yapılandırın"
+        },
+        "security": {
+          "title": "Güvenlik",
+          "description": "Şifre, iki faktör doğrulama ve erişim kayıtları"
+        },
+        "database": {
+          "title": "Veritabanı",
+          "description": "Yedekleme, geri yükleme ve bakım seçenekleri"
+        },
+        "localization": {
+          "title": "Yerelleştirme",
+          "description": "Varsayılan dil, saat dilimi ve bölgesel ayarlar"
+        },
+        "system": {
+          "title": "Sistem",
+          "description": "İleri seviye sistem yapılandırmaları"
+        }
+      },
+      "cardBadge": "Çok yakında",
+      "quickButtons": {
+        "clearCache": "Önbelleği Temizle",
+        "runBackup": "Yedek Al",
+        "exportData": "Verileri Dışa Aktar",
+        "systemInfo": "Sistem Bilgisi"
+      }
+    },
+    "forms": {
+      "common": {
+        "requiredIndicator": " *"
+      },
+      "product": {
+        "globalTitle": "Genel Ayarlar",
+        "languageFields": {
+          "title": "Başlık ({language}){required}",
+          "description": "Açıklama ({language})",
+          "features": "Özellikler ({language})",
+          "coverImage": "Kapak Görseli URL'si ({language})"
+        },
+        "placeholders": {
+          "title": "Ürün başlığını yazın",
+          "description": "Ayrıntılı ürün açıklaması",
+          "features": "Her satıra bir özellik (isteğe bağlı)",
+          "coverImage": "https://ornek.com/gorsel.jpg",
+          "price": "99.99",
+          "override": "Otomatik"
+        },
+        "slugLabel": "Kısa İsim (slug)",
+        "slugPlaceholder": "urun-adi (otomatik oluşur)",
+        "typeLabel": "Ürün Türü",
+        "typeOptions": {
+          "service": "Hizmet",
+          "digital_product": "Dijital Ürün",
+          "consulting": "Danışmanlık"
+        },
+        "statusLabel": "Durum",
+        "statusOptions": {
+          "draft": "Taslak",
+          "published": "Yayında",
+          "archived": "Arşivde"
+        },
+        "priceLabel": "Fiyat ({currencySymbol})",
+        "currencyLabel": "Para Birimi",
+        "localizedTitle": "Yerelleştirilmiş Fiyatlar",
+        "localizedDescription": "Alanı boş bırakırsanız {currency} kurundan otomatik çevrilir. Elle değer girmek için buraya yazın.",
+        "overrideLabel": "Üstüne Yaz",
+        "autoSuggestion": "Öneri: {value} ({currency} baz alınarak)",
+        "errors": {
+          "slugPrice": "Slug ve fiyat zorunludur.",
+          "englishTitle": "İngilizce başlık zorunludur.",
+          "pricePositive": "Fiyat pozitif olmalıdır."
+        },
+        "buttons": {
+          "cancel": "İptal",
+          "create": "Ürün Oluştur",
+          "update": "Ürünü Güncelle",
+          "saving": "Kaydediliyor..."
+        },
+        "badge": {
+          "base": "Temel",
+          "manual": "Manuel",
+          "auto": "Otomatik"
+        }
+      },
+      "blog": {
+        "languageFields": {
+          "title": "Başlık ({language}){required}",
+          "excerpt": "Özet ({language}){required}",
+          "content": "İçerik ({language})",
+          "coverImage": "Kapak Görseli URL'si ({language})"
+        },
+        "placeholders": {
+          "title": "Yazı başlığını girin",
+          "excerpt": "Listelerde gösterilecek kısa özet",
+          "content": "{language} dilinde blog içeriğini yaz...",
+          "coverImage": "https://ornek.com/gorsel.jpg",
+          "slug": "yazi-slug",
+          "publishedAt": "2024-01-01 10:00"
+        },
+        "slugLabel": "Slug",
+        "statusLabel": "Durum",
+        "statusOptions": {
+          "draft": "Taslak",
+          "published": "Yayında",
+          "archived": "Arşivde"
+        },
+        "featuredLabel": "Öne Çıkar",
+        "publishedAtLabel": "Yayın Tarihi",
+        "errors": {
+          "slugRequired": "Slug zorunludur.",
+          "englishTitleExcerpt": "İngilizce başlık ve özet zorunludur."
+        },
+        "buttons": {
+          "cancel": "İptal",
+          "create": "Yazı Oluştur",
+          "update": "Yazıyı Güncelle",
+          "saving": "Kaydediliyor..."
+        },
+        "globalTitle": "Genel Ayarlar",
+        "excerptCounter": "{count}/{max} karakter"
+      },
+      "project": {
+        "languageFields": {
+          "title": "Başlık ({language}){required}",
+          "description": "Açıklama ({language}){required}",
+          "technologies": "Teknolojiler ({language})",
+          "images": "Görseller ({language})"
+        },
+        "placeholders": {
+          "title": "Proje başlığını yazın",
+          "description": "Projeyi açıklayın",
+          "technologies": "React, Next.js, Tailwind",
+          "images": "https://ornek.com/gorsel.jpg",
+          "slug": "proje-slug",
+          "order": "0",
+          "url": "https://proje.com",
+          "imagesHelper": "Her satıra bir görsel adresi yazın"
+        },
+        "slugLabel": "Slug",
+        "categoryLabel": "Kategori",
+        "categoryOptions": {
+          "wordpress": "WordPress",
+          "web-development": "Web Geliştirme",
+          "consulting": "Danışmanlık",
+          "mobile": "Mobil Uygulama",
+          "optimization": "Optimizasyon"
+        },
+        "statusLabel": "Durum",
+        "statusOptions": {
+          "draft": "Taslak",
+          "published": "Yayında",
+          "archived": "Arşivde"
+        },
+        "featuredLabel": "Öne Çıkar",
+        "urlLabel": "Proje URL'si",
+        "orderLabel": "Gösterim Sırası",
+        "errors": {
+          "slugRequired": "Slug zorunludur.",
+          "englishTitle": "İngilizce başlık zorunludur.",
+          "englishDescription": "İngilizce açıklama zorunludur.",
+          "categoryRequired": "Kategori zorunludur.",
+          "titleDescription": "İngilizce başlık ve açıklama zorunludur."
+        },
+        "buttons": {
+          "cancel": "İptal",
+          "create": "Proje Oluştur",
+          "update": "Projeyi Güncelle",
+          "saving": "Kaydediliyor..."
+        },
+        "globalTitle": "Genel Ayarlar"
+      }
+    }
   }
 }

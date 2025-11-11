@@ -10,7 +10,8 @@
     "portfolio": "Portfolio",
     "blog": "Blog",
     "contact": "Contact",
-    "admin": "Admin"
+    "admin": "Admin",
+    "currency": "Currency"
   },
   "hero": {
     "title": "Professional WordPress & Web Development Services",
@@ -73,12 +74,23 @@
     }
   },
   "footer": {
-    "copyright": "© 2024 Dulundu.dev. All rights reserved.",
+    "description": "Professional WordPress & Web Development Services. Optimize, enhance, and grow your digital presence.",
+    "copyright": "All rights reserved.",
     "services": "Services",
     "company": "Company",
     "legal": "Legal",
     "privacy": "Privacy Policy",
-    "terms": "Terms of Service"
+    "terms": "Terms of Service",
+    "servicesLinks": {
+      "wordpress": "WordPress Optimization",
+      "consulting": "Consulting",
+      "products": "Digital Products"
+    },
+    "companyLinks": {
+      "portfolio": "Portfolio",
+      "blog": "Blog",
+      "contact": "Contact"
+    }
   },
   "blog": {
     "title": "Blog",
@@ -111,6 +123,8 @@
     "enterEmail": "Please enter your email address",
     "invalidEmail": "Please enter a valid email address",
     "notAvailable": "This product is not available for purchase",
+    "currencyUnavailable": "This product is not available in {currency}.",
+    "chooseAnotherCurrency": "Select another currency to enable checkout.",
     "checkoutError": "Failed to initiate checkout. Please try again."
   },
   "checkout": {
@@ -179,5 +193,359 @@
     "projectDetails": "Project Details",
     "category": "Category",
     "website": "Website"
+  },
+  "auth": {
+    "signin": {
+      "title": "Sign In to Admin Panel",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In",
+      "loading": "Signing in...",
+      "backToHome": "Back to Home",
+      "invalidCredentials": "Invalid email or password",
+      "error": "An error occurred. Please try again."
+    },
+    "error": {
+      "title": "Authentication Error",
+      "description": "We encountered an error while trying to sign you in.",
+      "tryAgain": "Try Again",
+      "backToHome": "Back to Home",
+      "invalidCredentials": "Invalid email or password.",
+      "accessDenied": "Access denied. You do not have permission.",
+      "verification": "Verification failed. Please try again.",
+      "default": "An unexpected error occurred."
+    }
+  },
+  "legal": {
+    "lastUpdated": "Last Updated",
+    "tableOfContents": "Table of Contents"
+  },
+  "admin": {
+    "sidebar": {
+      "title": "Admin Panel",
+      "links": {
+        "dashboard": "Dashboard",
+        "products": "Products",
+        "blog": "Blog",
+        "portfolio": "Portfolio",
+        "orders": "Orders",
+        "settings": "Settings"
+      }
+    },
+    "header": {
+      "title": "Admin Dashboard",
+      "notifications": "Notifications",
+      "profile": "Admin",
+      "signOut": "Sign Out"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "subtitle": "Welcome to your admin dashboard",
+      "cards": {
+        "products": "Products",
+        "posts": "Blog Posts",
+        "portfolio": "Portfolio",
+        "orders": "Orders"
+      },
+      "quickActions": {
+        "title": "Quick Actions",
+        "addProduct": {
+          "title": "Add Product",
+          "description": "Create a new product or service"
+        },
+        "writePost": {
+          "title": "Write Post",
+          "description": "Create a new blog post"
+        },
+        "addProject": {
+          "title": "Add Project",
+          "description": "Showcase a new portfolio project"
+        }
+      }
+    },
+    "products": {
+      "title": "Products & Services",
+      "subtitle": "Manage your products, services, and digital items",
+      "createTitle": "Create New Product",
+      "editTitle": "Edit Product",
+      "table": {
+        "product": "Product",
+        "type": "Type",
+        "usd": "USD",
+        "try": "TRY",
+        "brl": "BRL",
+        "summary": "Summary",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "badge": {
+        "base": "Base",
+        "manual": "Manual",
+        "auto": "Auto"
+      },
+      "popover": {
+        "title": "Price summary",
+        "description": "Stripe IDs appear here. Empty fields indicate prices that haven't been synced yet.",
+        "auto": "Auto FX",
+        "base": "Base price",
+        "manual": "Manual override",
+        "noStripe": "No Stripe ID"
+      },
+      "empty": "No products yet. Create your first product!",
+      "editDialog": {
+        "title": "Edit Product",
+        "description": "Update product details and localized pricing without leaving the list."
+      },
+      "statusOptions": {
+        "draft": "Draft",
+        "published": "Published",
+        "archived": "Archived"
+      }
+    },
+    "blog": {
+      "title": "Blog Posts",
+      "subtitle": "Manage your blog posts in multiple languages",
+      "createTitle": "Create New Blog Post",
+      "editTitle": "Edit Blog Post",
+      "table": {
+        "post": "Post",
+        "status": "Status",
+        "featured": "Featured",
+        "publishedAt": "Publish Date",
+        "actions": "Actions"
+      },
+      "empty": "No blog posts yet. Create your first post!",
+      "dialogTitle": "Edit Blog Post",
+      "dialogDescription": "Update blog translations and publish settings without leaving the table.",
+      "statusOptions": {
+        "draft": "Draft",
+        "published": "Published"
+      }
+    },
+    "portfolio": {
+      "title": "Portfolio Projects",
+      "subtitle": "Manage your portfolio projects in multiple languages",
+      "createTitle": "Create New Project",
+      "editTitle": "Edit Project",
+      "table": {
+        "project": "Project",
+        "category": "Category",
+        "status": "Status",
+        "featured": "Featured",
+        "order": "Order",
+        "actions": "Actions"
+      },
+      "empty": "No projects yet. Create your first project!",
+      "dialogTitle": "Edit Project",
+      "dialogDescription": "Update portfolio content and translations without leaving the list.",
+      "statusOptions": {
+        "draft": "Draft",
+        "published": "Published",
+        "archived": "Archived"
+      }
+    },
+    "orders": {
+      "title": "Orders",
+      "subtitle": "Manage customer orders and payments",
+      "table": {
+        "orderId": "Order ID",
+        "customer": "Customer",
+        "products": "Products",
+        "total": "Total",
+        "status": "Status",
+        "date": "Date"
+      },
+      "empty": "No orders yet.",
+      "statusLabels": {
+        "completed": "Completed",
+        "pending": "Pending",
+        "failed": "Failed"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "subtitle": "Manage your application settings and preferences",
+      "comingSoonTitle": "Settings Panel Coming Soon",
+      "comingSoonDescription": "Advanced settings and configuration options will be available in a future update.",
+      "quickActions": "Quick Actions",
+      "sections": {
+        "profile": {
+          "title": "Profile Settings",
+          "description": "Manage your account information and preferences"
+        },
+        "notifications": {
+          "title": "Notifications",
+          "description": "Configure email and system notifications"
+        },
+        "security": {
+          "title": "Security",
+          "description": "Password, two-factor authentication, and access logs"
+        },
+        "database": {
+          "title": "Database",
+          "description": "Backup, restore, and maintenance options"
+        },
+        "localization": {
+          "title": "Localization",
+          "description": "Default language, timezone, and regional settings"
+        },
+        "system": {
+          "title": "System",
+          "description": "Advanced system configuration and integrations"
+        }
+      },
+      "cardBadge": "Coming soon",
+      "quickButtons": {
+        "clearCache": "Clear Cache",
+        "runBackup": "Run Backup",
+        "exportData": "Export Data",
+        "systemInfo": "System Info"
+      }
+    },
+    "forms": {
+      "common": {
+        "requiredIndicator": " *"
+      },
+      "product": {
+        "globalTitle": "Global Settings",
+        "languageFields": {
+          "title": "Title ({language}){required}",
+          "description": "Description ({language})",
+          "features": "Features ({language})",
+          "coverImage": "Cover Image URL ({language})"
+        },
+        "placeholders": {
+          "title": "Enter product title",
+          "description": "Detailed product description",
+          "features": "One feature per line (optional)",
+          "coverImage": "https://example.com/image.jpg",
+          "price": "99.99",
+          "override": "Auto"
+        },
+        "slugLabel": "Slug",
+        "slugPlaceholder": "product-slug (auto-generated)",
+        "typeLabel": "Product Type",
+        "typeOptions": {
+          "service": "Service",
+          "digital_product": "Digital Product",
+          "consulting": "Consulting"
+        },
+        "statusLabel": "Status",
+        "statusOptions": {
+          "draft": "Draft",
+          "published": "Published",
+          "archived": "Archived"
+        },
+        "priceLabel": "Price ({currencySymbol})",
+        "currencyLabel": "Currency",
+        "localizedTitle": "Localized Prices",
+        "localizedDescription": "Leave blank to auto-convert from {currency}. Enter a value to override the base price.",
+        "overrideLabel": "Override",
+        "autoSuggestion": "Auto suggestion: {value} (based on {currency})",
+        "errors": {
+          "slugPrice": "Slug and price are required.",
+          "englishTitle": "English title is required.",
+          "pricePositive": "Price must be a positive number."
+        },
+        "buttons": {
+          "cancel": "Cancel",
+          "create": "Create Product",
+          "update": "Update Product",
+          "saving": "Saving..."
+        },
+        "badge": {
+          "base": "Base",
+          "manual": "Manual",
+          "auto": "Auto"
+        }
+      },
+      "blog": {
+        "languageFields": {
+          "title": "Title ({language}){required}",
+          "excerpt": "Excerpt ({language}){required}",
+          "content": "Content ({language})",
+          "coverImage": "Cover Image URL ({language})"
+        },
+        "placeholders": {
+          "title": "Enter post title",
+          "excerpt": "Short summary displayed on listings",
+          "content": "Write your blog content in {language}...",
+          "coverImage": "https://example.com/image.jpg",
+          "slug": "post-slug",
+          "publishedAt": "2024-01-01 10:00"
+        },
+        "slugLabel": "Slug",
+        "statusLabel": "Status",
+        "statusOptions": {
+          "draft": "Draft",
+          "published": "Published",
+          "archived": "Archived"
+        },
+        "featuredLabel": "Featured",
+        "publishedAtLabel": "Publish Date",
+        "errors": {
+          "slugRequired": "Slug is required.",
+          "englishTitleExcerpt": "English title and excerpt are required."
+        },
+        "buttons": {
+          "cancel": "Cancel",
+          "create": "Create Post",
+          "update": "Update Post",
+          "saving": "Saving..."
+        },
+        "globalTitle": "Global Settings",
+        "excerptCounter": "{count}/{max} characters"
+      },
+      "project": {
+        "languageFields": {
+          "title": "Title ({language}){required}",
+          "description": "Description ({language}){required}",
+          "technologies": "Technologies ({language})",
+          "images": "Images ({language})"
+        },
+        "placeholders": {
+          "title": "Enter project title",
+          "description": "Describe the project",
+          "technologies": "React, Next.js, Tailwind",
+          "images": "https://example.com/image.jpg",
+          "slug": "project-slug",
+          "order": "0",
+          "url": "https://project.com",
+          "imagesHelper": "Enter one image URL per line"
+        },
+        "slugLabel": "Slug",
+        "categoryLabel": "Category",
+        "categoryOptions": {
+          "wordpress": "WordPress",
+          "web-development": "Web Development",
+          "consulting": "Consulting",
+          "mobile": "Mobile App",
+          "optimization": "Optimization"
+        },
+        "statusLabel": "Status",
+        "statusOptions": {
+          "draft": "Draft",
+          "published": "Published",
+          "archived": "Archived"
+        },
+        "featuredLabel": "Featured",
+        "urlLabel": "Project URL",
+        "orderLabel": "Display Order",
+        "errors": {
+          "slugRequired": "Slug is required.",
+          "englishTitle": "English title is required.",
+          "englishDescription": "English description is required.",
+          "categoryRequired": "Category is required.",
+          "titleDescription": "English title and description are required."
+        },
+        "buttons": {
+          "cancel": "Cancel",
+          "create": "Create Project",
+          "update": "Update Project",
+          "saving": "Saving..."
+        },
+        "globalTitle": "Global Settings"
+      }
+    }
   }
 }

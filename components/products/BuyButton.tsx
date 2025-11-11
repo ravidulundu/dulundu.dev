@@ -2,23 +2,34 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { useCurrency } from '@/components/providers/CurrencyProvider';
+import { getCurrencySymbol } from '@/lib/currency';
 
 interface BuyButtonProps {
   productId: string;
-  stripePriceId: string;
   locale: string;
+  currency?: string;
+  isAvailable: boolean;
 }
 
-export default function BuyButton({ productId, stripePriceId, locale }: BuyButtonProps) {
+export default function BuyButton({ productId, locale, currency, isAvailable }: BuyButtonProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showEmailForm, setShowEmailForm] = useState(false);
   const [email, setEmail] = useState('');
   const t = useTranslations('products');
+  const { currency: contextCurrency } = useCurrency();
+  const activeCurrency = currency || contextCurrency;
+  const currencySymbol = getCurrencySymbol(activeCurrency);
 
   const handleBuyNow = async () => {
-    if (!stripePriceId) {
-      setError(t('notAvailable', { defaultMessage: 'This product is not available for purchase' }));
+    if (!isAvailable) {
+      setError(
+        t('currencyUnavailable', {
+          currency: `${currencySymbol} ${activeCurrency}`,
+          defaultMessage: 'This product is not available for the selected currency.'
+        })
+      );
       return;
     }
 
@@ -47,6 +58,7 @@ export default function BuyButton({ productId, stripePriceId, locale }: BuyButto
           productId,
           customerEmail: email,
           locale,
+          currency: activeCurrency,
         }),
       });
 
@@ -76,9 +88,9 @@ export default function BuyButton({ productId, stripePriceId, locale }: BuyButto
 
   return (
     <div className="space-y-4">
-      {showEmailForm && !email && (
-        <div className="p-4 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800">
-          <label htmlFor="customer-email" className="block text-sm font-medium mb-2">
+      {showEmailForm && isAvailable && (
+        <div className="p-4 border border-border rounded-lg bg-card">
+          <label htmlFor="customer-email" className="block text-sm font-medium text-muted-foreground mb-2">
             {t('emailLabel', { defaultMessage: 'Email Address' })}
           </label>
           <div className="flex gap-2">
@@ -93,14 +105,14 @@ export default function BuyButton({ productId, stripePriceId, locale }: BuyButto
                 }
               }}
               placeholder={t('emailPlaceholder', { defaultMessage: 'you@example.com' })}
-              className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+              className="flex-1 px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-background text-foreground placeholder:text-muted-foreground"
               autoFocus
               required
             />
             <button
               onClick={handleBuyNow}
               disabled={!email}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:bg-muted disabled:cursor-not-allowed transition-colors"
             >
               {t('continue', { defaultMessage: 'Continue' })}
             </button>
@@ -110,14 +122,14 @@ export default function BuyButton({ productId, stripePriceId, locale }: BuyButto
 
       <button
         onClick={handleBuyNow}
-        disabled={loading || !stripePriceId}
+        disabled={loading || !isAvailable}
         className={`
           w-full px-8 py-4 text-lg font-semibold rounded-lg
           transition-all duration-200
           ${
-            loading || !stripePriceId
-              ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl'
+            loading || !isAvailable
+              ? 'bg-muted text-muted-foreground cursor-not-allowed'
+              : 'bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl'
           }
         `}
       >
@@ -151,9 +163,18 @@ export default function BuyButton({ productId, stripePriceId, locale }: BuyButto
       </button>
 
       {error && (
-        <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-          <p className="text-red-600 dark:text-red-400 text-sm">{error}</p>
+        <div className="p-4 bg-destructive/10 border border-destructive/30 rounded-lg">
+          <p className="text-destructive text-sm">{error}</p>
         </div>
+      )}
+
+      {!isAvailable && (
+        <p className="text-sm text-muted-foreground">
+          {t('chooseAnotherCurrency', {
+            currency: `${currencySymbol} ${activeCurrency}`,
+            defaultMessage: 'Select another currency to enable checkout.'
+          })}
+        </p>
       )}
     </div>
   );

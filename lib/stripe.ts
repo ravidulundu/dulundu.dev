@@ -9,7 +9,7 @@ function getStripe(): Stripe {
       throw new Error('STRIPE_SECRET_KEY is not set');
     }
     stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY, {
-      apiVersion: '2024-11-20.acacia',
+      apiVersion: '2024-11-20.acacia' as Stripe.StripeConfig['apiVersion'],
       typescript: true,
     });
   }
@@ -24,51 +24,58 @@ export const stripe = new Proxy({} as Stripe, {
   }
 });
 
-// Create or update product in Stripe
-export async function syncProductToStripe(product: {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-  currency: string;
+export async function ensureStripeProduct({
+  stripeProductId,
+  name,
+  description,
+  metadata,
+}: {
   stripeProductId?: string | null;
+  name: string;
+  description?: string | null;
+  metadata?: Stripe.MetadataParam;
 }) {
-  try {
-    let stripeProduct: Stripe.Product;
-
-    if (product.stripeProductId) {
-      // Update existing product
-      stripeProduct = await stripe.products.update(product.stripeProductId, {
-        name: product.title,
-        description: product.description,
-        active: true,
-      });
-    } else {
-      // Create new product
-      stripeProduct = await stripe.products.create({
-        name: product.title,
-        description: product.description,
-        metadata: {
-          productId: product.id,
-        },
-      });
-    }
-
-    // Create or update price
-    const stripePrice = await stripe.prices.create({
-      product: stripeProduct.id,
-      unit_amount: Math.round(product.price * 100), // Convert to cents
-      currency: product.currency.toLowerCase(),
+  if (stripeProductId) {
+    await stripe.products.update(stripeProductId, {
+      name,
+      description: description ?? undefined,
+      metadata,
+      active: true,
     });
-
-    return {
-      stripeProductId: stripeProduct.id,
-      stripePriceId: stripePrice.id,
-    };
-  } catch (error) {
-    console.error('Error syncing product to Stripe:', error);
-    throw error;
+    return stripeProductId;
   }
+
+  const product = await stripe.products.create({
+    name,
+    description: description ?? undefined,
+    metadata,
+  });
+
+  return product.id;
+}
+
+export async function ensureStripePrice({
+  stripeProductId,
+  currency,
+  amount,
+  stripePriceId,
+}: {
+  stripeProductId: string;
+  currency: string;
+  amount: string | number;
+  stripePriceId?: string | null;
+}) {
+  if (stripePriceId) {
+    return stripePriceId;
+  }
+
+  const stripePrice = await stripe.prices.create({
+    product: stripeProductId,
+    unit_amount: Math.round(Number(amount) * 100),
+    currency: currency.toLowerCase(),
+  });
+
+  return stripePrice.id;
 }
 
 // Create checkout session

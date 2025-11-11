@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import ProjectGallery from "@/components/portfolio/ProjectGallery";
 import { ExternalLink, ArrowLeft } from "lucide-react";
+import PageWrapper from '@/components/layout/PageWrapper';
 
 async function getProject(slug: string, locale: string) {
   const project = await db.project.findUnique({
@@ -74,11 +75,12 @@ export default async function ProjectDetailPage({
   const images = (translation.images as string[]) || [];
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-5xl">
+    <PageWrapper>
+      <div className="container mx-auto px-4 py-12 max-w-5xl">
       {/* Back Link */}
       <Link
         href={`/${params.locale}/portfolio`}
-        className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mb-8 transition-colors"
+        className="inline-flex items-center text-primary dark:text-primary hover:text-primary dark:hover:text-primary mb-8 transition-colors"
       >
         <ArrowLeft className="w-4 h-4 mr-2" />
         {t('backToPortfolio', { defaultMessage: 'Back to Portfolio' })}
@@ -87,7 +89,7 @@ export default async function ProjectDetailPage({
       {/* Header */}
       <div className="mb-8">
         <div className="flex flex-wrap items-center gap-4 mb-4">
-          <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm font-medium">
+          <span className="px-3 py-1 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary/80 rounded-full text-sm font-medium">
             {project.category.replace('-', ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
           </span>
           {project.featured && (
@@ -97,11 +99,11 @@ export default async function ProjectDetailPage({
           )}
         </div>
 
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <h1 className="text-4xl font-bold text-foreground dark:text-white mb-4">
           {translation.title}
         </h1>
 
-        <p className="text-xl text-gray-600 dark:text-gray-300">
+        <p className="text-xl text-muted-foreground dark:text-muted-foreground/70">
           {translation.description}
         </p>
 
@@ -112,7 +114,7 @@ export default async function ProjectDetailPage({
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors font-medium"
             >
               {t('viewLive', { defaultMessage: 'View Live Project' })}
               <ExternalLink className="w-4 h-4" />
@@ -129,14 +131,14 @@ export default async function ProjectDetailPage({
       {/* Technologies */}
       {technologies.length > 0 && (
         <div className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-2xl font-bold text-foreground dark:text-white mb-4">
             {t('technologies', { defaultMessage: 'Technologies Used' })}
           </h2>
           <div className="flex flex-wrap gap-2">
             {technologies.map((tech, index) => (
               <span
                 key={index}
-                className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg text-sm font-medium"
+                className="px-4 py-2 bg-muted dark:bg-muted text-foreground dark:text-foreground rounded-lg text-sm font-medium"
               >
                 {tech}
               </span>
@@ -146,32 +148,32 @@ export default async function ProjectDetailPage({
       )}
 
       {/* Project Details */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+      <div className="bg-card dark:bg-card rounded-lg shadow-lg p-8">
+        <h2 className="text-2xl font-bold text-foreground dark:text-white mb-6">
           {t('projectDetails', { defaultMessage: 'Project Details' })}
         </h2>
 
         <div className="prose dark:prose-invert max-w-none">
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-lg font-semibold text-foreground dark:text-white mb-2">
                 {t('category', { defaultMessage: 'Category' })}
               </h3>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="text-muted-foreground dark:text-muted-foreground/70">
                 {project.category.replace('-', ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
               </p>
             </div>
 
             {project.url && (
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                <h3 className="text-lg font-semibold text-foreground dark:text-white mb-2">
                   {t('website', { defaultMessage: 'Website' })}
                 </h3>
                 <a
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
+                  className="text-primary dark:text-primary hover:underline flex items-center gap-1"
                 >
                   {new URL(project.url).hostname}
                   <ExternalLink className="w-4 h-4" />
@@ -186,12 +188,13 @@ export default async function ProjectDetailPage({
       <div className="mt-12 text-center">
         <Link
           href={`/${params.locale}/portfolio`}
-          className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
+          className="inline-flex items-center text-primary dark:text-primary hover:text-primary dark:hover:text-primary transition-colors"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           {t('backToPortfolio', { defaultMessage: 'Back to Portfolio' })}
         </Link>
       </div>
     </div>
+    </PageWrapper>
   );
 }

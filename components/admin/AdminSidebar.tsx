@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import {
   LayoutDashboard,
   Package,
@@ -10,47 +11,58 @@ import {
   ShoppingCart,
   Settings,
 } from 'lucide-react';
-
-const navigation = [
-  { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
-  { name: 'Products', href: '/admin/products', icon: Package },
-  { name: 'Blog', href: '/admin/blog', icon: FileText },
-  { name: 'Portfolio', href: '/admin/portfolio', icon: Briefcase },
-  { name: 'Orders', href: '/admin/orders', icon: ShoppingCart },
-  { name: 'Settings', href: '/admin/settings', icon: Settings },
-];
+import { IconBadge } from '@/components/common/IconBadge';
 
 export default function AdminSidebar() {
   const pathname = usePathname();
+  const t = useTranslations('admin.sidebar');
+  const navigation = [
+    { name: t('links.dashboard'), segment: 'dashboard', icon: LayoutDashboard },
+    { name: t('links.products'), segment: 'products', icon: Package },
+    { name: t('links.blog'), segment: 'blog', icon: FileText },
+    { name: t('links.portfolio'), segment: 'portfolio', icon: Briefcase },
+    { name: t('links.orders'), segment: 'orders', icon: ShoppingCart },
+    { name: t('links.settings'), segment: 'settings', icon: Settings },
+  ];
+  const segments = pathname.split('/').filter(Boolean);
+  const locale = segments[0] ?? 'en';
+  const adminBase = `/${locale}/admin`;
 
   return (
-    <aside className="w-64 bg-white border-r border-gray-200">
+    <aside className="w-64 bg-card border-r border-border">
       <div className="h-full px-3 py-4 overflow-y-auto">
         <div className="mb-8 px-3">
-          <h1 className="text-2xl font-bold text-blue-600">Dulundu.dev</h1>
-          <p className="text-sm text-gray-500 mt-1">Admin Panel</p>
+          <h1 className="text-2xl font-bold text-primary">Dulundu.dev</h1>
+          <p className="text-sm text-muted-foreground mt-1">{t('title')}</p>
         </div>
 
         <nav className="space-y-1">
           {navigation.map((item) => {
-            const isActive = pathname.includes(item.href);
+            const targetPath = `${adminBase}/${item.segment}`;
+            const isActive = pathname.startsWith(targetPath);
             return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`
+            <Link
+              key={item.name}
+              href={targetPath}
+              className={`
                   flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors
                   ${
                     isActive
-                      ? 'bg-blue-50 text-blue-600'
-                      : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                      ? 'bg-muted text-primary'
+                      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                   }
                 `}
-              >
-                <item.icon className="w-5 h-5 mr-3" />
-                {item.name}
-              </Link>
-            );
+            >
+              <IconBadge
+                icon={item.icon}
+                variant={isActive ? 'primary' : 'neutral'}
+                size="md"
+                className="mr-3"
+                strokeWidth={2}
+              />
+              {item.name}
+            </Link>
+          );
           })}
         </nav>
       </div>

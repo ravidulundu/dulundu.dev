@@ -1,6 +1,43 @@
 import { db } from "@/lib/db";
 import { requireAdmin } from "@/lib/auth-helpers";
+import { generatePriceMap, normalizeCurrency, normalizePriceOverrides } from "@/lib/currency";
 import { NextRequest, NextResponse } from "next/server";
+
+async function syncProductPrices(productId: string, priceMap: Record<string, string>) {
+  await Promise.all(
+    Object.entries(priceMap).map(([currencyCode, amount]) =>
+      db.productPrice.upsert({
+        where: {
+          productId_currency: {
+            productId,
+            currency: currencyCode
+          }
+        },
+        update: {
+          amount
+        },
+        create: {
+          productId,
+          currency: currencyCode,
+          amount
+        }
+      })
+    )
+  );
+}
+
+function buildPriceMap(
+  price: number,
+  currency: string,
+  overrides?: Record<string, string | number>
+) {
+  const normalizedCurrency = normalizeCurrency(currency);
+  const normalizedOverrides = normalizePriceOverrides(overrides);
+  if (normalizedOverrides[normalizedCurrency]) {
+    delete normalizedOverrides[normalizedCurrency];
+  }
+  return generatePriceMap(price, normalizedCurrency, normalizedOverrides);
+}
 
 // Get single product
 export async function GET(
@@ -15,6 +52,7 @@ export async function GET(
       where: { id },
       include: {
         translations: true,
+        prices: true,
       },
     });
 
@@ -44,7 +82,7 @@ export async function PUT(
   const { id } = await params;
 
   try {
-    const { slug, type, price, currency, status, translations } = await req.json();
+    const { slug, type, price, currency, status, translations, priceOverrides } = await req.json();
 
     // Check if product exists
     const existingProduct = await db.product.findUnique({
@@ -77,13 +115,23 @@ export async function PUT(
       where: { productId: id },
     });
 
+    const basePriceValue = Number(price);
+    if (Number.isNaN(basePriceValue) || basePriceValue <= 0) {
+      return NextResponse.json(
+        { error: 'Price must be a positive number' },
+        { status: 400 }
+      );
+    }
+    const normalizedCurrency = normalizeCurrency(currency);
+    const priceMap = buildPriceMap(basePriceValue, normalizedCurrency, priceOverrides);
+
     const product = await db.product.update({
       where: { id },
       data: {
         slug,
         type,
-        price,
-        currency,
+        price: basePriceValue,
+        currency: normalizedCurrency,
         status,
         translations: {
           create: translations.map((t: any) => ({
@@ -97,10 +145,21 @@ export async function PUT(
       },
       include: {
         translations: true,
+        prices: true,
       },
     });
 
-    return NextResponse.json(product);
+    await syncProductPrices(product.id, priceMap);
+
+    const productWithPrices = await db.product.findUnique({
+      where: { id: product.id },
+      include: {
+        translations: true,
+        prices: true,
+      },
+    });
+
+    return NextResponse.json(productWithPrices);
   } catch (error) {
     console.error('Error updating product:', error);
     return NextResponse.json(

@@ -1,12 +1,15 @@
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import ProductForm from "@/components/admin/ProductForm";
+import { mapProductToFormData } from "@/lib/admin/product-form-mapper";
 
 async function getProduct(id: string) {
   const product = await db.product.findUnique({
     where: { id },
     include: {
       translations: true,
+      prices: true,
     },
   });
 
@@ -16,40 +19,31 @@ async function getProduct(id: string) {
 export default async function EditProductPage({
   params,
 }: {
-  params: { id: string };
+  params: { id: string; locale: string };
 }) {
   const product = await getProduct(params.id);
+  const t = await getTranslations({ locale: params.locale, namespace: 'admin.products' });
 
   if (!product) {
     notFound();
   }
 
   // Format data for ProductForm
-  const initialData = {
-    id: product.id,
-    slug: product.slug,
-    type: product.type,
-    price: product.price.toString(),
-    currency: product.currency,
-    status: product.status,
-    translations: product.translations.map((t) => ({
-      locale: t.locale,
-      title: t.title,
-      description: t.description,
-      features: typeof t.features === 'string' ? t.features : JSON.stringify(t.features || []),
-      coverImage: '',
-    })),
-  };
+  const initialData = mapProductToFormData(product);
 
   return (
-    <div>
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Edit Product</h1>
-        <p className="text-gray-500 mt-2">Update product details and settings</p>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold text-foreground">{t('editTitle')}</h1>
+        <p className="text-muted-foreground mt-2">{t('subtitle')}</p>
       </div>
 
-      <div className="bg-white rounded-lg shadow p-6">
-        <ProductForm mode="edit" initialData={initialData} />
+      <div className="bg-card rounded-lg shadow p-6">
+        <ProductForm
+          mode="edit"
+          initialData={initialData}
+          redirectPath={`/${params.locale}/admin/products`}
+        />
       </div>
     </div>
   );

@@ -1,14 +1,16 @@
 import ProjectForm from "@/components/admin/ProjectForm";
+import { getTranslations } from "next-intl/server";
 
-export default function NewPortfolioProjectPage() {
+export default async function NewPortfolioProjectPage({ params }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'admin.portfolio' });
   return (
-    <div>
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Create New Project</h1>
-        <p className="text-gray-500 dark:text-gray-400 mt-2">Add a new project to your portfolio</p>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold text-foreground dark:text-white">{t('createTitle')}</h1>
+        <p className="text-muted-foreground dark:text-muted-foreground mt-2">{t('subtitle')}</p>
       </div>
 
-      <ProjectForm mode="create" />
+      <ProjectForm mode="create" redirectPath={`/${params.locale}/admin/portfolio`} />
     </div>
   );
 }

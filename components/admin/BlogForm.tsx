@@ -2,13 +2,25 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import RichTextEditor from './RichTextEditor';
-import Input from '../ui/Input';
-import Textarea from '../ui/Textarea';
-import Select from '../ui/Select';
-import Button from '../ui/Button';
+import { useTranslations } from 'next-intl';
+import dynamic from 'next/dynamic';
+import { Input } from '../ui/input';
+import { Textarea } from '../ui/textarea';
+import { Label } from '../ui/label';
+import { Button } from '../ui/button';
+import { Checkbox } from '../ui/checkbox';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select';
 
-interface Translation {
+const RichTextEditor = dynamic(() => import('./RichTextEditor'), { ssr: false });
+
+export interface BlogTranslationInput {
   locale: string;
   title: string;
   excerpt: string;
@@ -16,16 +28,20 @@ interface Translation {
   coverImage: string;
 }
 
+export type BlogFormInitialData = {
+  id?: string;
+  slug: string;
+  status: string;
+  featured: boolean;
+  publishedAt: string | null;
+  translations: BlogTranslationInput[];
+};
+
 interface BlogFormProps {
-  initialData?: {
-    id?: string;
-    slug: string;
-    status: string;
-    featured: boolean;
-    publishedAt: string | null;
-    translations: Translation[];
-  };
+  initialData?: BlogFormInitialData;
   mode: 'create' | 'edit';
+  redirectPath?: string;
+  onSuccess?: () => void;
 }
 
 const locales = [
@@ -34,8 +50,10 @@ const locales = [
   { code: 'pt-BR', name: 'Português (BR)', flag: '🇧🇷' },
 ];
 
-export default function BlogForm({ initialData, mode }: BlogFormProps) {
+export default function BlogForm({ initialData, mode, redirectPath, onSuccess }: BlogFormProps) {
   const router = useRouter();
+  const t = useTranslations('admin.forms.blog');
+  const tCommon = useTranslations('admin.forms.common');
   const [activeTab, setActiveTab] = useState('en');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -51,9 +69,9 @@ export default function BlogForm({ initialData, mode }: BlogFormProps) {
   );
 
   // Translations state
-  const [translations, setTranslations] = useState<Record<string, Translation>>(
+  const [translations, setTranslations] = useState<Record<string, BlogTranslationInput>>(
     () => {
-      const initial: Record<string, Translation> = {};
+      const initial: Record<string, BlogTranslationInput> = {};
       locales.forEach((locale) => {
         const existing = initialData?.translations.find(
           (t) => t.locale === locale.code
@@ -99,12 +117,12 @@ export default function BlogForm({ initialData, mode }: BlogFormProps) {
     try {
       // Validate required fields
       if (!slug) {
-        throw new Error('Slug is required');
+        throw new Error(t('errors.slugRequired'));
       }
 
       // Check if at least English translation is filled
       if (!translations.en.title || !translations.en.excerpt) {
-        throw new Error('English title and excerpt are required');
+        throw new Error(t('errors.englishTitleExcerpt'));
       }
 
       const data = {
@@ -136,8 +154,9 @@ export default function BlogForm({ initialData, mode }: BlogFormProps) {
       }
 
       // Redirect to blog list
-      router.push('/admin/blog');
+      router.push(redirectPath ?? '/admin/blog');
       router.refresh();
+      onSuccess?.();
     } catch (err: any) {
       setError(err.message);
       setLoading(false);
@@ -147,159 +166,156 @@ export default function BlogForm({ initialData, mode }: BlogFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg">
+        <div className="bg-destructive/10 border border-destructive/30 text-destructive px-4 py-3 rounded-lg">
           {error}
         </div>
       )}
 
       {/* Global Fields */}
-      <div className="bg-white rounded-lg shadow p-6 space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          Global Settings
-        </h3>
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold text-foreground">{t('globalTitle')}</h3>
 
         <div className="grid md:grid-cols-2 gap-4">
-          <Input
-            label="URL Slug"
-            value={slug}
-            onChange={(e) => setSlug(e.target.value)}
-            placeholder="my-blog-post"
-            required
-          />
+          <div className="space-y-2">
+            <Label htmlFor="slug">{t('slugLabel')}</Label>
+            <Input
+              id="slug"
+              value={slug}
+              onChange={(e) => setSlug(e.target.value)}
+              placeholder={t('placeholders.slug')}
+              required
+            />
+          </div>
 
-          <Select
-            label="Status"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            options={[
-              { value: 'draft', label: 'Draft' },
-              { value: 'published', label: 'Published' },
-            ]}
-          />
+          <div className="space-y-2">
+            <Label htmlFor="status">{t('statusLabel')}</Label>
+            <Select value={status} onValueChange={setStatus} required>
+              <SelectTrigger id="status">
+                <SelectValue placeholder={t('statusLabel')} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="draft">{t('statusOptions.draft')}</SelectItem>
+                <SelectItem value="published">{t('statusOptions.published')}</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-4">
-          <div>
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={featured}
-                onChange={(e) => setFeatured(e.target.checked)}
-                className="w-4 h-4 text-blue-600 rounded"
-              />
-              <span className="text-sm font-medium text-gray-700">
-                Featured Post
-              </span>
-            </label>
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="featured"
+              checked={featured}
+              onCheckedChange={(checked) => setFeatured(checked as boolean)}
+            />
+            <Label htmlFor="featured" className="text-sm font-medium cursor-pointer">
+              {t('featuredLabel')}
+            </Label>
           </div>
 
-          <Input
-            label="Publish Date (optional)"
-            type="datetime-local"
-            value={publishedAt}
-            onChange={(e) => setPublishedAt(e.target.value)}
-          />
+          <div className="space-y-2">
+            <Label htmlFor="publishedAt">{t('publishedAtLabel')}</Label>
+            <Input
+              id="publishedAt"
+              type="datetime-local"
+              value={publishedAt}
+              onChange={(e) => setPublishedAt(e.target.value)}
+            />
+          </div>
         </div>
       </div>
 
       {/* Language Tabs */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        {/* Tab Headers */}
-        <div className="border-b border-gray-200 flex">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
+        <TabsList className="grid grid-cols-3 w-full">
           {locales.map((locale) => (
-            <button
-              key={locale.code}
-              type="button"
-              onClick={() => setActiveTab(locale.code)}
-              className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${
-                activeTab === locale.code
-                  ? 'bg-blue-50 text-blue-600 border-b-2 border-blue-600'
-                  : 'text-gray-600 hover:bg-gray-50'
-              }`}
-            >
-              <span className="mr-2">{locale.flag}</span>
-              {locale.name}
-              {translations[locale.code].title && (
-                <span className="ml-2 text-green-600">✓</span>
-              )}
-            </button>
+            <TabsTrigger key={locale.code} value={locale.code} className="gap-2">
+              <span>{locale.flag}</span>
+              <span>{locale.name}</span>
+              {translations[locale.code].title && <span className="text-primary">✓</span>}
+            </TabsTrigger>
           ))}
-        </div>
+        </TabsList>
 
-        {/* Tab Content */}
-        <div className="p-6 space-y-4">
-          {locales.map((locale) => (
-            <div
-              key={locale.code}
-              className={activeTab === locale.code ? 'block' : 'hidden'}
-            >
+        {locales.map((locale) => (
+          <TabsContent key={locale.code} value={locale.code} className="space-y-4 p-1">
+            <div className="space-y-2">
+              <Label htmlFor={`title-${locale.code}`}>
+                {t('languageFields.title', {
+                  language: locale.name,
+                  required: locale.code === 'en' ? tCommon('requiredIndicator') : ''
+                })}
+              </Label>
               <Input
-                label="Title"
+                id={`title-${locale.code}`}
                 value={translations[locale.code].title}
-                onChange={(e) =>
-                  updateTranslation(locale.code, 'title', e.target.value)
-                }
-                placeholder={`Blog title in ${locale.name}`}
+                onChange={(e) => updateTranslation(locale.code, 'title', e.target.value)}
+                placeholder={t('placeholders.title')}
                 required={locale.code === 'en'}
               />
-
-              <div className="mt-4">
-                <Textarea
-                  label="Excerpt (Max 160 characters)"
-                  value={translations[locale.code].excerpt}
-                  onChange={(e) =>
-                    updateTranslation(locale.code, 'excerpt', e.target.value)
-                  }
-                  placeholder={`Brief description in ${locale.name}`}
-                  rows={3}
-                  maxLength={160}
-                  required={locale.code === 'en'}
-                />
-                <p className="text-xs text-gray-500 mt-1">
-                  {translations[locale.code].excerpt.length}/160 characters
-                </p>
-              </div>
-
-              <div className="mt-4">
-                <Input
-                  label="Cover Image URL (optional)"
-                  value={translations[locale.code].coverImage}
-                  onChange={(e) =>
-                    updateTranslation(locale.code, 'coverImage', e.target.value)
-                  }
-                  placeholder="https://example.com/image.jpg"
-                />
-              </div>
-
-              <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Content
-                </label>
-                <RichTextEditor
-                  content={translations[locale.code].content}
-                  onChange={(content) =>
-                    updateTranslation(locale.code, 'content', content)
-                  }
-                  placeholder={`Write your blog content in ${locale.name}...`}
-                />
-              </div>
             </div>
-          ))}
-        </div>
-      </div>
+
+            <div className="space-y-2">
+              <Label htmlFor={`excerpt-${locale.code}`}>
+                {t('languageFields.excerpt', {
+                  language: locale.name,
+                  required: locale.code === 'en' ? tCommon('requiredIndicator') : ''
+                })}
+              </Label>
+              <Textarea
+                id={`excerpt-${locale.code}`}
+                value={translations[locale.code].excerpt}
+                onChange={(e) => updateTranslation(locale.code, 'excerpt', e.target.value)}
+                placeholder={t('placeholders.excerpt')}
+                rows={3}
+                maxLength={160}
+                required={locale.code === 'en'}
+              />
+              <p className="text-xs text-muted-foreground">
+                {t('excerptCounter', { count: translations[locale.code].excerpt.length, max: 160 })}
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor={`cover-${locale.code}`}>
+                {t('languageFields.coverImage', { language: locale.name, required: '' })}
+              </Label>
+              <Input
+                id={`cover-${locale.code}`}
+                value={translations[locale.code].coverImage}
+                onChange={(e) => updateTranslation(locale.code, 'coverImage', e.target.value)}
+                placeholder={t('placeholders.coverImage')}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label>{t('languageFields.content', { language: locale.name, required: '' })}</Label>
+              <RichTextEditor
+                content={translations[locale.code].content}
+                onChange={(content) => updateTranslation(locale.code, 'content', content)}
+                placeholder={t('placeholders.content', { language: locale.name })}
+              />
+            </div>
+          </TabsContent>
+        ))}
+      </Tabs>
 
       {/* Actions */}
       <div className="flex justify-end gap-3">
         <Button
           type="button"
           variant="secondary"
-          onClick={() => router.push('/admin/blog')}
+          onClick={() => router.push(redirectPath ?? '/admin/blog')}
           disabled={loading}
         >
-          Cancel
+          {t('buttons.cancel')}
         </Button>
         <Button type="submit" disabled={loading}>
-          {loading ? 'Saving...' : mode === 'create' ? 'Create Post' : 'Update Post'}
+          {loading
+            ? t('buttons.saving')
+            : mode === 'create'
+            ? t('buttons.create')
+            : t('buttons.update')}
         </Button>
       </div>
     </form>

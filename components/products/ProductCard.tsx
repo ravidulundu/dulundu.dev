@@ -1,27 +1,36 @@
 import Link from "next/link";
-import { Package, Star, DollarSign } from "lucide-react";
+import { Package, Star } from "lucide-react";
+import { formatCurrencyAmount } from "@/lib/currency";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 interface ProductCardProps {
   product: {
     id: string;
     slug: string;
     type: string;
-    price: any; // Decimal type from Prisma
+    price: any;
     currency: string;
     featured: boolean;
+    prices?: {
+      currency: string;
+      amount: any;
+    }[];
     translations: {
       title: string;
       description: string;
     }[];
   };
   locale: string;
+  preferredCurrency: string;
 }
 
-const productTypeColors: Record<string, string> = {
-  'wordpress-plugin': 'bg-blue-100 text-blue-800',
-  'wordpress-theme': 'bg-purple-100 text-purple-800',
-  'consulting': 'bg-green-100 text-green-800',
-  'optimization': 'bg-orange-100 text-orange-800',
+const productTypeVariants: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
+  'wordpress-plugin': 'default',
+  'wordpress-theme': 'secondary',
+  'consulting': 'outline',
+  'optimization': 'secondary',
 };
 
 const productTypeLabels: Record<string, string> = {
@@ -31,66 +40,76 @@ const productTypeLabels: Record<string, string> = {
   'optimization': 'Optimization',
 };
 
-export default function ProductCard({ product, locale }: ProductCardProps) {
+export default function ProductCard({ product, locale, preferredCurrency }: ProductCardProps) {
   const translation = product.translations[0]; // Already filtered by locale in the API
 
   if (!translation) {
     return null;
   }
 
-  const typeColor = productTypeColors[product.type] || 'bg-gray-100 text-gray-800';
+  const typeVariant = productTypeVariants[product.type] || 'default';
   const typeLabel = productTypeLabels[product.type] || product.type;
+  const priceEntry =
+    product.prices?.find((price) => price.currency === preferredCurrency) ||
+    product.prices?.find((price) => price.currency === product.currency) ||
+    product.prices?.[0];
+
+  const displayAmount = priceEntry
+    ? parseFloat(priceEntry.amount.toString())
+    : parseFloat(product.price.toString());
+  const displayCurrency = priceEntry?.currency || product.currency;
+  const formattedPrice = formatCurrencyAmount({
+    amount: displayAmount,
+    currency: displayCurrency,
+    locale
+  });
 
   return (
-    <article className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
-      {/* Header with Icon */}
-      <div className="relative h-48 bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 flex items-center justify-center">
+    <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300">
+      {/* Header with Icon & Badges */}
+      <CardHeader className="relative h-48 bg-gradient-to-br from-primary/40 via-primary to-accent flex items-center justify-center p-0">
         <Package className="w-20 h-20 text-white/20" strokeWidth={1.5} />
 
-        {/* Product Type Badge */}
-        <div className={`absolute top-4 left-4 ${typeColor} px-3 py-1 rounded-full text-xs font-semibold`}>
-          {typeLabel}
+        {/* Badges positioned absolutely */}
+        <div className="absolute top-4 left-4">
+          <Badge variant={typeVariant}>
+            {typeLabel}
+          </Badge>
         </div>
 
-        {/* Featured Badge */}
         {product.featured && (
-          <div className="absolute top-4 right-4 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
-            <Star className="w-3 h-3 fill-current" />
-            Featured
+          <div className="absolute top-4 right-4">
+            <Badge variant="secondary" className="gap-1">
+              <Star className="w-3 h-3 fill-current" />
+              Featured
+            </Badge>
           </div>
         )}
-      </div>
+      </CardHeader>
 
       {/* Content */}
-      <div className="p-6">
-        {/* Title */}
-        <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+      <CardContent className="p-6">
+        <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
           {translation.title}
         </h3>
 
-        {/* Description */}
-        <p className="text-gray-600 mb-4 line-clamp-3">
+        <p className="text-muted-foreground line-clamp-3">
           {translation.description}
         </p>
+      </CardContent>
 
-        {/* Price & CTA */}
-        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-          <div className="flex items-center text-2xl font-bold text-gray-900">
-            <DollarSign className="w-5 h-5" />
-            {parseFloat(product.price.toString()).toFixed(2)}
-            <span className="text-sm text-gray-500 ml-1 font-normal">
-              {product.currency}
-            </span>
-          </div>
+      {/* Footer with Price & CTA */}
+      <CardFooter className="flex items-center justify-between p-6 pt-0">
+        <div className="text-2xl font-bold text-foreground">
+          {formattedPrice}
+        </div>
 
-          <Link
-            href={`/${locale}/products/${product.slug}`}
-            className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
-          >
+        <Button asChild>
+          <Link href={`/${locale}/products/${product.slug}`}>
             View Details
           </Link>
-        </div>
-      </div>
-    </article>
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }

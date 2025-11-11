@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { getTranslations } from 'next-intl/server';
 import ProjectCard from "@/components/portfolio/ProjectCard";
+import PageWrapper from '@/components/layout/PageWrapper';
 
 async function getProjects(locale: string) {
   const projects = await db.project.findMany({
@@ -51,13 +52,14 @@ export default async function PortfolioPage({
   const regularProjects = projects.filter((p) => !p.featured);
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <PageWrapper>
+      <div className="container mx-auto px-4 py-12">
       {/* Header */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <h1 className="text-4xl font-bold text-foreground dark:text-white mb-4">
           {t('title', { defaultMessage: 'Portfolio' })}
         </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        <p className="text-xl text-muted-foreground dark:text-muted-foreground/70 max-w-2xl mx-auto">
           {t('subtitle', {
             defaultMessage: 'Explore our completed projects and case studies',
           })}
@@ -67,7 +69,7 @@ export default async function PortfolioPage({
       {/* Featured Projects */}
       {featuredProjects.length > 0 && (
         <div className="mb-16">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-2xl font-bold text-foreground dark:text-white mb-6">
             {t('featured', { defaultMessage: 'Featured Projects' })}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -93,7 +95,7 @@ export default async function PortfolioPage({
       {/* All Projects */}
       {regularProjects.length > 0 ? (
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-2xl font-bold text-foreground dark:text-white mb-6">
             {t('allProjects', { defaultMessage: 'All Projects' })}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -117,7 +119,7 @@ export default async function PortfolioPage({
       ) : (
         !featuredProjects.length && (
           <div className="text-center py-12">
-            <p className="text-gray-500 dark:text-gray-400 text-lg">
+            <p className="text-muted-foreground dark:text-muted-foreground text-lg">
               {t('noProjects', {
                 defaultMessage: 'No projects available yet. Check back soon!',
               })}
@@ -126,5 +128,6 @@ export default async function PortfolioPage({
         )
       )}
     </div>
+    </PageWrapper>
   );
 }

@@ -99,13 +99,13 @@ The application has **143 occurrences** of `dark:` classes across components:
 **Examples Found**:
 ```tsx
 // components/products/BuyButton.tsx
-<div className="dark:bg-gray-800">
+<div className="dark:bg-card">
 
 // app/[locale]/portfolio/page.tsx
-<h1 className="text-gray-900 dark:text-white">
+<h1 className="text-foreground dark:text-white">
 
 // components/portfolio/ProjectCard.tsx
-<div className="bg-white dark:bg-gray-800">
+<div className="bg-card dark:bg-card">
 ```
 
 **Component Categories Using Dark Mode**:
@@ -272,11 +272,11 @@ export default function ThemeSwitcher() {
   if (!mounted) return null;
 
   return (
-    <div className="flex items-center gap-2 p-1 bg-gray-100 dark:bg-gray-800 rounded-lg">
+    <div className="flex items-center gap-2 p-1 bg-muted dark:bg-card rounded-lg">
       <button
         onClick={() => setTheme('light')}
         className={`p-2 rounded ${
-          theme === 'light' ? 'bg-white shadow' : ''
+          theme === 'light' ? 'bg-card shadow' : ''
         }`}
         aria-label="Light mode"
       >
@@ -285,7 +285,7 @@ export default function ThemeSwitcher() {
       <button
         onClick={() => setTheme('system')}
         className={`p-2 rounded ${
-          theme === 'system' ? 'bg-white dark:bg-gray-700 shadow' : ''
+          theme === 'system' ? 'bg-card dark:bg-muted shadow' : ''
         }`}
         aria-label="System mode"
       >

@@ -1,16 +1,21 @@
 import ProductForm from "@/components/admin/ProductForm";
+import { Card, CardContent } from "@/components/ui/card";
+import { getTranslations } from "next-intl/server";
 
-export default function NewProductPage() {
+export default async function NewProductPage({ params }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'admin.products' });
   return (
-    <div>
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Create New Product</h1>
-        <p className="text-gray-500 mt-2">Add a new product or service to your catalog</p>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold text-foreground">{t('createTitle')}</h1>
+        <p className="text-muted-foreground mt-2">{t('subtitle')}</p>
       </div>
 
-      <div className="bg-white rounded-lg shadow p-6">
-        <ProductForm mode="create" />
-      </div>
+      <Card>
+        <CardContent className="pt-6">
+          <ProductForm mode="create" redirectPath={`/${params.locale}/admin/products`} />
+        </CardContent>
+      </Card>
     </div>
   );
 }

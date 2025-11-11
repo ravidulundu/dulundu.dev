@@ -171,13 +171,13 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-gray-900 text-muted-foreground/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <h3 className="text-2xl font-bold text-white mb-4">Dulundu.dev</h3>
-            <p className="text-gray-400 max-w-md">
+            <p className="text-muted-foreground max-w-md">
               Professional WordPress & Web Development Services.
               Optimize, enhance, and grow your digital presence.
             </p>
@@ -229,15 +229,15 @@ export default function Footer() {
         </div>
 
         {/* Bottom - Legal links now include locale */}
-        <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
+        <div className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-muted-foreground text-sm">
             &copy; {currentYear} Dulundu.dev. {t('copyright')}
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href={`/${locale}/privacy`} className="text-gray-400 hover:text-white text-sm transition-colors">
+            <Link href={`/${locale}/privacy`} className="text-muted-foreground hover:text-white text-sm transition-colors">
               {t('privacy')}
             </Link>
-            <Link href={`/${locale}/terms`} className="text-gray-400 hover:text-white text-sm transition-colors">
+            <Link href={`/${locale}/terms`} className="text-muted-foreground hover:text-white text-sm transition-colors">
               {t('terms')}
             </Link>
           </div>
