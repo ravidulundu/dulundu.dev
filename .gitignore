@@ -39,6 +39,17 @@ next-env.d.ts
 prisma/dev.db
 prisma/dev.db-journal
 
+# audit / verification artifacts
+AUDIT_*.md
+VERIFICATION_*.md
+COMPREHENSIVE_AUDIT_SUMMARY.txt
+FINAL_VERIFICATION_REPORT.md
+VERIFICATION_COMPLETE.txt
+VERIFICATION_INDEX.md
+VERIFICATION_SCREENSHOTS.md
+VERIFICATION_SUMMARY.txt
+.playwright-mcp/
+
 # SpecPulse (optional - commit specs & plans for team collaboration)
 .specpulse/cache/
 .specpulse/checkpoints/
