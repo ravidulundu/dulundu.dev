@@ -48,6 +48,10 @@ VERIFICATION_COMPLETE.txt
 VERIFICATION_INDEX.md
 VERIFICATION_SCREENSHOTS.md
 VERIFICATION_SUMMARY.txt
+README_VERIFICATION.md
+THEME_AUDIT_ACTION_ITEMS.md
+THEME_AUDIT_REPORT.md
+.specpulse/memory/notes/specpulse-sync-*.md
 .playwright-mcp/
 
 # SpecPulse (optional - commit specs & plans for team collaboration)
