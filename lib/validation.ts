@@ -111,7 +111,7 @@ export function sanitizeSlug(text: string): string {
   const slug = text
     .toLowerCase()
     .trim()
-    .replace(/[^a-z0-9\s-]/g, '') // Remove non-ASCII special characters
+    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters (keeping only alphanumeric, spaces, and hyphens)
     .replace(/[\s_]+/g, '-') // Replace spaces and underscores with hyphens
     .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
 

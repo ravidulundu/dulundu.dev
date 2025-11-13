@@ -214,7 +214,7 @@ if (localeCandidate && isValidLocale(localeCandidate))
 
 **Validation Functions Added**:
 ```typescript
-// Email validation regex (RFC 5322 simplified)
+// Email validation regex (simplified, not RFC 5322 compliant)
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function isValidEmail(email: string): boolean {
@@ -404,10 +404,10 @@ npx prisma migrate dev --name add-performance-indexes
 
 | Area | Before | After | Improvement |
 |------|--------|-------|-------------|
-| Database Queries | No indexes | 20 indexes | 10-100x faster |
+| Database Queries | No indexes | 21 indexes | 10-100x faster |
 | Webhook Security | 300s tolerance | 60s tolerance | 5x tighter |
 | Type Safety | 5 `as any` | 0 `as any` | 100% type-safe |
-| Data Integrity | No email validation | RFC 5322 validation | 100% valid emails |
+| Data Integrity | No email validation | Basic email format validation | 100% format-checked emails |
 | XSS Protection | None | Full CSP | Attack vector closed |
 
 ---
