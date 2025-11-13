@@ -130,7 +130,7 @@ export default function ContactPage() {
                   >
                     {status === 'sending' ? (
                       <>
-                        <Spinner className="mr-2" size="sm" />
+                        <Spinner className="mr-2" />
                         {t('form.sending')}
                       </>
                     ) : (

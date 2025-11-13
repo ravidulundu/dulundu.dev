@@ -17,7 +17,10 @@
     "name": "Ege Dulundu",
     "tagline": "Tornando sites mais rápidos. Especialista WordPress + desenvolvedor full-stack.",
     "ctaPortfolio": "Ver Portfólio",
-    "ctaServices": "Contratar Serviço"
+    "ctaServices": "Contratar Serviço",
+    "typewriter1": "Especialista WordPress 🚀",
+    "typewriter2": "Desenvolvedor Full-Stack 💻",
+    "typewriter3": "Consultor de Performance ⚡"
   },
   "bio": {
     "introduction": "Especializado em otimização WordPress e desenvolvimento full-stack, ajudando empresas a melhorar o desempenho de seus sites e construir aplicações web escaláveis. Da otimização de velocidade ao desenvolvimento personalizado, entrego resultados que importam.",
@@ -29,17 +32,35 @@
     "wordpress": {
       "title": "Especialista WordPress",
       "description": "Desenvolvimento de temas e plugins, WooCommerce e otimização",
-      "badges": ["WordPress", "WooCommerce", "Plugins", "Temas", "PHP"]
+      "badges": [
+        "WordPress",
+        "WooCommerce",
+        "Plugins",
+        "Temas",
+        "PHP"
+      ]
     },
     "performance": {
       "title": "Otimizador de Performance",
       "description": "Otimização de velocidade, cache, Core Web Vitals e configuração CDN",
-      "badges": ["Velocidade", "Cache", "Core Web Vitals", "CDN", "Lighthouse"]
+      "badges": [
+        "Velocidade",
+        "Cache",
+        "Core Web Vitals",
+        "CDN",
+        "Lighthouse"
+      ]
     },
     "fullstack": {
       "title": "Desenvolvedor Full-Stack",
       "description": "Aplicações web modernas com Next.js, React e PostgreSQL",
-      "badges": ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL"]
+      "badges": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Node.js",
+        "PostgreSQL"
+      ]
     }
   },
   "featuredProjects": {
@@ -158,7 +179,25 @@
     "latestPosts": "Últimos Posts",
     "allPosts": "Todos os Posts",
     "categories": "Categorias",
-    "tags": "Tags"
+    "tags": "Tags",
+    "authorBio": "Especializo-me em otimização WordPress e desenvolvimento full-stack, ajudando empresas a melhorar o desempenho de seus sites e construir aplicações web escaláveis. Desde otimização de velocidade até desenvolvimento customizado, entrego resultados que importam.",
+    "viewPortfolio": "Ver Portfólio",
+    "copyLink": "Copiar Link",
+    "copied": "Copiado!",
+    "ctaTitle": "Precisa de ajuda com seu projeto?",
+    "ctaDescription": "Vamos discutir como posso ajudar a otimizar seu site ou construir seu próximo projeto.",
+    "ctaServices": "Ver Serviços",
+    "ctaContact": "Entre em Contato",
+    "newsletterTitle": "Assine a Newsletter",
+    "newsletterDescription": "Receba os últimos insights, tutoriais e atualizações diretamente na sua caixa de entrada.",
+    "newsletterPlaceholder": "Digite seu e-mail",
+    "newsletterSubscribe": "Assinar",
+    "newsletterSending": "Assinando...",
+    "newsletterSuccess": "Inscrito com sucesso! Verifique seu e-mail para confirmação.",
+    "newsletterEmailRequired": "Por favor, insira seu endereço de e-mail",
+    "newsletterEmailInvalid": "Por favor, insira um endereço de e-mail válido",
+    "newsletterPrivacy": "Respeitamos sua privacidade. Cancele a inscrição a qualquer momento.",
+    "relatedPostsDescription": "Continue explorando artigos e insights relacionados"
   },
   "products": {
     "title": "Produtos",
@@ -292,7 +331,7 @@
     "header": {
       "title": "Painel Administrativo",
       "notifications": "Notificações",
-      "profile": "Admin",
+      "profile": "Perfil",
       "signOut": "Sair"
     },
     "dashboard": {
@@ -488,8 +527,8 @@
           "description": "Descrição detalhada do produto",
           "features": "Um recurso por linha (opcional)",
           "coverImage": "https://exemplo.com/imagem.jpg",
-          "price": "99.99",
-          "override": "Auto"
+          "price": "0.00",
+          "override": "0.00"
         },
         "slugLabel": "Slug",
         "slugPlaceholder": "produto-slug (gerado automaticamente)",
@@ -540,8 +579,8 @@
           "excerpt": "Resumo exibido nas listagens",
           "content": "Escreva o conteúdo em {language}...",
           "coverImage": "https://exemplo.com/imagem.jpg",
-          "slug": "post-slug",
-          "publishedAt": "2024-01-01 10:00"
+          "slug": "exemplo-de-slug",
+          "publishedAt": "AAAA-MM-DD"
         },
         "slugLabel": "Slug",
         "statusLabel": "Status",
@@ -575,9 +614,9 @@
         "placeholders": {
           "title": "Digite o título do projeto",
           "description": "Descreva o projeto",
-          "technologies": "React, Next.js, Tailwind",
+          "technologies": "Tecnologias (separadas por vírgula)",
           "images": "https://exemplo.com/imagem.jpg",
-          "slug": "projeto-slug",
+          "slug": "exemplo-de-projeto",
           "order": "0",
           "url": "https://projeto.com",
           "imagesHelper": "Digite um URL por linha"
@@ -616,8 +655,7 @@
         "globalTitle": "Configurações Gerais"
       }
     }
-  }
-,
+  },
   "servicesPage": {
     "hero": {
       "title": "Serviços Profissionais",
@@ -743,7 +781,7 @@
     "budget": "Faixa de Orçamento",
     "budgetPlaceholder": "Selecione a faixa de orçamento",
     "budgetOptions": {
-      "10000plus": "$10,000+",
+      "10000plus": "$10.000+",
       "flexible": "Flexível"
     },
     "timeline": "Cronograma",

@@ -17,7 +17,10 @@
     "name": "Ege Dulundu",
     "tagline": "Making websites faster. WordPress expert + full-stack developer.",
     "ctaPortfolio": "View Portfolio",
-    "ctaServices": "Book a Service"
+    "ctaServices": "Book a Service",
+    "typewriter1": "WordPress Expert 🚀",
+    "typewriter2": "Full-Stack Developer 💻",
+    "typewriter3": "Performance Consultant ⚡"
   },
   "bio": {
     "introduction": "I specialize in WordPress optimization and full-stack development, helping businesses improve their website performance and build scalable web applications. From speed optimization to custom development, I deliver results that matter.",
@@ -158,7 +161,25 @@
     "latestPosts": "Latest Posts",
     "allPosts": "All Posts",
     "categories": "Categories",
-    "tags": "Tags"
+    "tags": "Tags",
+    "authorBio": "I specialize in WordPress optimization and full-stack development, helping businesses improve their website performance and build scalable web applications. From speed optimization to custom development, I deliver results that matter.",
+    "viewPortfolio": "View Portfolio",
+    "copyLink": "Copy Link",
+    "copied": "Copied!",
+    "ctaTitle": "Need help with your project?",
+    "ctaDescription": "Let's discuss how I can help optimize your website or build your next project.",
+    "ctaServices": "View Services",
+    "ctaContact": "Get in Touch",
+    "newsletterTitle": "Subscribe to Newsletter",
+    "newsletterDescription": "Get the latest insights, tutorials, and updates delivered to your inbox.",
+    "newsletterPlaceholder": "Enter your email",
+    "newsletterSubscribe": "Subscribe",
+    "newsletterSending": "Subscribing...",
+    "newsletterSuccess": "Successfully subscribed! Check your email for confirmation.",
+    "newsletterEmailRequired": "Please enter your email address",
+    "newsletterEmailInvalid": "Please enter a valid email address",
+    "newsletterPrivacy": "We respect your privacy. Unsubscribe at any time.",
+    "relatedPostsDescription": "Continue exploring related articles and insights"
   },
   "products": {
     "title": "Products",

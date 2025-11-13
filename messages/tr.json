@@ -17,7 +17,10 @@
     "name": "Ege Dulundu",
     "tagline": "Web sitelerini hızlandırıyorum. WordPress uzmanı + full-stack geliştirici.",
     "ctaPortfolio": "Portföyü İncele",
-    "ctaServices": "Hizmet Al"
+    "ctaServices": "Hizmet Al",
+    "typewriter1": "WordPress Uzmanı 🚀",
+    "typewriter2": "Full-Stack Geliştirici 💻",
+    "typewriter3": "Performans Danışmanı ⚡"
   },
   "bio": {
     "introduction": "WordPress optimizasyonu ve full-stack geliştirme konusunda uzmanlaşmış bir geliştiriciyim. İşletmelerin web sitesi performanslarını iyileştirmeleri ve ölçeklenebilir web uygulamaları oluşturmaları için çalışıyorum. Hız optimizasyonundan özel geliştirmeye, önemli sonuçlar sunuyorum.",
@@ -29,17 +32,35 @@
     "wordpress": {
       "title": "WordPress Uzmanı",
       "description": "Tema & eklenti geliştirme, WooCommerce ve optimizasyon",
-      "badges": ["WordPress", "WooCommerce", "Eklentiler", "Temalar", "PHP"]
+      "badges": [
+        "WordPress",
+        "WooCommerce",
+        "Eklentiler",
+        "Temalar",
+        "PHP"
+      ]
     },
     "performance": {
       "title": "Performans Optimizasyonu",
       "description": "Hız optimizasyonu, önbellekleme, Core Web Vitals ve CDN kurulumu",
-      "badges": ["Hız", "Önbellekleme", "Core Web Vitals", "CDN", "Lighthouse"]
+      "badges": [
+        "Hız",
+        "Önbellekleme",
+        "Core Web Vitals",
+        "CDN",
+        "Lighthouse"
+      ]
     },
     "fullstack": {
       "title": "Full-Stack Geliştirici",
       "description": "Next.js, React ve PostgreSQL ile modern web uygulamaları",
-      "badges": ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL"]
+      "badges": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Node.js",
+        "PostgreSQL"
+      ]
     }
   },
   "featuredProjects": {
@@ -158,7 +179,25 @@
     "latestPosts": "Son Yazılar",
     "allPosts": "Tüm Yazılar",
     "categories": "Kategoriler",
-    "tags": "Etiketler"
+    "tags": "Etiketler",
+    "authorBio": "WordPress optimizasyonu ve full-stack geliştirme konusunda uzmanlaşmış olarak, işletmelerin web sitesi performansını artırmalarına ve ölçeklenebilir web uygulamaları oluşturmalarına yardımcı oluyorum. Hız optimizasyonundan özel geliştirmeye kadar, önemli sonuçlar sunuyorum.",
+    "viewPortfolio": "Portföyü Görüntüle",
+    "copyLink": "Linki Kopyala",
+    "copied": "Kopyalandı!",
+    "ctaTitle": "Projeniz için yardıma mı ihtiyacınız var?",
+    "ctaDescription": "Web sitenizi nasıl optimize edebileceğimi veya bir sonraki projenizi nasıl geliştirebileceğimi görüşelim.",
+    "ctaServices": "Hizmetleri Görüntüle",
+    "ctaContact": "İletişime Geç",
+    "newsletterTitle": "Bültene Abone Ol",
+    "newsletterDescription": "En son içgörüler, eğitimler ve güncellemeleri doğrudan gelen kutunuzda alın.",
+    "newsletterPlaceholder": "E-posta adresinizi girin",
+    "newsletterSubscribe": "Abone Ol",
+    "newsletterSending": "Abone olunuyor...",
+    "newsletterSuccess": "Başarıyla abone oldunuz! Onay için e-postanızı kontrol edin.",
+    "newsletterEmailRequired": "Lütfen e-posta adresinizi girin",
+    "newsletterEmailInvalid": "Lütfen geçerli bir e-posta adresi girin",
+    "newsletterPrivacy": "Gizliliğinize saygı duyuyoruz. İstediğiniz zaman abonelikten çıkabilirsiniz.",
+    "relatedPostsDescription": "İlgili makaleleri ve içgörüleri keşfetmeye devam edin"
   },
   "products": {
     "title": "Ürünler",
@@ -292,7 +331,7 @@
     "header": {
       "title": "Yönetim Paneli",
       "notifications": "Bildirimler",
-      "profile": "Admin",
+      "profile": "Profil",
       "signOut": "Çıkış Yap"
     },
     "dashboard": {
@@ -488,7 +527,7 @@
           "description": "Ayrıntılı ürün açıklaması",
           "features": "Her satıra bir özellik (isteğe bağlı)",
           "coverImage": "https://ornek.com/gorsel.jpg",
-          "price": "99.99",
+          "price": "0.00",
           "override": "Otomatik"
         },
         "slugLabel": "Kısa İsim (slug)",
@@ -541,9 +580,9 @@
           "content": "{language} dilinde blog içeriğini yaz...",
           "coverImage": "https://ornek.com/gorsel.jpg",
           "slug": "yazi-slug",
-          "publishedAt": "2024-01-01 10:00"
+          "publishedAt": "YYYY-MM-DD"
         },
-        "slugLabel": "Slug",
+        "slugLabel": "URL Kısa Adı",
         "statusLabel": "Durum",
         "statusOptions": {
           "draft": "Taslak",
@@ -575,14 +614,14 @@
         "placeholders": {
           "title": "Proje başlığını yazın",
           "description": "Projeyi açıklayın",
-          "technologies": "React, Next.js, Tailwind",
+          "technologies": "Teknolojiler (virgülle ayırın)",
           "images": "https://ornek.com/gorsel.jpg",
           "slug": "proje-slug",
           "order": "0",
           "url": "https://proje.com",
           "imagesHelper": "Her satıra bir görsel adresi yazın"
         },
-        "slugLabel": "Slug",
+        "slugLabel": "URL Kısa Adı",
         "categoryLabel": "Kategori",
         "categoryOptions": {
           "wordpress": "WordPress",
@@ -616,8 +655,7 @@
         "globalTitle": "Genel Ayarlar"
       }
     }
-  }
-,
+  },
   "servicesPage": {
     "hero": {
       "title": "Profesyonel Hizmetler",
@@ -743,7 +781,7 @@
     "budget": "Bütçe Aralığı",
     "budgetPlaceholder": "Bütçe aralığını seçin",
     "budgetOptions": {
-      "10000plus": "$10,000+",
+      "10000plus": "$10.000+",
       "flexible": "Esnek"
     },
     "timeline": "Zaman Çizelgesi",

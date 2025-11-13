@@ -119,7 +119,7 @@ function SignInForm() {
               >
                 {loading ? (
                   <>
-                    <Spinner className="mr-2" size="sm" />
+                    <Spinner className="mr-2" />
                     {t('loading')}
                   </>
                 ) : (
@@ -148,7 +148,7 @@ export default function SignInPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center">
-        <Spinner size="lg" />
+        <Spinner className="size-8" />
       </div>
     }>
       <SignInForm />

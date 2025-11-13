@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
-import Image from 'next/image';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { InteractiveProjectCard } from '@/components/portfolio/InteractiveProjectCard';
+import { staggerContainer, fadeInUp } from '@/lib/animations';
 
 interface ProjectTranslation {
   title: string;
@@ -76,88 +76,70 @@ export function FeaturedProjects() {
   }
 
   return (
-    <section className="py-20 px-4 md:px-8 bg-background">
+    <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-background to-muted/20">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
+        {/* Header */}
+        <motion.div
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">
             {t('title')}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             {t('subtitle')}
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => {
+        {/* Projects Grid */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {projects.map((project, index) => {
             const translation = project.translations[0];
             const images = translation.images as string[] | undefined;
-            const coverImage = images && images.length > 0 ? images[0] : null;
             const technologies = translation.technologies as string[] | undefined;
 
             return (
-              <Card key={project.id} className="group hover:shadow-xl transition-shadow overflow-hidden">
-                {coverImage && (
-                  <div className="relative h-48 w-full overflow-hidden bg-muted">
-                    <Image
-                      src={coverImage}
-                      alt={translation.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                )}
-
-                <CardHeader>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Badge variant="secondary">{project.category}</Badge>
-                    {project.url && (
-                      <ExternalLink className="w-4 h-4 text-muted-foreground" />
-                    )}
-                  </div>
-                  <CardTitle className="text-xl">{translation.title}</CardTitle>
-                  <CardDescription className="line-clamp-2">
-                    {translation.description}
-                  </CardDescription>
-                </CardHeader>
-
-                {technologies && technologies.length > 0 && (
-                  <CardContent>
-                    <div className="flex flex-wrap gap-1.5">
-                      {technologies.slice(0, 4).map((tech) => (
-                        <Badge key={tech} variant="outline" className="text-xs">
-                          {tech}
-                        </Badge>
-                      ))}
-                      {technologies.length > 4 && (
-                        <Badge variant="outline" className="text-xs">
-                          +{technologies.length - 4}
-                        </Badge>
-                      )}
-                    </div>
-                  </CardContent>
-                )}
-
-                <CardFooter>
-                  <Button variant="ghost" className="w-full group/btn" asChild>
-                    <Link href={`/${locale}/portfolio/${project.slug}`}>
-                      {t('viewCaseStudy')}
-                      <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
+              <InteractiveProjectCard
+                key={project.id}
+                slug={project.slug}
+                title={translation.title}
+                description={translation.description}
+                category={project.category}
+                featured={project.featured}
+                images={images || []}
+                locale={locale}
+                technologies={technologies}
+                url={project.url}
+                index={index}
+              />
             );
           })}
-        </div>
+        </motion.div>
 
-        <div className="text-center mt-12">
-          <Button variant="outline" size="lg" asChild>
+        {/* View All CTA */}
+        <motion.div
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-center mt-16"
+        >
+          <Button variant="outline" size="lg" asChild className="group">
             <Link href={`/${locale}/portfolio`}>
               {t('viewAllProjects')}
-              <ArrowRight className="ml-2 w-4 h-4" />
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </Button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

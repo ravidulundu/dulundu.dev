@@ -1,8 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { format } from "date-fns";
-import { Calendar, ArrowLeft } from "lucide-react";
+import { Calendar, ArrowLeft, Clock, Github, Linkedin } from "lucide-react";
 import { getTranslations } from 'next-intl/server';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { SocialShare } from './SocialShare';
+import { BlogCTA } from './BlogCTA';
+import { NewsletterSignup } from './NewsletterSignup';
+import { RelatedPosts } from './RelatedPosts';
 
 interface BlogPostProps {
   post: {
@@ -17,9 +23,10 @@ interface BlogPostProps {
     }[];
   };
   locale: string;
+  readingTime: number;
 }
 
-export default async function BlogPost({ post, locale }: BlogPostProps) {
+export default async function BlogPost({ post, locale, readingTime }: BlogPostProps) {
   const translation = post.translations[0];
   const t = await getTranslations({ locale, namespace: 'blog' });
 
@@ -63,11 +70,17 @@ export default async function BlogPost({ post, locale }: BlogPostProps) {
             {translation.title}
           </h1>
 
-          <div className="flex items-center text-muted-foreground">
-            <Calendar className="w-5 h-5 mr-2" />
-            <time dateTime={post.publishedAt.toISOString()}>
-              {format(new Date(post.publishedAt), 'MMMM dd, yyyy')}
-            </time>
+          <div className="flex items-center gap-6 text-muted-foreground">
+            <div className="flex items-center">
+              <Calendar className="w-5 h-5 mr-2" />
+              <time dateTime={post.publishedAt.toISOString()}>
+                {format(new Date(post.publishedAt), 'MMMM dd, yyyy')}
+              </time>
+            </div>
+            <div className="flex items-center">
+              <Clock className="w-5 h-5 mr-2" />
+              <span>{readingTime} {t('minuteRead')}</span>
+            </div>
           </div>
 
           {translation.excerpt && (
@@ -95,6 +108,83 @@ export default async function BlogPost({ post, locale }: BlogPostProps) {
             prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground"
           dangerouslySetInnerHTML={{ __html: translation.content }}
         />
+
+        {/* Social Share */}
+        <div className="mt-8">
+          <SocialShare
+            title={translation.title}
+            url={`/${locale}/blog/${post.slug}`}
+          />
+        </div>
+
+        {/* CTA Section */}
+        <BlogCTA locale={locale} />
+
+        {/* Author Bio */}
+        <Card className="mt-8 bg-card border-border">
+          <CardContent className="p-6">
+            <div className="flex flex-col md:flex-row gap-6 items-start">
+              {/* Author Avatar */}
+              <div className="flex-shrink-0">
+                <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center text-primary text-2xl font-bold">
+                  ED
+                </div>
+              </div>
+
+              {/* Author Info */}
+              <div className="flex-1">
+                <div className="mb-2">
+                  <Badge variant="secondary" className="mb-2">
+                    {t('author')}
+                  </Badge>
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-2">
+                  Ege Dulundu
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  WordPress Expert & Full-Stack Developer
+                </p>
+                <p className="text-muted-foreground mb-4">
+                  {t('authorBio')}
+                </p>
+
+                {/* Social Links */}
+                <div className="flex gap-4">
+                  <a
+                    href="https://github.com/dulundu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    <Github className="w-4 h-4" />
+                    GitHub
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/egedulundu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                    LinkedIn
+                  </a>
+                  <Link
+                    href={`/${locale}/portfolio`}
+                    className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {t('viewPortfolio')} →
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Newsletter Signup */}
+        <NewsletterSignup />
+
+        {/* Related Posts */}
+        <RelatedPosts currentPostSlug={post.slug} locale={locale} />
       </div>
     </article>
   );

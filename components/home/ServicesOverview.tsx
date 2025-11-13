@@ -1,3 +1,5 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { Zap, Shield, Code2, Activity } from 'lucide-react';

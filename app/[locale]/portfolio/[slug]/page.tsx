@@ -79,8 +79,36 @@ export default async function ProjectDetailPage({
   const images = (translation.images as string[]) || [];
   const results = (translation.results as Record<string, string>) || {};
 
+  // Structured Data - CreativeWork Schema
+  const projectSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: translation.title,
+    description: translation.description,
+    creator: {
+      '@type': 'Person',
+      name: 'Ege Dulundu',
+      url: 'https://dulundu.dev',
+    },
+    ...(images.length > 0 && { image: images[0] }),
+    ...(project.url && { url: project.url }),
+    ...(technologies.length > 0 && { keywords: technologies.join(', ') }),
+    ...(translation.client && {
+      client: {
+        '@type': 'Organization',
+        name: translation.client,
+      },
+    }),
+  };
+
   return (
     <PageWrapper>
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
+      />
+
       <div className="container mx-auto px-4 py-12 max-w-6xl">
         {/* Back Link */}
         <Link
@@ -260,7 +288,7 @@ export default async function ProjectDetailPage({
           <Card className="mb-12 bg-muted/50">
             <CardContent className="pt-6">
               <blockquote className="text-lg italic leading-relaxed mb-4">
-                "{translation.testimonial}"
+                &ldquo;{translation.testimonial}&rdquo;
               </blockquote>
               {translation.client && (
                 <p className="text-sm font-semibold text-muted-foreground">

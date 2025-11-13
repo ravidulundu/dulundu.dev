@@ -10,11 +10,17 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'metadata' });
+  const t = await getTranslations({ locale, namespace: 'servicesPage' });
 
   return {
-    title: `${t('title')} - Services`,
-    description: 'WordPress optimization, full-stack development, and consulting services. Fixed packages and custom project solutions.',
+    title: t('hero.title'),
+    description: t('hero.subtitle'),
+    openGraph: {
+      title: t('hero.title'),
+      description: t('hero.subtitle'),
+      type: 'website',
+      url: `https://dulundu.dev/${locale}/services`,
+    },
   };
 }
 
