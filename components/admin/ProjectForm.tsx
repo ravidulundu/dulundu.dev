@@ -23,6 +23,11 @@ export interface ProjectTranslationInput {
   locale: string;
   title: string;
   description: string;
+  challenge?: string;
+  solution?: string;
+  results?: Record<string, string>;
+  client?: string;
+  testimonial?: string;
   technologies: string[];
   images: string[];
 }
@@ -34,6 +39,7 @@ export type ProjectFormInitialData = {
   status: string;
   featured: boolean;
   url: string | null;
+  githubUrl?: string | null;
   order: number;
   translations: ProjectTranslationInput[];
 };
@@ -73,6 +79,7 @@ export default function ProjectForm({ initialData, mode, redirectPath, onSuccess
   const [status, setStatus] = useState(initialData?.status || 'draft');
   const [featured, setFeatured] = useState(initialData?.featured || false);
   const [url, setUrl] = useState(initialData?.url || '');
+  const [githubUrl, setGithubUrl] = useState(initialData?.githubUrl || '');
   const [order, setOrder] = useState(initialData?.order || 0);
 
   // Translations state
@@ -87,6 +94,11 @@ export default function ProjectForm({ initialData, mode, redirectPath, onSuccess
           locale: locale.code,
           title: '',
           description: '',
+          challenge: '',
+          solution: '',
+          results: {},
+          client: '',
+          testimonial: '',
           technologies: [],
           images: [],
         };
@@ -152,11 +164,17 @@ export default function ProjectForm({ initialData, mode, redirectPath, onSuccess
         status,
         featured,
         url: url || null,
+        githubUrl: githubUrl || null,
         order,
         translations: Object.values(translations).filter(
           (t) => t.title && t.description
         ).map(t => ({
           ...t,
+          challenge: t.challenge || null,
+          solution: t.solution || null,
+          results: t.results && Object.keys(t.results).length > 0 ? t.results : null,
+          client: t.client || null,
+          testimonial: t.testimonial || null,
           technologies: t.technologies.length > 0 ? t.technologies : null,
           images: t.images.length > 0 ? t.images : null,
         })),

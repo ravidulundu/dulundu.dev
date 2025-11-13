@@ -161,6 +161,11 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
+
+  /* Scroll offset for sticky navbar */
+  :target {
+    scroll-margin-top: 80px;
+  }
 }
 
 @layer utilities {

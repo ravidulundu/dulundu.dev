@@ -3,11 +3,8 @@
 ## Current State
 
 ## Active Feature
-- **Feature ID**: 001
-- **Feature Name**: test-migration-feature
-- **Directory**: 001-test-migration-feature
-- **Last Updated**: 2025-11-11T16:24:00.482345
+- **Feature ID**: 020
+- **Feature Name**: modern-portfolio-template-integration
+- **Directory**: 020-modern-portfolio-template-integration
+- **Last Updated**: 2025-11-13T13:51:21.574540
 - **Status**: initialized
-
-
-

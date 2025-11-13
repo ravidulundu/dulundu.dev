@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Dulundu.dev - Profesyonel WordPress & Web Geliştirme Hizmetleri",
-    "description": "Uzman WordPress optimizasyonu, danışmanlık ve dijital ürünler. Sitenizin performansını artırın ve iş hedeflerinize ulaşın."
+    "title": "Ege Dulundu - WordPress Uzmanı & Full-Stack Geliştirici",
+    "description": "Web sitelerini hızlandırıyorum. WordPress optimizasyonu, performans danışmanlığı ve full-stack geliştirme hizmetleri."
   },
   "nav": {
     "home": "Ana Sayfa",
@@ -14,10 +14,115 @@
     "currency": "Para Birimi"
   },
   "hero": {
-    "title": "Profesyonel WordPress & Web Geliştirme Hizmetleri",
-    "subtitle": "Dijital varlığınızı optimize edin, geliştirin ve büyütün",
-    "cta": "Başlayın",
-    "learnMore": "Daha Fazla Bilgi"
+    "name": "Ege Dulundu",
+    "tagline": "Web sitelerini hızlandırıyorum. WordPress uzmanı + full-stack geliştirici.",
+    "ctaPortfolio": "Portföyü İncele",
+    "ctaServices": "Hizmet Al",
+    "badgeText": "Full-Stack Web Developer"
+  },
+  "bio": {
+    "introduction": "WordPress optimizasyonu ve full-stack geliştirme konusunda uzmanlaşmış bir geliştiriciyim. İşletmelerin web sitesi performanslarını iyileştirmeleri ve ölçeklenebilir web uygulamaları oluşturmaları için çalışıyorum. Hız optimizasyonundan özel geliştirmeye, önemli sonuçlar sunuyorum.",
+    "experience": "3+ yıl profesyonel deneyim ile WordPress sitelerini optimize ediyor ve modern web uygulamaları geliştiriyorum."
+  },
+  "about": {
+    "badge": "Hakkımda",
+    "title": "Etkili web deneyimleri yaratma tutkusu",
+    "description": "5+ yıllık full-stack geliştirme deneyimi ile modern teknolojiler kullanarak ölçeklenebilir web uygulamaları geliştirme konusunda uzmanlaştım. Uzmanlık alanlarım arasında React, Node.js ve cloud mimarisi yer alıyor. Karmaşık problemlere şık çözümler üretme ve geliştirici topluluğu ile bilgi paylaşımı konusunda tutkuluyum.",
+    "viewGithub": "GitHub'ı Görüntüle",
+    "downloadCV": "CV İndir"
+  },
+  "experience": {
+    "badge": "Deneyim",
+    "title": "Profesyonel Yolculuk",
+    "subtitle": "Profesyonel gelişimim ve başlıca başarılarımın zaman çizelgesi",
+    "items": [
+      {
+        "title": "Senior Full Stack Developer",
+        "company": "TechCorp Solutions",
+        "period": "2021 - Halen",
+        "description": "Kurumsal ölçekli web uygulamaları geliştirmeyi liderlik ettim, junior geliştiricilere mentorluk yaptım ve kod kalitesi ve performans optimizasyonu için en iyi uygulamaları hayata geçirdim.",
+        "technologies": "React,Node.js,TypeScript,AWS,MongoDB"
+      },
+      {
+        "title": "Full Stack Developer",
+        "company": "Digital Innovations Inc",
+        "period": "2019 - 2021",
+        "description": "Birden fazla müşteri projesini geliştirdim ve bakımını yaptım, duyarlı tasarımları hayata geçirdim ve gelişmiş işlevsellik için üçüncü taraf API'lerini entegre ettim.",
+        "technologies": "React,Express.js,PostgreSQL,Docker,Redis"
+      },
+      {
+        "title": "Frontend Developer",
+        "company": "WebTech Studios",
+        "period": "2018 - 2019",
+        "description": "Duyarlı ve etkileşimli kullanıcı arayüzleri oluşturdum, tasarımcılarla işbirliği yaptım ve uygulama performansını optimize ettim.",
+        "technologies": "React,JavaScript,SASS,Webpack,Jest"
+      }
+    ]
+  },
+  "skills": {
+    "title": "Uzmanlık Alanları",
+    "subtitle": "Web geliştirme sorunlarınızı çözmek için özel yetenekler",
+    "wordpress": {
+      "title": "WordPress Uzmanı",
+      "description": "Tema & eklenti geliştirme, WooCommerce ve optimizasyon",
+      "badges": [
+        "WordPress",
+        "WooCommerce",
+        "Eklentiler",
+        "Temalar",
+        "PHP"
+      ]
+    },
+    "performance": {
+      "title": "Performans Optimizasyonu",
+      "description": "Hız optimizasyonu, önbellekleme, Core Web Vitals ve CDN kurulumu",
+      "badges": [
+        "Hız",
+        "Önbellekleme",
+        "Core Web Vitals",
+        "CDN",
+        "Lighthouse"
+      ]
+    },
+    "fullstack": {
+      "title": "Full-Stack Geliştirici",
+      "description": "Next.js, React ve PostgreSQL ile modern web uygulamaları",
+      "badges": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Node.js",
+        "PostgreSQL"
+      ]
+    }
+  },
+  "featuredProjects": {
+    "badge": "Projeler",
+    "title": "Öne Çıkan Projeler",
+    "subtitle": "Ölçülebilir sonuçlara sahip gerçek projeler",
+    "viewCaseStudy": "Vaka Çalışmasını İncele",
+    "viewAllProjects": "Tüm Projeleri Görüntüle"
+  },
+  "servicesOverview": {
+    "title": "Hizmetler",
+    "subtitle": "İşinizi büyütmek için nasıl yardımcı olabilirim",
+    "wordpress": {
+      "title": "WordPress Optimizasyonu",
+      "description": "WordPress sitenizi profesyonel optimizasyon ile hızlandırın"
+    },
+    "consulting": {
+      "title": "Teknik Danışmanlık",
+      "description": "Web geliştirme projeleriniz için uzman rehberliği"
+    },
+    "fullstack": {
+      "title": "Full-Stack Geliştirme",
+      "description": "Modern teknolojilerle özel web uygulamaları"
+    },
+    "audit": {
+      "title": "Performans Denetimi",
+      "description": "Uygulanabilir önerilerle kapsamlı site denetimi"
+    },
+    "viewAllServices": "Tüm Hizmetleri Görüntüle"
   },
   "services": {
     "title": "Hizmetlerimiz",
@@ -74,23 +179,10 @@
     }
   },
   "footer": {
-    "description": "Profesyonel WordPress & Web Geliştirme Hizmetleri. Dijital varlığınızı optimize edin, geliştirin ve büyütün.",
-    "copyright": "Tüm hakları saklıdır.",
-    "services": "Hizmetler",
-    "company": "Şirket",
-    "legal": "Yasal",
-    "privacy": "Gizlilik Politikası",
-    "terms": "Kullanım Şartları",
-    "servicesLinks": {
-      "wordpress": "WordPress Optimizasyonu",
-      "consulting": "Danışmanlık",
-      "products": "Dijital Ürünler"
-    },
-    "companyLinks": {
-      "portfolio": "Portföy",
-      "blog": "Blog",
-      "contact": "İletişim"
-    }
+    "about": "Hakkımda",
+    "experience": "Deneyim",
+    "projects": "Projeler",
+    "rights": "Tüm hakları saklıdır."
   },
   "blog": {
     "title": "Blog",
@@ -108,7 +200,25 @@
     "latestPosts": "Son Yazılar",
     "allPosts": "Tüm Yazılar",
     "categories": "Kategoriler",
-    "tags": "Etiketler"
+    "tags": "Etiketler",
+    "authorBio": "WordPress optimizasyonu ve full-stack geliştirme konusunda uzmanlaşmış olarak, işletmelerin web sitesi performansını artırmalarına ve ölçeklenebilir web uygulamaları oluşturmalarına yardımcı oluyorum. Hız optimizasyonundan özel geliştirmeye kadar, önemli sonuçlar sunuyorum.",
+    "viewPortfolio": "Portföyü Görüntüle",
+    "copyLink": "Linki Kopyala",
+    "copied": "Kopyalandı!",
+    "ctaTitle": "Projeniz için yardıma mı ihtiyacınız var?",
+    "ctaDescription": "Web sitenizi nasıl optimize edebileceğimi veya bir sonraki projenizi nasıl geliştirebileceğimi görüşelim.",
+    "ctaServices": "Hizmetleri Görüntüle",
+    "ctaContact": "İletişime Geç",
+    "newsletterTitle": "Bültene Abone Ol",
+    "newsletterDescription": "En son içgörüler, eğitimler ve güncellemeleri doğrudan gelen kutunuzda alın.",
+    "newsletterPlaceholder": "E-posta adresinizi girin",
+    "newsletterSubscribe": "Abone Ol",
+    "newsletterSending": "Abone olunuyor...",
+    "newsletterSuccess": "Başarıyla abone oldunuz! Onay için e-postanızı kontrol edin.",
+    "newsletterEmailRequired": "Lütfen e-posta adresinizi girin",
+    "newsletterEmailInvalid": "Lütfen geçerli bir e-posta adresi girin",
+    "newsletterPrivacy": "Gizliliğinize saygı duyuyoruz. İstediğiniz zaman abonelikten çıkabilirsiniz.",
+    "relatedPostsDescription": "İlgili makaleleri ve içgörüleri keşfetmeye devam edin"
   },
   "products": {
     "title": "Ürünler",
@@ -183,16 +293,23 @@
   "portfolio": {
     "title": "Portfolyo",
     "subtitle": "Tamamlanmış projelerimizi ve vaka çalışmalarımızı keşfedin",
-    "featured": "Öne Çıkan Projeler",
+    "featured": "Öne Çıkan",
     "allProjects": "Tüm Projeler",
     "noProjects": "Henüz proje bulunmuyor. Yakında tekrar kontrol edin!",
     "viewProject": "Projeyi Görüntüle",
     "backToPortfolio": "Portfolyo'ya Dön",
     "viewLive": "Canlı Projeyi Görüntüle",
+    "viewCode": "Kodu Görüntüle",
     "technologies": "Kullanılan Teknolojiler",
+    "techUsed": "teknoloji kullanıldı",
     "projectDetails": "Proje Detayları",
     "category": "Kategori",
-    "website": "Web Sitesi"
+    "website": "Web Sitesi",
+    "client": "Müşteri",
+    "challenge": "Meydan Okuma",
+    "solution": "Çözüm",
+    "results": "Sonuçlar & Etki",
+    "measurableImpact": "Elde edilen ölçülebilir iyileştirmeler"
   },
   "auth": {
     "signin": {
@@ -235,7 +352,7 @@
     "header": {
       "title": "Yönetim Paneli",
       "notifications": "Bildirimler",
-      "profile": "Admin",
+      "profile": "Profil",
       "signOut": "Çıkış Yap"
     },
     "dashboard": {
@@ -431,7 +548,7 @@
           "description": "Ayrıntılı ürün açıklaması",
           "features": "Her satıra bir özellik (isteğe bağlı)",
           "coverImage": "https://ornek.com/gorsel.jpg",
-          "price": "99.99",
+          "price": "0.00",
           "override": "Otomatik"
         },
         "slugLabel": "Kısa İsim (slug)",
@@ -484,9 +601,9 @@
           "content": "{language} dilinde blog içeriğini yaz...",
           "coverImage": "https://ornek.com/gorsel.jpg",
           "slug": "yazi-slug",
-          "publishedAt": "2024-01-01 10:00"
+          "publishedAt": "YYYY-MM-DD"
         },
-        "slugLabel": "Slug",
+        "slugLabel": "URL Kısa Adı",
         "statusLabel": "Durum",
         "statusOptions": {
           "draft": "Taslak",
@@ -518,14 +635,14 @@
         "placeholders": {
           "title": "Proje başlığını yazın",
           "description": "Projeyi açıklayın",
-          "technologies": "React, Next.js, Tailwind",
+          "technologies": "Teknolojiler (virgülle ayırın)",
           "images": "https://ornek.com/gorsel.jpg",
           "slug": "proje-slug",
           "order": "0",
           "url": "https://proje.com",
           "imagesHelper": "Her satıra bir görsel adresi yazın"
         },
-        "slugLabel": "Slug",
+        "slugLabel": "URL Kısa Adı",
         "categoryLabel": "Kategori",
         "categoryOptions": {
           "wordpress": "WordPress",
@@ -559,5 +676,149 @@
         "globalTitle": "Genel Ayarlar"
       }
     }
+  },
+  "servicesPage": {
+    "hero": {
+      "title": "Profesyonel Hizmetler",
+      "subtitle": "İşinizi büyütmek için sabit paketler ve özel çözümler"
+    }
+  },
+  "servicePackages": {
+    "title": "Hizmet Paketleri",
+    "subtitle": "İhtiyaçlarınıza uygun bir paket seçin veya özel çözüm talep edin",
+    "popular": "En Popüler",
+    "bookNow": "Hemen Rezervasyon",
+    "wordpress": {
+      "name": "WordPress Optimizasyonu",
+      "description": "WordPress sitenizi profesyonel optimizasyonla hızlandırın",
+      "pricing": "$1,500'den başlayan fiyatlar",
+      "features": [
+        "Performans denetimi ve analizi",
+        "Önbellekleme uygulaması",
+        "Veritabanı optimizasyonu",
+        "Görsel optimizasyonu ve lazy loading",
+        "CDN kurulumu ve yapılandırması",
+        "Core Web Vitals optimizasyonu",
+        "Sürekli izleme (3 ay)"
+      ]
+    },
+    "consulting": {
+      "name": "Teknik Danışmanlık",
+      "description": "Web geliştirme projeleriniz için uzman rehberliği",
+      "pricing": "Saatlik $150 veya aylık anlaşma",
+      "features": [
+        "Teknik mimari incelemesi",
+        "Kod incelemesi ve en iyi uygulamalar",
+        "Teknoloji yığını önerileri",
+        "Performans optimizasyon stratejileri",
+        "Güvenlik değerlendirmeleri",
+        "Ekip mentorluğu ve eğitimi"
+      ]
+    },
+    "fullstack": {
+      "name": "Full-Stack Geliştirme",
+      "description": "Modern teknolojilerle özel web uygulamaları",
+      "pricing": "Proje bazlı fiyatlandırma",
+      "features": [
+        "Özel web uygulaması geliştirme",
+        "API geliştirme ve entegrasyon",
+        "Veritabanı tasarımı ve optimizasyonu",
+        "Kimlik doğrulama ve yetkilendirme",
+        "Ödeme entegrasyonu (Stripe)",
+        "Progressive Web App (PWA)",
+        "Dağıtım ve bakım"
+      ]
+    },
+    "audit": {
+      "name": "Performans Denetimi",
+      "description": "Uygulanabilir önerilerle kapsamlı site denetimi",
+      "pricing": "$500'den başlayan fiyatlar",
+      "features": [
+        "Derinlemesine performans analizi",
+        "Core Web Vitals değerlendirmesi",
+        "SEO teknik denetimi",
+        "Güvenlik açığı kontrolü",
+        "Detaylı öneriler raporu",
+        "Uygulama yol haritası",
+        "30 dakikalık danışmanlık görüşmesi"
+      ]
+    }
+  },
+  "process": {
+    "title": "Nasıl Çalışıyorum",
+    "subtitle": "Sonuç vermek için basit bir süreç",
+    "discovery": {
+      "title": "Keşif ve Planlama",
+      "description": "Hedeflerinizi, gereksinimlerinizi ve proje kapsamını anlama",
+      "duration": "1-3 gün"
+    },
+    "development": {
+      "title": "Geliştirme ve Uygulama",
+      "description": "En iyi uygulamalar ve temiz kod ile çözüm oluşturma",
+      "duration": "1-4 hafta"
+    },
+    "testing": {
+      "title": "Test ve İnceleme",
+      "description": "Kapsamlı test ve geri bildiriminizin entegrasyonu",
+      "duration": "2-5 gün"
+    },
+    "launch": {
+      "title": "Yayınlama ve Destek",
+      "description": "Dağıtım ve başarıyı sağlamak için sürekli destek",
+      "duration": "1-2 gün + sürekli"
+    },
+    "deliverables": {
+      "title": "Ne Alacaksınız",
+      "items": [
+        "Temiz, dokümante edilmiş kod",
+        "Performans optimize edilmiş çözüm",
+        "Dağıtım desteği",
+        "Eğitim ve dokümantasyon",
+        "30 günlük destek süresi",
+        "Kaynak kodu ve tam sahiplik"
+      ]
+    }
+  },
+  "projectInquiry": {
+    "title": "Özel Proje Talebi",
+    "subtitle": "Benzersiz bir projeniz mi var? Gereksinimlerinizi tartışalım",
+    "formTitle": "Projeniz Hakkında Bana Bilgi Verin",
+    "formDescription": "Aşağıdaki formu doldurun, 24 saat içinde size dönüş yapacağım",
+    "name": "Adınız",
+    "namePlaceholder": "Ahmet Yılmaz",
+    "email": "E-posta Adresi",
+    "emailPlaceholder": "ahmet@sirket.com",
+    "company": "Şirket (Opsiyonel)",
+    "companyPlaceholder": "Şirket Adınız",
+    "projectType": "Proje Tipi",
+    "projectTypePlaceholder": "Proje tipini seçin",
+    "types": {
+      "wordpress": "WordPress Optimizasyonu",
+      "optimization": "Performans Optimizasyonu",
+      "fullstack": "Full-Stack Geliştirme",
+      "consulting": "Teknik Danışmanlık",
+      "other": "Diğer"
+    },
+    "budget": "Bütçe Aralığı",
+    "budgetPlaceholder": "Bütçe aralığını seçin",
+    "budgetOptions": {
+      "10000plus": "$10.000+",
+      "flexible": "Esnek"
+    },
+    "timeline": "Zaman Çizelgesi",
+    "timelinePlaceholder": "Buna ne zaman ihtiyacınız var?",
+    "timelineOptions": {
+      "urgent": "Acil (< 1 hafta)",
+      "1-2weeks": "1-2 hafta",
+      "2-4weeks": "2-4 hafta",
+      "1-2months": "1-2 ay",
+      "flexible": "Esnek"
+    },
+    "description": "Proje Açıklaması",
+    "descriptionPlaceholder": "Projeniz, hedefleriniz ve özel gereksinimleriniz hakkında bana bilgi verin...",
+    "submit": "Talep Gönder",
+    "sending": "Gönderiliyor...",
+    "success": "Teşekkürler! Talebinizi inceleyip 24 saat içinde size dönüş yapacağım.",
+    "error": "Talep gönderilemedi. Lütfen tekrar deneyin veya doğrudan e-posta gönderin."
   }
 }

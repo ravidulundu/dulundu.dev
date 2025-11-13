@@ -36,6 +36,14 @@ export async function generateMetadata({
     description: t('subtitle', {
       defaultMessage: 'Explore our completed projects and case studies',
     }),
+    openGraph: {
+      title: `${t('title', { defaultMessage: 'Portfolio' })} | Ege Dulundu`,
+      description: t('subtitle', {
+        defaultMessage: 'Explore our completed projects and case studies',
+      }),
+      type: 'website',
+      url: `https://dulundu.dev/${params.locale}/portfolio`,
+    },
   };
 }
 

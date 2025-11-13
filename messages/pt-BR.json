@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Dulundu.dev - Serviços Profissionais de WordPress e Desenvolvimento Web",
-    "description": "Otimização especializada de WordPress, consultoria e produtos digitais. Aumente o desempenho do seu site e alcance seus objetivos de negócios."
+    "title": "Ege Dulundu - Especialista WordPress & Desenvolvedor Full-Stack",
+    "description": "Tornando sites mais rápidos. Otimização WordPress, consultoria de performance e serviços de desenvolvimento full-stack."
   },
   "nav": {
     "home": "Início",
@@ -14,10 +14,115 @@
     "currency": "Moeda"
   },
   "hero": {
-    "title": "Serviços Profissionais de WordPress e Desenvolvimento Web",
-    "subtitle": "Otimize, aprimore e expanda sua presença digital",
-    "cta": "Começar",
-    "learnMore": "Saiba Mais"
+    "name": "Ege Dulundu",
+    "tagline": "Tornando sites mais rápidos. Especialista WordPress + desenvolvedor full-stack.",
+    "ctaPortfolio": "Ver Portfólio",
+    "ctaServices": "Contratar Serviço",
+    "badgeText": "Desenvolvedor Web Fullstack"
+  },
+  "bio": {
+    "introduction": "Especializado em otimização WordPress e desenvolvimento full-stack, ajudando empresas a melhorar o desempenho de seus sites e construir aplicações web escaláveis. Da otimização de velocidade ao desenvolvimento personalizado, entrego resultados que importam.",
+    "experience": "Mais de 3 anos de experiência profissional otimizando sites WordPress e desenvolvendo aplicações web modernas."
+  },
+  "about": {
+    "badge": "Sobre Mim",
+    "title": "Apaixonado por criar experiências web impactantes",
+    "description": "Com mais de 5 anos de experiência em desenvolvimento full-stack, me especializo em construir aplicações web escaláveis usando tecnologias modernas. Minha expertise inclui React, Node.js e arquitetura em nuvem. Sou apaixonado por criar soluções elegantes para problemas complexos e compartilhar conhecimento com a comunidade de desenvolvedores.",
+    "viewGithub": "Ver Github",
+    "downloadCV": "Baixar CV"
+  },
+  "experience": {
+    "badge": "Experiência",
+    "title": "Jornada Profissional",
+    "subtitle": "Uma linha do tempo do meu crescimento profissional e conquistas principais",
+    "items": [
+      {
+        "title": "Desenvolvedor Full Stack Sênior",
+        "company": "TechCorp Solutions",
+        "period": "2021 - Presente",
+        "description": "Liderei o desenvolvimento de aplicações web de nível empresarial, mentorei desenvolvedores júnior e implementei melhores práticas para qualidade de código e otimização de desempenho.",
+        "technologies": "React,Node.js,TypeScript,AWS,MongoDB"
+      },
+      {
+        "title": "Desenvolvedor Full Stack",
+        "company": "Digital Innovations Inc",
+        "period": "2019 - 2021",
+        "description": "Desenvolvi e mantive múltiplos projetos de clientes, implementei designs responsivos e integrei APIs de terceiros para funcionalidades aprimoradas.",
+        "technologies": "React,Express.js,PostgreSQL,Docker,Redis"
+      },
+      {
+        "title": "Desenvolvedor Frontend",
+        "company": "WebTech Studios",
+        "period": "2018 - 2019",
+        "description": "Criei interfaces de usuário responsivas e interativas, colaborei com designers e otimizei o desempenho das aplicações.",
+        "technologies": "React,JavaScript,SASS,Webpack,Jest"
+      }
+    ]
+  },
+  "skills": {
+    "title": "Especialidades",
+    "subtitle": "Habilidades especializadas para resolver seus desafios de desenvolvimento web",
+    "wordpress": {
+      "title": "Especialista WordPress",
+      "description": "Desenvolvimento de temas e plugins, WooCommerce e otimização",
+      "badges": [
+        "WordPress",
+        "WooCommerce",
+        "Plugins",
+        "Temas",
+        "PHP"
+      ]
+    },
+    "performance": {
+      "title": "Otimizador de Performance",
+      "description": "Otimização de velocidade, cache, Core Web Vitals e configuração CDN",
+      "badges": [
+        "Velocidade",
+        "Cache",
+        "Core Web Vitals",
+        "CDN",
+        "Lighthouse"
+      ]
+    },
+    "fullstack": {
+      "title": "Desenvolvedor Full-Stack",
+      "description": "Aplicações web modernas com Next.js, React e PostgreSQL",
+      "badges": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Node.js",
+        "PostgreSQL"
+      ]
+    }
+  },
+  "featuredProjects": {
+    "badge": "Projetos",
+    "title": "Trabalhos em Destaque",
+    "subtitle": "Projetos reais com resultados mensuráveis",
+    "viewCaseStudy": "Ver Estudo de Caso",
+    "viewAllProjects": "Ver Todos os Projetos"
+  },
+  "servicesOverview": {
+    "title": "Serviços",
+    "subtitle": "Como posso ajudar seu negócio a crescer",
+    "wordpress": {
+      "title": "Otimização WordPress",
+      "description": "Acelere seu site WordPress com otimização profissional"
+    },
+    "consulting": {
+      "title": "Consultoria Técnica",
+      "description": "Orientação especializada para seus projetos de desenvolvimento web"
+    },
+    "fullstack": {
+      "title": "Desenvolvimento Full-Stack",
+      "description": "Aplicações web personalizadas construídas com tecnologias modernas"
+    },
+    "audit": {
+      "title": "Auditoria de Performance",
+      "description": "Auditoria abrangente do site com recomendações práticas"
+    },
+    "viewAllServices": "Ver Todos os Serviços"
   },
   "services": {
     "title": "Nossos Serviços",
@@ -74,23 +179,10 @@
     }
   },
   "footer": {
-    "description": "Serviços Profissionais de WordPress e Desenvolvimento Web. Otimize, aprimore e expanda sua presença digital.",
-    "copyright": "Todos os direitos reservados.",
-    "services": "Serviços",
-    "company": "Empresa",
-    "legal": "Jurídico",
-    "privacy": "Política de Privacidade",
-    "terms": "Termos de Serviço",
-    "servicesLinks": {
-      "wordpress": "Otimização WordPress",
-      "consulting": "Consultoria",
-      "products": "Produtos Digitais"
-    },
-    "companyLinks": {
-      "portfolio": "Portfólio",
-      "blog": "Blog",
-      "contact": "Contato"
-    }
+    "about": "Sobre",
+    "experience": "Experiência",
+    "projects": "Projetos",
+    "rights": "Todos os direitos reservados."
   },
   "blog": {
     "title": "Blog",
@@ -108,7 +200,25 @@
     "latestPosts": "Últimos Posts",
     "allPosts": "Todos os Posts",
     "categories": "Categorias",
-    "tags": "Tags"
+    "tags": "Tags",
+    "authorBio": "Especializo-me em otimização WordPress e desenvolvimento full-stack, ajudando empresas a melhorar o desempenho de seus sites e construir aplicações web escaláveis. Desde otimização de velocidade até desenvolvimento customizado, entrego resultados que importam.",
+    "viewPortfolio": "Ver Portfólio",
+    "copyLink": "Copiar Link",
+    "copied": "Copiado!",
+    "ctaTitle": "Precisa de ajuda com seu projeto?",
+    "ctaDescription": "Vamos discutir como posso ajudar a otimizar seu site ou construir seu próximo projeto.",
+    "ctaServices": "Ver Serviços",
+    "ctaContact": "Entre em Contato",
+    "newsletterTitle": "Assine a Newsletter",
+    "newsletterDescription": "Receba os últimos insights, tutoriais e atualizações diretamente na sua caixa de entrada.",
+    "newsletterPlaceholder": "Digite seu e-mail",
+    "newsletterSubscribe": "Assinar",
+    "newsletterSending": "Assinando...",
+    "newsletterSuccess": "Inscrito com sucesso! Verifique seu e-mail para confirmação.",
+    "newsletterEmailRequired": "Por favor, insira seu endereço de e-mail",
+    "newsletterEmailInvalid": "Por favor, insira um endereço de e-mail válido",
+    "newsletterPrivacy": "Respeitamos sua privacidade. Cancele a inscrição a qualquer momento.",
+    "relatedPostsDescription": "Continue explorando artigos e insights relacionados"
   },
   "products": {
     "title": "Produtos",
@@ -183,16 +293,23 @@
   "portfolio": {
     "title": "Portfólio",
     "subtitle": "Explore nossos projetos concluídos e estudos de caso",
-    "featured": "Projetos em Destaque",
+    "featured": "Destaque",
     "allProjects": "Todos os Projetos",
     "noProjects": "Nenhum projeto disponível ainda. Volte em breve!",
     "viewProject": "Ver Projeto",
     "backToPortfolio": "Voltar ao Portfólio",
     "viewLive": "Ver Projeto ao Vivo",
+    "viewCode": "Ver Código",
     "technologies": "Tecnologias Utilizadas",
+    "techUsed": "tecnologias utilizadas",
     "projectDetails": "Detalhes do Projeto",
     "category": "Categoria",
-    "website": "Site"
+    "website": "Site",
+    "client": "Cliente",
+    "challenge": "O Desafio",
+    "solution": "A Solução",
+    "results": "Resultados & Impacto",
+    "measurableImpact": "Melhorias mensuráveis alcançadas"
   },
   "auth": {
     "signin": {
@@ -235,7 +352,7 @@
     "header": {
       "title": "Painel Administrativo",
       "notifications": "Notificações",
-      "profile": "Admin",
+      "profile": "Perfil",
       "signOut": "Sair"
     },
     "dashboard": {
@@ -431,8 +548,8 @@
           "description": "Descrição detalhada do produto",
           "features": "Um recurso por linha (opcional)",
           "coverImage": "https://exemplo.com/imagem.jpg",
-          "price": "99.99",
-          "override": "Auto"
+          "price": "0.00",
+          "override": "0.00"
         },
         "slugLabel": "Slug",
         "slugPlaceholder": "produto-slug (gerado automaticamente)",
@@ -483,8 +600,8 @@
           "excerpt": "Resumo exibido nas listagens",
           "content": "Escreva o conteúdo em {language}...",
           "coverImage": "https://exemplo.com/imagem.jpg",
-          "slug": "post-slug",
-          "publishedAt": "2024-01-01 10:00"
+          "slug": "exemplo-de-slug",
+          "publishedAt": "AAAA-MM-DD"
         },
         "slugLabel": "Slug",
         "statusLabel": "Status",
@@ -518,9 +635,9 @@
         "placeholders": {
           "title": "Digite o título do projeto",
           "description": "Descreva o projeto",
-          "technologies": "React, Next.js, Tailwind",
+          "technologies": "Tecnologias (separadas por vírgula)",
           "images": "https://exemplo.com/imagem.jpg",
-          "slug": "projeto-slug",
+          "slug": "exemplo-de-projeto",
           "order": "0",
           "url": "https://projeto.com",
           "imagesHelper": "Digite um URL por linha"
@@ -559,5 +676,149 @@
         "globalTitle": "Configurações Gerais"
       }
     }
+  },
+  "servicesPage": {
+    "hero": {
+      "title": "Serviços Profissionais",
+      "subtitle": "Pacotes fixos e soluções personalizadas para ajudar seu negócio a crescer"
+    }
+  },
+  "servicePackages": {
+    "title": "Pacotes de Serviços",
+    "subtitle": "Escolha um pacote que atenda suas necessidades ou solicite uma solução personalizada",
+    "popular": "Mais Popular",
+    "bookNow": "Reservar Agora",
+    "wordpress": {
+      "name": "Otimização WordPress",
+      "description": "Acelere seu site WordPress com otimização profissional",
+      "pricing": "A partir de $1,500",
+      "features": [
+        "Auditoria e análise de desempenho",
+        "Implementação de cache",
+        "Otimização de banco de dados",
+        "Otimização de imagens e lazy loading",
+        "Configuração de CDN",
+        "Otimização Core Web Vitals",
+        "Monitoramento contínuo (3 meses)"
+      ]
+    },
+    "consulting": {
+      "name": "Consultoria Técnica",
+      "description": "Orientação especializada para seus projetos de desenvolvimento web",
+      "pricing": "$150/hora ou mensalidade",
+      "features": [
+        "Revisão de arquitetura técnica",
+        "Revisão de código e melhores práticas",
+        "Recomendações de stack tecnológico",
+        "Estratégias de otimização de desempenho",
+        "Avaliações de segurança",
+        "Mentoria e treinamento de equipe"
+      ]
+    },
+    "fullstack": {
+      "name": "Desenvolvimento Full-Stack",
+      "description": "Aplicações web personalizadas com tecnologias modernas",
+      "pricing": "Preço baseado em projeto",
+      "features": [
+        "Desenvolvimento de aplicativo web personalizado",
+        "Desenvolvimento e integração de API",
+        "Design e otimização de banco de dados",
+        "Autenticação e autorização",
+        "Integração de pagamento (Stripe)",
+        "Progressive Web App (PWA)",
+        "Implantação e manutenção"
+      ]
+    },
+    "audit": {
+      "name": "Auditoria de Desempenho",
+      "description": "Auditoria abrangente do site com recomendações práticas",
+      "pricing": "A partir de $500",
+      "features": [
+        "Análise de desempenho aprofundada",
+        "Avaliação Core Web Vitals",
+        "Auditoria técnica de SEO",
+        "Verificação de vulnerabilidades de segurança",
+        "Relatório detalhado de recomendações",
+        "Roteiro de implementação",
+        "Chamada de consultoria de 30 minutos"
+      ]
+    }
+  },
+  "process": {
+    "title": "Como Eu Trabalho",
+    "subtitle": "Um processo direto para entregar resultados",
+    "discovery": {
+      "title": "Descoberta e Planejamento",
+      "description": "Entendendo seus objetivos, requisitos e escopo do projeto",
+      "duration": "1-3 dias"
+    },
+    "development": {
+      "title": "Desenvolvimento e Implementação",
+      "description": "Construindo sua solução com melhores práticas e código limpo",
+      "duration": "1-4 semanas"
+    },
+    "testing": {
+      "title": "Testes e Revisão",
+      "description": "Testes completos e integração do seu feedback",
+      "duration": "2-5 dias"
+    },
+    "launch": {
+      "title": "Lançamento e Suporte",
+      "description": "Implantação e suporte contínuo para garantir o sucesso",
+      "duration": "1-2 dias + contínuo"
+    },
+    "deliverables": {
+      "title": "O Que Você Recebe",
+      "items": [
+        "Código limpo e documentado",
+        "Solução otimizada para desempenho",
+        "Assistência de implantação",
+        "Treinamento e documentação",
+        "Período de suporte de 30 dias",
+        "Código-fonte e propriedade total"
+      ]
+    }
+  },
+  "projectInquiry": {
+    "title": "Consulta de Projeto Personalizado",
+    "subtitle": "Tem um projeto único em mente? Vamos discutir seus requisitos",
+    "formTitle": "Conte-me Sobre Seu Projeto",
+    "formDescription": "Preencha o formulário abaixo e entrarei em contato em 24 horas",
+    "name": "Seu Nome",
+    "namePlaceholder": "João Silva",
+    "email": "Endereço de E-mail",
+    "emailPlaceholder": "joao@empresa.com",
+    "company": "Empresa (Opcional)",
+    "companyPlaceholder": "Nome da Sua Empresa",
+    "projectType": "Tipo de Projeto",
+    "projectTypePlaceholder": "Selecione o tipo de projeto",
+    "types": {
+      "wordpress": "Otimização WordPress",
+      "optimization": "Otimização de Desempenho",
+      "fullstack": "Desenvolvimento Full-Stack",
+      "consulting": "Consultoria Técnica",
+      "other": "Outro"
+    },
+    "budget": "Faixa de Orçamento",
+    "budgetPlaceholder": "Selecione a faixa de orçamento",
+    "budgetOptions": {
+      "10000plus": "$10.000+",
+      "flexible": "Flexível"
+    },
+    "timeline": "Cronograma",
+    "timelinePlaceholder": "Quando você precisa disso?",
+    "timelineOptions": {
+      "urgent": "Urgente (< 1 semana)",
+      "1-2weeks": "1-2 semanas",
+      "2-4weeks": "2-4 semanas",
+      "1-2months": "1-2 meses",
+      "flexible": "Flexível"
+    },
+    "description": "Descrição do Projeto",
+    "descriptionPlaceholder": "Conte-me sobre seu projeto, objetivos e quaisquer requisitos específicos...",
+    "submit": "Enviar Consulta",
+    "sending": "Enviando...",
+    "success": "Obrigado! Vou revisar sua consulta e retornar em 24 horas.",
+    "error": "Falha ao enviar consulta. Tente novamente ou envie um e-mail diretamente."
   }
 }

@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Dulundu.dev - Professional WordPress & Web Development Services",
-    "description": "Expert WordPress optimization, consulting, and digital products. Boost your site performance and achieve your business goals."
+    "title": "Ege Dulundu - WordPress Expert & Full-Stack Developer",
+    "description": "Making websites faster. WordPress optimization, performance consulting, and full-stack development services."
   },
   "nav": {
     "home": "Home",
@@ -14,10 +14,97 @@
     "currency": "Currency"
   },
   "hero": {
-    "title": "Professional WordPress & Web Development Services",
-    "subtitle": "Optimize, enhance, and grow your digital presence",
-    "cta": "Get Started",
-    "learnMore": "Learn More"
+    "name": "Ege Dulundu",
+    "tagline": "Making websites faster. WordPress expert + full-stack developer.",
+    "ctaPortfolio": "View Portfolio",
+    "ctaServices": "Book a Service",
+    "badgeText": "Fullstack Web Developer"
+  },
+  "bio": {
+    "introduction": "I specialize in WordPress optimization and full-stack development, helping businesses improve their website performance and build scalable web applications. From speed optimization to custom development, I deliver results that matter.",
+    "experience": "3+ years of professional experience optimizing WordPress sites and building modern web applications."
+  },
+  "about": {
+    "badge": "About Me",
+    "title": "Passionate about creating impactful web experiences",
+    "description": "With over 5 years of experience in full-stack development, I specialize in building scalable web applications using modern technologies. My expertise includes React, Node.js, and cloud architecture. I'm passionate about creating elegant solutions to complex problems and sharing knowledge with the developer community.",
+    "viewGithub": "View Github",
+    "downloadCV": "Download CV"
+  },
+  "experience": {
+    "badge": "Experience",
+    "title": "Professional Journey",
+    "subtitle": "A timeline of my professional growth and key achievements",
+    "items": [
+      {
+        "title": "Senior Full Stack Developer",
+        "company": "TechCorp Solutions",
+        "period": "2021 - Present",
+        "description": "Led the development of enterprise-scale web applications, mentored junior developers, and implemented best practices for code quality and performance optimization.",
+        "technologies": "React,Node.js,TypeScript,AWS,MongoDB"
+      },
+      {
+        "title": "Full Stack Developer",
+        "company": "Digital Innovations Inc",
+        "period": "2019 - 2021",
+        "description": "Developed and maintained multiple client projects, implemented responsive designs, and integrated third-party APIs for enhanced functionality.",
+        "technologies": "React,Express.js,PostgreSQL,Docker,Redis"
+      },
+      {
+        "title": "Frontend Developer",
+        "company": "WebTech Studios",
+        "period": "2018 - 2019",
+        "description": "Created responsive and interactive user interfaces, collaborated with designers, and optimized application performance.",
+        "technologies": "React,JavaScript,SASS,Webpack,Jest"
+      }
+    ]
+  },
+  "skills": {
+    "title": "Expertise",
+    "subtitle": "Specialized skills to solve your web development challenges",
+    "wordpress": {
+      "title": "WordPress Expert",
+      "description": "Theme & plugin development, WooCommerce, and optimization",
+      "badges": ["WordPress", "WooCommerce", "Plugins", "Themes", "PHP"]
+    },
+    "performance": {
+      "title": "Performance Optimizer",
+      "description": "Speed optimization, caching, Core Web Vitals, and CDN setup",
+      "badges": ["Speed", "Caching", "Core Web Vitals", "CDN", "Lighthouse"]
+    },
+    "fullstack": {
+      "title": "Full-Stack Developer",
+      "description": "Modern web applications with Next.js, React, and PostgreSQL",
+      "badges": ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL"]
+    }
+  },
+  "featuredProjects": {
+    "badge": "Projects",
+    "title": "Featured Work",
+    "subtitle": "Real projects with measurable results",
+    "viewCaseStudy": "View Case Study",
+    "viewAllProjects": "View All Projects"
+  },
+  "servicesOverview": {
+    "title": "Services",
+    "subtitle": "How I can help your business grow",
+    "wordpress": {
+      "title": "WordPress Optimization",
+      "description": "Speed up your WordPress site with professional optimization"
+    },
+    "consulting": {
+      "title": "Technical Consulting",
+      "description": "Expert guidance for your web development projects"
+    },
+    "fullstack": {
+      "title": "Full-Stack Development",
+      "description": "Custom web applications built with modern technologies"
+    },
+    "audit": {
+      "title": "Performance Audit",
+      "description": "Comprehensive site audit with actionable recommendations"
+    },
+    "viewAllServices": "View All Services"
   },
   "services": {
     "title": "Our Services",
@@ -74,23 +161,10 @@
     }
   },
   "footer": {
-    "description": "Professional WordPress & Web Development Services. Optimize, enhance, and grow your digital presence.",
-    "copyright": "All rights reserved.",
-    "services": "Services",
-    "company": "Company",
-    "legal": "Legal",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service",
-    "servicesLinks": {
-      "wordpress": "WordPress Optimization",
-      "consulting": "Consulting",
-      "products": "Digital Products"
-    },
-    "companyLinks": {
-      "portfolio": "Portfolio",
-      "blog": "Blog",
-      "contact": "Contact"
-    }
+    "about": "About",
+    "experience": "Experience",
+    "projects": "Projects",
+    "rights": "All rights reserved."
   },
   "blog": {
     "title": "Blog",
@@ -108,7 +182,25 @@
     "latestPosts": "Latest Posts",
     "allPosts": "All Posts",
     "categories": "Categories",
-    "tags": "Tags"
+    "tags": "Tags",
+    "authorBio": "I specialize in WordPress optimization and full-stack development, helping businesses improve their website performance and build scalable web applications. From speed optimization to custom development, I deliver results that matter.",
+    "viewPortfolio": "View Portfolio",
+    "copyLink": "Copy Link",
+    "copied": "Copied!",
+    "ctaTitle": "Need help with your project?",
+    "ctaDescription": "Let's discuss how I can help optimize your website or build your next project.",
+    "ctaServices": "View Services",
+    "ctaContact": "Get in Touch",
+    "newsletterTitle": "Subscribe to Newsletter",
+    "newsletterDescription": "Get the latest insights, tutorials, and updates delivered to your inbox.",
+    "newsletterPlaceholder": "Enter your email",
+    "newsletterSubscribe": "Subscribe",
+    "newsletterSending": "Subscribing...",
+    "newsletterSuccess": "Successfully subscribed! Check your email for confirmation.",
+    "newsletterEmailRequired": "Please enter your email address",
+    "newsletterEmailInvalid": "Please enter a valid email address",
+    "newsletterPrivacy": "We respect your privacy. Unsubscribe at any time.",
+    "relatedPostsDescription": "Continue exploring related articles and insights"
   },
   "products": {
     "title": "Products",
@@ -183,16 +275,23 @@
   "portfolio": {
     "title": "Portfolio",
     "subtitle": "Explore our completed projects and case studies",
-    "featured": "Featured Projects",
+    "featured": "Featured",
     "allProjects": "All Projects",
     "noProjects": "No projects available yet. Check back soon!",
     "viewProject": "View Project",
     "backToPortfolio": "Back to Portfolio",
     "viewLive": "View Live Project",
+    "viewCode": "View Code",
     "technologies": "Technologies Used",
+    "techUsed": "technologies used",
     "projectDetails": "Project Details",
     "category": "Category",
-    "website": "Website"
+    "website": "Website",
+    "client": "Client",
+    "challenge": "The Challenge",
+    "solution": "The Solution",
+    "results": "Results & Impact",
+    "measurableImpact": "Measurable improvements achieved"
   },
   "auth": {
     "signin": {
@@ -559,5 +658,149 @@
         "globalTitle": "Global Settings"
       }
     }
+  },
+  "servicesPage": {
+    "hero": {
+      "title": "Professional Services",
+      "subtitle": "Fixed packages and custom solutions to help your business grow"
+    }
+  },
+  "servicePackages": {
+    "title": "Service Packages",
+    "subtitle": "Choose a package that fits your needs or request a custom solution",
+    "popular": "Most Popular",
+    "bookNow": "Book Now",
+    "wordpress": {
+      "name": "WordPress Optimization",
+      "description": "Speed up your WordPress site with professional optimization",
+      "pricing": "Starting at $1,500",
+      "features": [
+        "Performance audit & analysis",
+        "Caching implementation",
+        "Database optimization",
+        "Image optimization & lazy loading",
+        "CDN setup & configuration",
+        "Core Web Vitals optimization",
+        "Ongoing monitoring (3 months)"
+      ]
+    },
+    "consulting": {
+      "name": "Technical Consulting",
+      "description": "Expert guidance for your web development projects",
+      "pricing": "$150/hour or monthly retainer",
+      "features": [
+        "Technical architecture review",
+        "Code review & best practices",
+        "Technology stack recommendations",
+        "Performance optimization strategies",
+        "Security assessments",
+        "Team mentoring & training"
+      ]
+    },
+    "fullstack": {
+      "name": "Full-Stack Development",
+      "description": "Custom web applications built with modern technologies",
+      "pricing": "Project-based pricing",
+      "features": [
+        "Custom web app development",
+        "API development & integration",
+        "Database design & optimization",
+        "Authentication & authorization",
+        "Payment integration (Stripe)",
+        "Progressive Web App (PWA)",
+        "Deployment & maintenance"
+      ]
+    },
+    "audit": {
+      "name": "Performance Audit",
+      "description": "Comprehensive site audit with actionable recommendations",
+      "pricing": "Starting at $500",
+      "features": [
+        "In-depth performance analysis",
+        "Core Web Vitals assessment",
+        "SEO technical audit",
+        "Security vulnerability check",
+        "Detailed recommendations report",
+        "Implementation roadmap",
+        "30-minute consultation call"
+      ]
+    }
+  },
+  "process": {
+    "title": "How I Work",
+    "subtitle": "A straightforward process to deliver results",
+    "discovery": {
+      "title": "Discovery & Planning",
+      "description": "Understanding your goals, requirements, and project scope",
+      "duration": "1-3 days"
+    },
+    "development": {
+      "title": "Development & Implementation",
+      "description": "Building your solution with best practices and clean code",
+      "duration": "1-4 weeks"
+    },
+    "testing": {
+      "title": "Testing & Review",
+      "description": "Thorough testing and your feedback integration",
+      "duration": "2-5 days"
+    },
+    "launch": {
+      "title": "Launch & Support",
+      "description": "Deployment and ongoing support to ensure success",
+      "duration": "1-2 days + ongoing"
+    },
+    "deliverables": {
+      "title": "What You Get",
+      "items": [
+        "Clean, documented code",
+        "Performance-optimized solution",
+        "Deployment assistance",
+        "Training & documentation",
+        "30-day support period",
+        "Source code & full ownership"
+      ]
+    }
+  },
+  "projectInquiry": {
+    "title": "Custom Project Inquiry",
+    "subtitle": "Have a unique project in mind? Let's discuss your requirements",
+    "formTitle": "Tell Me About Your Project",
+    "formDescription": "Fill out the form below and I'll get back to you within 24 hours",
+    "name": "Your Name",
+    "namePlaceholder": "John Doe",
+    "email": "Email Address",
+    "emailPlaceholder": "john@company.com",
+    "company": "Company (Optional)",
+    "companyPlaceholder": "Your Company Name",
+    "projectType": "Project Type",
+    "projectTypePlaceholder": "Select project type",
+    "types": {
+      "wordpress": "WordPress Optimization",
+      "optimization": "Performance Optimization",
+      "fullstack": "Full-Stack Development",
+      "consulting": "Technical Consulting",
+      "other": "Other"
+    },
+    "budget": "Budget Range",
+    "budgetPlaceholder": "Select budget range",
+    "budgetOptions": {
+      "10000plus": "$10,000+",
+      "flexible": "Flexible"
+    },
+    "timeline": "Timeline",
+    "timelinePlaceholder": "When do you need this?",
+    "timelineOptions": {
+      "urgent": "Urgent (< 1 week)",
+      "1-2weeks": "1-2 weeks",
+      "2-4weeks": "2-4 weeks",
+      "1-2months": "1-2 months",
+      "flexible": "Flexible"
+    },
+    "description": "Project Description",
+    "descriptionPlaceholder": "Tell me about your project, goals, and any specific requirements...",
+    "submit": "Submit Inquiry",
+    "sending": "Sending...",
+    "success": "Thank you! I'll review your inquiry and get back to you within 24 hours.",
+    "error": "Failed to submit inquiry. Please try again or email me directly."
   }
 }

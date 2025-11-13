@@ -3,8 +3,12 @@ import { notFound } from "next/navigation";
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import ProjectGallery from "@/components/portfolio/ProjectGallery";
-import { ExternalLink, ArrowLeft } from "lucide-react";
+import { ExternalLink, ArrowLeft, Github, CheckCircle2, TrendingUp } from "lucide-react";
 import PageWrapper from '@/components/layout/PageWrapper';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 
 async function getProject(slug: string, locale: string) {
   const project = await db.project.findUnique({
@@ -73,128 +77,240 @@ export default async function ProjectDetailPage({
   const translation = project.translations[0];
   const technologies = (translation.technologies as string[]) || [];
   const images = (translation.images as string[]) || [];
+  const results = (translation.results as Record<string, string>) || {};
+
+  // Structured Data - CreativeWork Schema
+  const projectSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: translation.title,
+    description: translation.description,
+    creator: {
+      '@type': 'Person',
+      name: 'Ege Dulundu',
+      url: 'https://dulundu.dev',
+    },
+    ...(images.length > 0 && { image: images[0] }),
+    ...(project.url && { url: project.url }),
+    ...(technologies.length > 0 && { keywords: technologies.join(', ') }),
+    ...(translation.client && {
+      client: {
+        '@type': 'Organization',
+        name: translation.client,
+      },
+    }),
+  };
 
   return (
     <PageWrapper>
-      <div className="container mx-auto px-4 py-12 max-w-5xl">
-      {/* Back Link */}
-      <Link
-        href={`/${params.locale}/portfolio`}
-        className="inline-flex items-center text-primary dark:text-primary hover:text-primary dark:hover:text-primary mb-8 transition-colors"
-      >
-        <ArrowLeft className="w-4 h-4 mr-2" />
-        {t('backToPortfolio', { defaultMessage: 'Back to Portfolio' })}
-      </Link>
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
+      />
 
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex flex-wrap items-center gap-4 mb-4">
-          <span className="px-3 py-1 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary/80 rounded-full text-sm font-medium">
-            {project.category.replace('-', ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
-          </span>
-          {project.featured && (
-            <span className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm font-medium">
-              ⭐ Featured
-            </span>
-          )}
-        </div>
+      <div className="container mx-auto px-4 py-12 max-w-6xl">
+        {/* Back Link */}
+        <Link
+          href={`/${params.locale}/portfolio`}
+          className="inline-flex items-center text-muted-foreground hover:text-foreground mb-8 transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          {t('backToPortfolio')}
+        </Link>
 
-        <h1 className="text-4xl font-bold text-foreground dark:text-white mb-4">
-          {translation.title}
-        </h1>
-
-        <p className="text-xl text-muted-foreground dark:text-muted-foreground/70">
-          {translation.description}
-        </p>
-
-        {/* Project URL */}
-        {project.url && (
-          <div className="mt-6">
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors font-medium"
-            >
-              {t('viewLive', { defaultMessage: 'View Live Project' })}
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          </div>
-        )}
-      </div>
-
-      {/* Gallery */}
-      <div className="mb-12">
-        <ProjectGallery images={images} title={translation.title} />
-      </div>
-
-      {/* Technologies */}
-      {technologies.length > 0 && (
+        {/* Hero Section */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold text-foreground dark:text-white mb-4">
-            {t('technologies', { defaultMessage: 'Technologies Used' })}
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {technologies.map((tech, index) => (
-              <span
-                key={index}
-                className="px-4 py-2 bg-muted dark:bg-muted text-foreground dark:text-foreground rounded-lg text-sm font-medium"
-              >
-                {tech}
-              </span>
-            ))}
+          <div className="flex flex-wrap items-center gap-3 mb-4">
+            <Badge variant="secondary" className="text-sm">
+              {project.category.replace('-', ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
+            </Badge>
+            {project.featured && (
+              <Badge variant="default" className="text-sm">
+                ⭐ {t('featured')}
+              </Badge>
+            )}
           </div>
-        </div>
-      )}
 
-      {/* Project Details */}
-      <div className="bg-card dark:bg-card rounded-lg shadow-lg p-8">
-        <h2 className="text-2xl font-bold text-foreground dark:text-white mb-6">
-          {t('projectDetails', { defaultMessage: 'Project Details' })}
-        </h2>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+            {translation.title}
+          </h1>
 
-        <div className="prose dark:prose-invert max-w-none">
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <h3 className="text-lg font-semibold text-foreground dark:text-white mb-2">
-                {t('category', { defaultMessage: 'Category' })}
-              </h3>
-              <p className="text-muted-foreground dark:text-muted-foreground/70">
-                {project.category.replace('-', ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
-              </p>
-            </div>
+          <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl">
+            {translation.description}
+          </p>
 
+          {/* Action Buttons */}
+          <div className="flex flex-wrap gap-4 mt-6">
             {project.url && (
-              <div>
-                <h3 className="text-lg font-semibold text-foreground dark:text-white mb-2">
-                  {t('website', { defaultMessage: 'Website' })}
-                </h3>
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary dark:text-primary hover:underline flex items-center gap-1"
-                >
-                  {new URL(project.url).hostname}
-                  <ExternalLink className="w-4 h-4" />
+              <Button size="lg" asChild>
+                <a href={project.url} target="_blank" rel="noopener noreferrer">
+                  {t('viewLive')}
+                  <ExternalLink className="ml-2 w-4 h-4" />
                 </a>
-              </div>
+              </Button>
+            )}
+            {project.githubUrl && (
+              <Button variant="outline" size="lg" asChild>
+                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                  <Github className="mr-2 w-4 h-4" />
+                  {t('viewCode')}
+                </a>
+              </Button>
             )}
           </div>
         </div>
-      </div>
 
-      {/* Back Link */}
-      <div className="mt-12 text-center">
-        <Link
-          href={`/${params.locale}/portfolio`}
-          className="inline-flex items-center text-primary dark:text-primary hover:text-primary dark:hover:text-primary transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          {t('backToPortfolio', { defaultMessage: 'Back to Portfolio' })}
-        </Link>
+        {/* Project Gallery */}
+        {images.length > 0 && (
+          <div className="mb-16">
+            <ProjectGallery images={images} title={translation.title} />
+          </div>
+        )}
+
+        {/* Overview Grid */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          {/* Category */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-sm text-muted-foreground">
+                {t('category')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="font-semibold">
+                {project.category.replace('-', ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Client */}
+          {translation.client && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-sm text-muted-foreground">
+                  {t('client')}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="font-semibold">{translation.client}</p>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Technologies Count */}
+          {technologies.length > 0 && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-sm text-muted-foreground">
+                  {t('technologies')}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="font-semibold">{technologies.length} {t('techUsed')}</p>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+
+        {/* Challenge Section */}
+        {translation.challenge && (
+          <Card className="mb-12">
+            <CardHeader>
+              <CardTitle className="text-2xl flex items-center gap-2">
+                <CheckCircle2 className="w-6 h-6 text-primary" />
+                {t('challenge')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-wrap">
+                {translation.challenge}
+              </p>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Solution Section */}
+        {translation.solution && (
+          <Card className="mb-12">
+            <CardHeader>
+              <CardTitle className="text-2xl flex items-center gap-2">
+                <TrendingUp className="w-6 h-6 text-primary" />
+                {t('solution')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-wrap">
+                {translation.solution}
+              </p>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Results Section */}
+        {Object.keys(results).length > 0 && (
+          <Card className="mb-12 bg-primary/5 border-primary/20">
+            <CardHeader>
+              <CardTitle className="text-2xl">{t('results')}</CardTitle>
+              <CardDescription>{t('measurableImpact')}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {Object.entries(results).map(([key, value]) => (
+                  <div key={key} className="text-center p-4 bg-background rounded-lg">
+                    <p className="text-3xl font-bold text-primary mb-2">{value}</p>
+                    <p className="text-sm text-muted-foreground capitalize">
+                      {key.replace(/([A-Z])/g, ' $1').trim()}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Technologies Section */}
+        {technologies.length > 0 && (
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold mb-6">{t('technologies')}</h2>
+            <div className="flex flex-wrap gap-2">
+              {technologies.map((tech, index) => (
+                <Badge key={index} variant="outline" className="text-sm px-3 py-1">
+                  {tech}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Testimonial Section */}
+        {translation.testimonial && (
+          <Card className="mb-12 bg-muted/50">
+            <CardContent className="pt-6">
+              <blockquote className="text-lg italic leading-relaxed mb-4">
+                &ldquo;{translation.testimonial}&rdquo;
+              </blockquote>
+              {translation.client && (
+                <p className="text-sm font-semibold text-muted-foreground">
+                  — {translation.client}
+                </p>
+              )}
+            </CardContent>
+          </Card>
+        )}
+
+        <Separator className="my-12" />
+
+        {/* Back Link */}
+        <div className="text-center">
+          <Button variant="ghost" asChild>
+            <Link href={`/${params.locale}/portfolio`}>
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              {t('backToPortfolio')}
+            </Link>
+          </Button>
+        </div>
       </div>
-    </div>
     </PageWrapper>
   );
 }

@@ -18,8 +18,15 @@ Multi-language (TR/EN/PT-BR) portfolio & e-commerce platform built with:
 - shadcn/ui components
 - Claymorphism theme
 
-## Active Feature: Admin Panel shadcn UI Migration - COMPLETED
-**Last Completed**: Admin Panel shadcn UI Migration (2025-11-12)
+## Active Feature: Portfolio-First Redesign - PLANNING
+**Current Feature**: Portfolio-First Redesign (2025-11-13)
+**Feature ID**: 016-portfolio-first-redesign
+**Status**: Planning & Documentation Complete ✅
+
+⚠️ **CRITICAL REMINDER**: Always use SpecPulse CLI (`specpulse sp-pulse`) for new features!
+See: `.specpulse/memory/notes/specpulse-cli-usage-reminder.md`
+
+**Previous Feature**: Admin Panel shadcn UI Migration (2025-11-12)
 **Feature ID**: 015-admin-shadcn-ui-migration
 **Status**: Production Ready ✅
 
