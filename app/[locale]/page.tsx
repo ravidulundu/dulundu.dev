@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'hero' });
+  const bioT = await getTranslations({ locale, namespace: 'bio' });
 
   // Structured Data - Person Schema
   const personSchema = {
@@ -109,6 +110,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           locale={locale}
           name={t('name')}
           tagline={t('tagline')}
+          description={bioT('introduction')}
           ctaPortfolio={t('ctaPortfolio')}
           ctaServices={t('ctaServices')}
           badgeText={t('badgeText')}

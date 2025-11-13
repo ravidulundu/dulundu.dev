@@ -12,6 +12,7 @@ interface AnimatedHeroProps {
   locale: string;
   name: string;
   tagline: string;
+  description: string;
   ctaPortfolio: string;
   ctaServices: string;
   badgeText: string;
@@ -21,6 +22,7 @@ export function AnimatedHero({
   locale,
   name,
   tagline,
+  description,
   ctaPortfolio,
   ctaServices,
   badgeText,
@@ -69,9 +71,7 @@ export function AnimatedHero({
           transition={{ delay: 0.3 }}
           className="mt-6 text-[17px] md:text-lg text-muted-foreground max-w-2xl mx-auto"
         >
-          WordPress optimizasyonu ve full-stack geliştirme konusunda uzmanlaşmış bir geliştiriciyim.
-          İşletmelerin web sitesi performanslarını iyileştirmeleri ve ölçeklenebilir web uygulamaları oluşturmaları için çalışıyorum.
-          Hız optimizasyonundan özel geliştirmeye, önemli sonuçlar sunuyorum. 🚀
+          {description}
         </motion.p>
 
         {/* CTA Button */}
