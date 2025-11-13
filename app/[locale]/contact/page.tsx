@@ -3,13 +3,14 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Mail, MapPin, Clock, Send } from 'lucide-react';
-import { IconBadge } from '@/components/common/IconBadge';
 import PageWrapper from '@/components/layout/PageWrapper';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Spinner } from '@/components/ui/spinner';
 
 export default function ContactPage() {
   const t = useTranslations('contact');
@@ -49,7 +50,7 @@ export default function ContactPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
             {t('title')}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -129,7 +130,7 @@ export default function ContactPage() {
                   >
                     {status === 'sending' ? (
                       <>
-                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                        <Spinner className="mr-2" size="sm" />
                         {t('form.sending')}
                       </>
                     ) : (
@@ -142,14 +143,18 @@ export default function ContactPage() {
 
                   {/* Status Messages */}
                   {status === 'success' && (
-                    <div className="p-4 bg-muted border border-primary/30 rounded-lg text-primary">
-                      {t('success')}
-                    </div>
+                    <Alert className="bg-muted border-primary/30">
+                      <AlertDescription className="text-primary">
+                        {t('success')}
+                      </AlertDescription>
+                    </Alert>
                   )}
                   {status === 'error' && (
-                    <div className="p-4 bg-destructive/10 border border-destructive/30 rounded-lg text-destructive">
-                      {t('error')}
-                    </div>
+                    <Alert variant="destructive">
+                      <AlertDescription>
+                        {t('error')}
+                      </AlertDescription>
+                    </Alert>
                   )}
                 </form>
               </CardContent>
@@ -164,15 +169,17 @@ export default function ContactPage() {
               </CardHeader>
               <CardContent className="space-y-6">
                 {/* Email */}
-                <div className="flex items-start">
-                  <IconBadge icon={Mail} variant="primary" className="mr-4" />
-                  <div className="ml-4">
-                    <h3 className="text-sm font-medium text-foreground mb-1">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <Mail className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-medium mb-1">
                       {t('info.email')}
                     </h3>
                     <a
                       href="mailto:contact@dulundu.dev"
-                      className="text-primary hover:text-primary transition-colors"
+                      className="text-primary hover:text-primary/80 transition-colors"
                     >
                       contact@dulundu.dev
                     </a>
@@ -180,10 +187,12 @@ export default function ContactPage() {
                 </div>
 
                 {/* Location */}
-                <div className="flex items-start">
-                  <IconBadge icon={MapPin} variant="secondary" className="mr-4" />
-                  <div className="ml-4">
-                    <h3 className="text-sm font-medium text-foreground mb-1">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-muted-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-medium mb-1">
                       {t('info.location')}
                     </h3>
                     <p className="text-muted-foreground">Remote / Global</p>
@@ -191,10 +200,12 @@ export default function ContactPage() {
                 </div>
 
                 {/* Hours */}
-                <div className="flex items-start">
-                  <IconBadge icon={Clock} variant="accent" className="mr-4" />
-                  <div className="ml-4">
-                    <h3 className="text-sm font-medium text-foreground mb-1">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <Clock className="w-6 h-6 text-muted-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-medium mb-1">
                       {t('info.hours')}
                     </h3>
                     <p className="text-muted-foreground">Mon - Fri: 9:00 - 18:00 UTC</p>
