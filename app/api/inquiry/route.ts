@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { validateEmail } from '@/lib/validation';
 
 export async function POST(req: NextRequest) {
   try {
@@ -13,11 +14,20 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Validate email format
+    const validatedEmail = validateEmail(email);
+    if (!validatedEmail) {
+      return NextResponse.json(
+        { error: 'Invalid email address' },
+        { status: 400 }
+      );
+    }
+
     // TODO: Implement email sending logic
     // For now, just log the inquiry
     console.log('Project Inquiry:', {
       name,
-      email,
+      email: validatedEmail,
       company,
       projectType,
       budget,

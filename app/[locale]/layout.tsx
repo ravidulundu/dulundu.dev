@@ -1,7 +1,7 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { locales } from '@/i18n';
+import { locales, isValidLocale } from '@/i18n';
 import CurrencyProvider from '@/components/providers/CurrencyProvider';
 import ThemeProvider from '@/components/providers/ThemeProvider';
 import { getPreferredCurrencyForRequest } from '@/lib/currency-preferences';
@@ -64,7 +64,7 @@ export default async function LocaleLayout({
   const { locale } = await params;
 
   // Validate locale
-  if (!locales.includes(locale as any)) {
+  if (!isValidLocale(locale)) {
     notFound();
   }
 
