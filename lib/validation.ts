@@ -51,3 +51,59 @@ export function isDateInPast(date: Date): boolean {
 export function isDateInFuture(date: Date): boolean {
   return date.getTime() > Date.now();
 }
+
+/**
+ * Email validation regex (RFC 5322 simplified)
+ */
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/**
+ * Validates an email address format
+ */
+export function isValidEmail(email: string): boolean {
+  if (!email || typeof email !== 'string') {
+    return false;
+  }
+  return EMAIL_REGEX.test(email.trim());
+}
+
+/**
+ * Validates and normalizes an email address
+ * Returns normalized email or null if invalid
+ */
+export function validateEmail(email: string | null | undefined): string | null {
+  if (!email) {
+    return null;
+  }
+
+  const trimmed = email.trim().toLowerCase();
+
+  if (!isValidEmail(trimmed)) {
+    return null;
+  }
+
+  return trimmed;
+}
+
+/**
+ * Validates a slug (URL-safe string)
+ * Allows lowercase letters, numbers, and hyphens
+ */
+export function isValidSlug(slug: string): boolean {
+  if (!slug || typeof slug !== 'string') {
+    return false;
+  }
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug);
+}
+
+/**
+ * Sanitizes a string to create a valid slug
+ */
+export function sanitizeSlug(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '') // Remove special characters
+    .replace(/[\s_]+/g, '-') // Replace spaces and underscores with hyphens
+    .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+}

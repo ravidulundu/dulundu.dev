@@ -1,6 +1,6 @@
 import createMiddleware from 'next-intl/middleware';
 import { NextRequest, NextResponse } from 'next/server';
-import { locales, defaultLocale } from './i18n';
+import { locales, defaultLocale, isValidLocale } from './i18n';
 import { CURRENCY_COOKIE, DEFAULT_CURRENCY, getCurrencyForCountry, getCurrencyForLocale } from './lib/currency';
 
 const countryLocaleMap: Record<string, string> = {
@@ -20,7 +20,7 @@ function getLocaleFromCountry(country: string | null): string | null {
 function getLocaleFromPath(pathname: string): string | null {
   const segments = pathname.split('/').filter(Boolean);
   const localeCandidate = segments[0];
-  return localeCandidate && locales.includes(localeCandidate as any) ? localeCandidate : null;
+  return localeCandidate && isValidLocale(localeCandidate) ? localeCandidate : null;
 }
 
 export default function middleware(request: NextRequest) {
@@ -35,7 +35,7 @@ export default function middleware(request: NextRequest) {
   // Only auto-detect on first visit (when no locale is in path and no cookie)
   if (!hasLocaleInPath && !request.cookies.has('NEXT_LOCALE')) {
     const ipLocale = getLocaleFromCountry(detectedCountry);
-    if (ipLocale && locales.includes(ipLocale as any)) {
+    if (ipLocale && isValidLocale(ipLocale)) {
       // Create redirect response with cookie
       const url = request.nextUrl.clone();
       url.pathname = `/${ipLocale}${pathname}`;

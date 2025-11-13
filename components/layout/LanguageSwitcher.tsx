@@ -3,7 +3,7 @@
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
 import { useTransition } from 'react';
-import { locales } from '@/i18n';
+import { locales, isValidLocale } from '@/i18n';
 import { getCurrencyForLocale } from '@/lib/currency';
 import { FlagIcon } from '@/components/common/FlagIcon';
 import { useCurrency } from '@/components/providers/CurrencyProvider';
@@ -40,7 +40,7 @@ export default function LanguageSwitcher() {
     const segments = pathname.split('/').filter(Boolean);
 
     // Remove current locale if it's the first segment
-    if (segments[0] && locales.includes(segments[0] as any)) {
+    if (segments[0] && isValidLocale(segments[0])) {
       segments.shift();
     }
 

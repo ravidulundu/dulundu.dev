@@ -5,6 +5,7 @@ import { normalizeCurrency } from '@/lib/currency';
 import { getPreferredCurrencyFromRequest } from '@/lib/currency-preferences';
 import { defaultLocale } from '@/i18n';
 import { getTranslations } from 'next-intl/server';
+import { validateEmail } from '@/lib/validation';
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,6 +16,15 @@ export async function POST(req: NextRequest) {
     if (!productId || !customerEmail) {
       return NextResponse.json(
         { error: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
+
+    // Validate email format
+    const validatedEmail = validateEmail(customerEmail);
+    if (!validatedEmail) {
+      return NextResponse.json(
+        { error: 'Invalid email address' },
         { status: 400 }
       );
     }
@@ -98,7 +108,7 @@ export async function POST(req: NextRequest) {
     // Create order
     const order = await db.order.create({
       data: {
-        customerEmail,
+        customerEmail: validatedEmail,
         total: priceEntry.amount,
         currency: priceEntry.currency,
         status: 'pending',
@@ -119,7 +129,7 @@ export async function POST(req: NextRequest) {
       priceId: stripePriceId,
       successUrl: `${baseUrl}/${locale}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancelUrl: `${baseUrl}/${locale}/checkout/cancel`,
-      customerEmail,
+      customerEmail: validatedEmail,
       metadata: {
         orderId: order.id,
         productId: product.id,
