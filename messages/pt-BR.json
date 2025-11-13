@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Dulundu.dev - Serviços Profissionais de WordPress e Desenvolvimento Web",
-    "description": "Otimização especializada de WordPress, consultoria e produtos digitais. Aumente o desempenho do seu site e alcance seus objetivos de negócios."
+    "title": "Ege Dulundu - Especialista WordPress & Desenvolvedor Full-Stack",
+    "description": "Tornando sites mais rápidos. Otimização WordPress, consultoria de performance e serviços de desenvolvimento full-stack."
   },
   "nav": {
     "home": "Início",
@@ -14,10 +14,60 @@
     "currency": "Moeda"
   },
   "hero": {
-    "title": "Serviços Profissionais de WordPress e Desenvolvimento Web",
-    "subtitle": "Otimize, aprimore e expanda sua presença digital",
-    "cta": "Começar",
-    "learnMore": "Saiba Mais"
+    "name": "Ege Dulundu",
+    "tagline": "Tornando sites mais rápidos. Especialista WordPress + desenvolvedor full-stack.",
+    "ctaPortfolio": "Ver Portfólio",
+    "ctaServices": "Contratar Serviço"
+  },
+  "bio": {
+    "introduction": "Especializado em otimização WordPress e desenvolvimento full-stack, ajudando empresas a melhorar o desempenho de seus sites e construir aplicações web escaláveis. Da otimização de velocidade ao desenvolvimento personalizado, entrego resultados que importam.",
+    "experience": "Mais de 3 anos de experiência profissional otimizando sites WordPress e desenvolvendo aplicações web modernas."
+  },
+  "skills": {
+    "title": "Especialidades",
+    "subtitle": "Habilidades especializadas para resolver seus desafios de desenvolvimento web",
+    "wordpress": {
+      "title": "Especialista WordPress",
+      "description": "Desenvolvimento de temas e plugins, WooCommerce e otimização",
+      "badges": ["WordPress", "WooCommerce", "Plugins", "Temas", "PHP"]
+    },
+    "performance": {
+      "title": "Otimizador de Performance",
+      "description": "Otimização de velocidade, cache, Core Web Vitals e configuração CDN",
+      "badges": ["Velocidade", "Cache", "Core Web Vitals", "CDN", "Lighthouse"]
+    },
+    "fullstack": {
+      "title": "Desenvolvedor Full-Stack",
+      "description": "Aplicações web modernas com Next.js, React e PostgreSQL",
+      "badges": ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL"]
+    }
+  },
+  "featuredProjects": {
+    "title": "Trabalhos em Destaque",
+    "subtitle": "Projetos reais com resultados mensuráveis",
+    "viewCaseStudy": "Ver Estudo de Caso",
+    "viewAllProjects": "Ver Todos os Projetos"
+  },
+  "servicesOverview": {
+    "title": "Serviços",
+    "subtitle": "Como posso ajudar seu negócio a crescer",
+    "wordpress": {
+      "title": "Otimização WordPress",
+      "description": "Acelere seu site WordPress com otimização profissional"
+    },
+    "consulting": {
+      "title": "Consultoria Técnica",
+      "description": "Orientação especializada para seus projetos de desenvolvimento web"
+    },
+    "fullstack": {
+      "title": "Desenvolvimento Full-Stack",
+      "description": "Aplicações web personalizadas construídas com tecnologias modernas"
+    },
+    "audit": {
+      "title": "Auditoria de Performance",
+      "description": "Auditoria abrangente do site com recomendações práticas"
+    },
+    "viewAllServices": "Ver Todos os Serviços"
   },
   "services": {
     "title": "Nossos Serviços",

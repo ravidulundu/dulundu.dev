@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Dulundu.dev - Profesyonel WordPress & Web Geliştirme Hizmetleri",
-    "description": "Uzman WordPress optimizasyonu, danışmanlık ve dijital ürünler. Sitenizin performansını artırın ve iş hedeflerinize ulaşın."
+    "title": "Ege Dulundu - WordPress Uzmanı & Full-Stack Geliştirici",
+    "description": "Web sitelerini hızlandırıyorum. WordPress optimizasyonu, performans danışmanlığı ve full-stack geliştirme hizmetleri."
   },
   "nav": {
     "home": "Ana Sayfa",
@@ -14,10 +14,60 @@
     "currency": "Para Birimi"
   },
   "hero": {
-    "title": "Profesyonel WordPress & Web Geliştirme Hizmetleri",
-    "subtitle": "Dijital varlığınızı optimize edin, geliştirin ve büyütün",
-    "cta": "Başlayın",
-    "learnMore": "Daha Fazla Bilgi"
+    "name": "Ege Dulundu",
+    "tagline": "Web sitelerini hızlandırıyorum. WordPress uzmanı + full-stack geliştirici.",
+    "ctaPortfolio": "Portföyü İncele",
+    "ctaServices": "Hizmet Al"
+  },
+  "bio": {
+    "introduction": "WordPress optimizasyonu ve full-stack geliştirme konusunda uzmanlaşmış bir geliştiriciyim. İşletmelerin web sitesi performanslarını iyileştirmeleri ve ölçeklenebilir web uygulamaları oluşturmaları için çalışıyorum. Hız optimizasyonundan özel geliştirmeye, önemli sonuçlar sunuyorum.",
+    "experience": "3+ yıl profesyonel deneyim ile WordPress sitelerini optimize ediyor ve modern web uygulamaları geliştiriyorum."
+  },
+  "skills": {
+    "title": "Uzmanlık Alanları",
+    "subtitle": "Web geliştirme sorunlarınızı çözmek için özel yetenekler",
+    "wordpress": {
+      "title": "WordPress Uzmanı",
+      "description": "Tema & eklenti geliştirme, WooCommerce ve optimizasyon",
+      "badges": ["WordPress", "WooCommerce", "Eklentiler", "Temalar", "PHP"]
+    },
+    "performance": {
+      "title": "Performans Optimizasyonu",
+      "description": "Hız optimizasyonu, önbellekleme, Core Web Vitals ve CDN kurulumu",
+      "badges": ["Hız", "Önbellekleme", "Core Web Vitals", "CDN", "Lighthouse"]
+    },
+    "fullstack": {
+      "title": "Full-Stack Geliştirici",
+      "description": "Next.js, React ve PostgreSQL ile modern web uygulamaları",
+      "badges": ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL"]
+    }
+  },
+  "featuredProjects": {
+    "title": "Öne Çıkan Projeler",
+    "subtitle": "Ölçülebilir sonuçlara sahip gerçek projeler",
+    "viewCaseStudy": "Vaka Çalışmasını İncele",
+    "viewAllProjects": "Tüm Projeleri Görüntüle"
+  },
+  "servicesOverview": {
+    "title": "Hizmetler",
+    "subtitle": "İşinizi büyütmek için nasıl yardımcı olabilirim",
+    "wordpress": {
+      "title": "WordPress Optimizasyonu",
+      "description": "WordPress sitenizi profesyonel optimizasyon ile hızlandırın"
+    },
+    "consulting": {
+      "title": "Teknik Danışmanlık",
+      "description": "Web geliştirme projeleriniz için uzman rehberliği"
+    },
+    "fullstack": {
+      "title": "Full-Stack Geliştirme",
+      "description": "Modern teknolojilerle özel web uygulamaları"
+    },
+    "audit": {
+      "title": "Performans Denetimi",
+      "description": "Uygulanabilir önerilerle kapsamlı site denetimi"
+    },
+    "viewAllServices": "Tüm Hizmetleri Görüntüle"
   },
   "services": {
     "title": "Hizmetlerimiz",

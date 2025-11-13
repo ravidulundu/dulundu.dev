@@ -2,6 +2,34 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+---
+
+## ⚠️ CRITICAL - READ FIRST BEFORE ANY NEW FEATURE
+
+**ALWAYS USE SPECPULSE CLI FOR NEW FEATURES - NO EXCEPTIONS**
+
+User explicitly stated: "bir suru para kaybettiyorsun bana" (you're costing me a lot of money)
+
+### Correct Commands (AI-powered):
+```bash
+specpulse sp-pulse "Feature Name"     # Initialize feature (AI command)
+specpulse sp-spec "Description"       # Create specification (AI command)
+specpulse sp-plan                     # Create implementation plan (AI command)
+specpulse sp-task                     # Break down into tasks (AI command)
+```
+
+### ❌ NEVER:
+- Manual directory creation in `.specpulse/`
+- Manual file creation with Write tool
+- Editing feature counter manually
+- Updating context.md manually
+
+**Violation Cost**: Extra tokens, frustrated user, wasted money
+
+Last violation: Feature 016 (2025-11-13)
+
+---
+
 ## Project Overview
 
 **dulundu.dev** is a professional multi-language portfolio and service selling platform built with Next.js 14 App Router. It supports Turkish (tr), English (en), and Portuguese-BR (pt-BR) with automatic IP-based locale detection and currency management.
@@ -437,51 +465,58 @@ npx prisma db push         # Direct schema push (no migration files)
 
 **Full audit report:** `.specpulse/memory/notes/full-stack-tech-audit-2025-11-11.md`
 
-## SpecPulse Workflow (CRITICAL - READ FIRST!)
+## SpecPulse Workflow (CRITICAL - UPDATED 2025-11-13)
 
 **This project uses SpecPulse CLI for ALL feature development. NEVER use manual methods.**
 
-### ✅ CORRECT Workflow:
+### ✅ CORRECT Workflow (AI-Powered Commands):
 
 ```bash
-# 1. Initialize feature (CLI creates structure)
-specpulse feature init <feature-name>
+# 1. Initialize feature (AI command - ALWAYS USE THIS!)
+specpulse sp-pulse "Feature Name Here"
 # Creates: specs/###-feature-name/, plans/###-feature-name/, tasks/###-feature-name/
-# Updates: .specpulse/memory/context.md (AUTOMATIC!)
+# Auto-increments feature counter
+# Updates context automatically
 
-# 2. Create spec template (CLI creates empty file)
-specpulse spec create "<description>"
-# YOU manually fill: specs/###-feature-name/spec-001.md
+# 2. Create specification (AI command)
+specpulse sp-spec "Feature description"
+# AI generates: specs/###-feature-name/spec-001.md
+# You can edit/refine afterwards
 
-# 3. Create plan template (CLI creates empty file)
-specpulse plan create "<description>"
-# YOU manually fill: plans/###-feature-name/plan-001.md
+# 3. Create implementation plan (AI command)
+specpulse sp-plan
+# AI generates: plans/###-feature-name/plan-001.md
+# You can edit/refine afterwards
 
-# 4. Create tasks (CLI creates empty files)
-specpulse task breakdown <plan-id>
-# YOU manually fill: tasks/###-feature-name/task-001.md, task-002.md, etc.
+# 4. Break down into tasks (AI command)
+specpulse sp-task
+# AI generates: tasks/###-feature-name/task-001.md
+# You can edit/refine afterwards
 ```
 
-### ❌ NEVER DO:
-- ❌ **NEVER edit `.specpulse/memory/context.md`** (CLI manages automatically!)
-- ❌ **NEVER create `.specpulse/INDEX.md`** (doesn't exist in SpecPulse!)
-- ❌ **NEVER manually create directories** in `.specpulse/`
-- ❌ **NEVER edit `.specpulse/templates/`** (CLI manages!)
+### ❌ NEVER DO (USER EXPLICITLY FORBIDS - COSTS MONEY):
+- ❌ `echo "016" > .specpulse/feature_counter.txt` - Manual counter editing
+- ❌ `mkdir -p .specpulse/specs/016-...` - Manual directory creation
+- ❌ Using Write tool to create spec/plan/task files manually
+- ❌ Editing `.specpulse/memory/context.md` manually
+- ❌ Creating `.specpulse/INDEX.md` (doesn't exist!)
+- ❌ Any manual file operations in `.specpulse/`
 
-### ✅ YOU CAN EDIT:
-- ✅ Spec content: `specs/###-feature-name/spec-001.md`
-- ✅ Plan content: `plans/###-feature-name/plan-001.md`
-- ✅ Task content: `tasks/###-feature-name/task-*.md`
-- ✅ Notes: `memory/notes/*.md`
+### ✅ YOU CAN:
+- ✅ Edit AI-generated content after CLI creates it
+- ✅ Add notes: `memory/notes/*.md`
+- ✅ Use `specpulse feature continue <id>` for existing features
+- ✅ Use `specpulse doctor` and `specpulse list-specs`
 
-### 🔍 Check Status:
+### 🔍 Available Commands:
 ```bash
-specpulse doctor        # Health check (5 checks)
-specpulse list-specs    # List all specifications
-cat .specpulse/memory/context.md  # Current state (READ ONLY!)
+specpulse --help              # Show all commands
+specpulse feature list        # List all features
+specpulse doctor             # Health check
+specpulse feature continue    # Continue existing feature
 ```
 
-**Remember:** CLI-First Architecture = CLI creates structure, YOU fill content!
+**Critical Reminder:** User stated this violation wastes money. Always use `specpulse sp-pulse` first!
 
 ---
 

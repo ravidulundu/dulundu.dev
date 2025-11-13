@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Dulundu.dev - Professional WordPress & Web Development Services",
-    "description": "Expert WordPress optimization, consulting, and digital products. Boost your site performance and achieve your business goals."
+    "title": "Ege Dulundu - WordPress Expert & Full-Stack Developer",
+    "description": "Making websites faster. WordPress optimization, performance consulting, and full-stack development services."
   },
   "nav": {
     "home": "Home",
@@ -14,10 +14,60 @@
     "currency": "Currency"
   },
   "hero": {
-    "title": "Professional WordPress & Web Development Services",
-    "subtitle": "Optimize, enhance, and grow your digital presence",
-    "cta": "Get Started",
-    "learnMore": "Learn More"
+    "name": "Ege Dulundu",
+    "tagline": "Making websites faster. WordPress expert + full-stack developer.",
+    "ctaPortfolio": "View Portfolio",
+    "ctaServices": "Book a Service"
+  },
+  "bio": {
+    "introduction": "I specialize in WordPress optimization and full-stack development, helping businesses improve their website performance and build scalable web applications. From speed optimization to custom development, I deliver results that matter.",
+    "experience": "3+ years of professional experience optimizing WordPress sites and building modern web applications."
+  },
+  "skills": {
+    "title": "Expertise",
+    "subtitle": "Specialized skills to solve your web development challenges",
+    "wordpress": {
+      "title": "WordPress Expert",
+      "description": "Theme & plugin development, WooCommerce, and optimization",
+      "badges": ["WordPress", "WooCommerce", "Plugins", "Themes", "PHP"]
+    },
+    "performance": {
+      "title": "Performance Optimizer",
+      "description": "Speed optimization, caching, Core Web Vitals, and CDN setup",
+      "badges": ["Speed", "Caching", "Core Web Vitals", "CDN", "Lighthouse"]
+    },
+    "fullstack": {
+      "title": "Full-Stack Developer",
+      "description": "Modern web applications with Next.js, React, and PostgreSQL",
+      "badges": ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL"]
+    }
+  },
+  "featuredProjects": {
+    "title": "Featured Work",
+    "subtitle": "Real projects with measurable results",
+    "viewCaseStudy": "View Case Study",
+    "viewAllProjects": "View All Projects"
+  },
+  "servicesOverview": {
+    "title": "Services",
+    "subtitle": "How I can help your business grow",
+    "wordpress": {
+      "title": "WordPress Optimization",
+      "description": "Speed up your WordPress site with professional optimization"
+    },
+    "consulting": {
+      "title": "Technical Consulting",
+      "description": "Expert guidance for your web development projects"
+    },
+    "fullstack": {
+      "title": "Full-Stack Development",
+      "description": "Custom web applications built with modern technologies"
+    },
+    "audit": {
+      "title": "Performance Audit",
+      "description": "Comprehensive site audit with actionable recommendations"
+    },
+    "viewAllServices": "View All Services"
   },
   "services": {
     "title": "Our Services",
