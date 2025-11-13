@@ -5,8 +5,6 @@ import Link from 'next/link';
 import { CircleArrowDown, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { GradientText, Typewriter } from '@/components/ui/animated-text';
-import { fadeInUp, staggerContainer } from '@/lib/animations';
 import AnimatedGridPattern from '@/components/ui/animated-grid-pattern';
 import { cn } from '@/lib/utils';
 
@@ -16,7 +14,7 @@ interface AnimatedHeroProps {
   tagline: string;
   ctaPortfolio: string;
   ctaServices: string;
-  typewriterTexts: string[];
+  badgeText: string;
 }
 
 export function AnimatedHero({
@@ -25,7 +23,7 @@ export function AnimatedHero({
   tagline,
   ctaPortfolio,
   ctaServices,
-  typewriterTexts,
+  badgeText,
 }: AnimatedHeroProps) {
   return (
     <section className="relative min-h-screen flex items-center justify-center px-6 pt-6 overflow-hidden">
@@ -50,7 +48,7 @@ export function AnimatedHero({
         >
           <Badge className="rounded-full border-none">
             <Zap className="fill-current w-4 h-4 mr-1" />
-            <Typewriter texts={typewriterTexts} className="text-sm" />
+            {badgeText}
           </Badge>
         </motion.div>
 
@@ -76,20 +74,17 @@ export function AnimatedHero({
           Hız optimizasyonundan özel geliştirmeye, önemli sonuçlar sunuyorum. 🚀
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mt-12 flex items-center justify-center gap-4"
+          className="mt-12 flex items-center justify-center"
         >
           <Button asChild size="lg" className="rounded-full text-base">
             <Link href={`/${locale}/portfolio`}>
               {ctaPortfolio} <CircleArrowDown className="ml-2 !h-5.5 !w-5.5" />
             </Link>
-          </Button>
-          <Button asChild size="lg" variant="outline" className="rounded-full text-base">
-            <Link href={`/${locale}/services`}>{ctaServices}</Link>
           </Button>
         </motion.div>
       </div>

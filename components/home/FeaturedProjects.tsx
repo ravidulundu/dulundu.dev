@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
 import { InteractiveProjectCard } from '@/components/portfolio/InteractiveProjectCard';
 import { staggerContainer, fadeInUp } from '@/lib/animations';
@@ -51,15 +52,15 @@ export function FeaturedProjects() {
 
   if (loading) {
     return (
-      <section className="py-20 px-4 md:px-8 bg-background">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative py-20 px-6">
+        <div className="max-w-screen-md mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
-              {t('title')}
+              Loading...
             </h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[1, 2, 3].map((i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[1, 2].map((i) => (
               <div
                 key={i}
                 className="h-96 bg-muted animate-pulse rounded-xl"
@@ -76,32 +77,23 @@ export function FeaturedProjects() {
   }
 
   return (
-    <section className="py-20 px-4 md:px-8 bg-gradient-to-b from-background to-muted/20">
-      <div className="max-w-7xl mx-auto">
+    <section id="projects" className="relative py-20 px-6">
+      <div className="max-w-screen-md mx-auto">
         {/* Header */}
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">
+        <div className="text-center mb-12">
+          <Badge variant="secondary" className="mb-4">
+            {t('badge')}
+          </Badge>
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight">
             {t('title')}
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground mt-2 sm:mt-4 text-lg">
             {t('subtitle')}
           </p>
-        </motion.div>
+        </div>
 
         {/* Projects Grid */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project, index) => {
             const translation = project.translations[0];
             const images = translation.images as string[] | undefined;
@@ -123,23 +115,17 @@ export function FeaturedProjects() {
               />
             );
           })}
-        </motion.div>
+        </div>
 
         {/* View All CTA */}
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="text-center mt-16"
-        >
-          <Button variant="outline" size="lg" asChild className="group">
+        <div className="text-center mt-12">
+          <Button variant="outline" size="lg" asChild className="group rounded-full">
             <Link href={`/${locale}/portfolio`}>
               {t('viewAllProjects')}
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </Button>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

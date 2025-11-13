@@ -1,10 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import { BioSection } from '@/components/home/BioSection';
-import { SkillsProgress } from '@/components/home/SkillsProgress';
+import { About } from '@/components/home/About';
+import { Experience } from '@/components/home/Experience';
 import { FeaturedProjects } from '@/components/home/FeaturedProjects';
-import { ServicesOverview } from '@/components/home/ServicesOverview';
 import { AnimatedHero } from '@/components/home/AnimatedHero';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -104,31 +103,26 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       <Navbar />
 
-      {/* Animated Hero Section */}
-      <AnimatedHero
-        locale={locale}
-        name={t('name')}
-        tagline={t('tagline')}
-        ctaPortfolio={t('ctaPortfolio')}
-        ctaServices={t('ctaServices')}
-        typewriterTexts={[
-          t('typewriter1'),
-          t('typewriter2'),
-          t('typewriter3'),
-        ]}
-      />
+      <div className="space-y-10 sm:space-y-16">
+        {/* Animated Hero Section */}
+        <AnimatedHero
+          locale={locale}
+          name={t('name')}
+          tagline={t('tagline')}
+          ctaPortfolio={t('ctaPortfolio')}
+          ctaServices={t('ctaServices')}
+          badgeText={t('badgeText')}
+        />
 
-      {/* Bio Section */}
-      <BioSection />
+        {/* About Section */}
+        <About />
 
-      {/* Skills Section with Progress Bars */}
-      <SkillsProgress />
+        {/* Experience Section */}
+        <Experience />
 
-      {/* Featured Projects Section */}
-      <FeaturedProjects />
-
-      {/* Services Overview Section */}
-      <ServicesOverview locale={locale} />
+        {/* Featured Projects Section */}
+        <FeaturedProjects />
+      </div>
 
       <Footer />
     </>
