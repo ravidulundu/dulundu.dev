@@ -50,7 +50,7 @@ export function InteractiveProjectCard({
       animate={inView ? 'visible' : 'hidden'}
       transition={{ delay: index * 0.1 }}
     >
-      <Card className="group relative overflow-hidden hover:shadow-2xl transition-all duration-500 cursor-pointer h-full">
+      <Card className="group relative flex flex-col overflow-hidden rounded-xl border border-border transition-all hover:border-primary/50 hover:shadow-2xl duration-500 cursor-pointer h-full">
         <Link href={`/${locale}/portfolio/${slug}`}>
           {/* Image Container with Overlay */}
           <div className="relative aspect-video bg-muted overflow-hidden">
@@ -121,8 +121,8 @@ export function InteractiveProjectCard({
             >
               <div className="flex flex-col items-center gap-3">
                 <Button
-                  size="lg"
-                  className="gap-2 shadow-xl"
+                  size="default"
+                  className="gap-2 shadow-xl rounded-full"
                   onClick={(e) => {
                     e.preventDefault();
                     window.location.href = `/${locale}/portfolio/${slug}`;
@@ -135,14 +135,14 @@ export function InteractiveProjectCard({
                   <Button
                     size="sm"
                     variant="outline"
-                    className="gap-2 bg-background/80 backdrop-blur-sm"
+                    className="gap-2 bg-background/80 backdrop-blur-sm rounded-full shadow-none"
                     onClick={(e) => {
                       e.preventDefault();
                       window.open(url, '_blank');
                     }}
                   >
-                    Live Demo
                     <ExternalLink className="w-4 h-4" />
+                    Live Demo
                   </Button>
                 )}
               </div>
@@ -160,12 +160,12 @@ export function InteractiveProjectCard({
             {technologies && technologies.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-4">
                 {technologies.slice(0, 3).map((tech, i) => (
-                  <Badge key={i} variant="outline" className="text-xs">
+                  <Badge key={i} variant="secondary" className="text-xs rounded-full">
                     {tech}
                   </Badge>
                 ))}
                 {technologies.length > 3 && (
-                  <Badge variant="outline" className="text-xs">
+                  <Badge variant="secondary" className="text-xs rounded-full">
                     +{technologies.length - 3}
                   </Badge>
                 )}
