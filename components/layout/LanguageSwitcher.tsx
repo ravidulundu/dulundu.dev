@@ -51,6 +51,11 @@ export default function LanguageSwitcher() {
 
     setCurrency(targetCurrency);
 
+    // Persist locale preference in localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('preferred-locale', newLocale);
+    }
+
     startTransition(() => {
       router.push(newPath);
     });
