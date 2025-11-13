@@ -113,9 +113,9 @@ export default async function PortfolioPage({
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-2">
                         <ProjectEditDialog initialData={formData} locale={params.locale} />
-                        <button className="text-destructive hover:text-destructive/80" aria-label="Delete">
-                          <Trash2 className="w-4 h-4 inline" />
-                        </button>
+                        <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive hover:text-destructive/80" aria-label="Delete">
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
                       </div>
                     </TableCell>
                   </TableRow>

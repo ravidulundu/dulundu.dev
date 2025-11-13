@@ -261,6 +261,18 @@
           "title": "Add Project",
           "description": "Showcase a new portfolio project"
         }
+      },
+      "recentOrders": {
+        "title": "Recent Orders",
+        "viewAll": "View All",
+        "empty": "No orders yet",
+        "table": {
+          "orderId": "Order ID",
+          "customer": "Customer",
+          "total": "Total",
+          "status": "Status",
+          "date": "Date"
+        }
       }
     },
     "products": {

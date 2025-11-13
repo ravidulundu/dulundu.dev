@@ -5,7 +5,7 @@ import { Bell, LogOut, User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from '@/components/layout/LanguageSwitcher';
 import ThemeToggle from '@/components/layout/ThemeToggle';
-import { IconBadge } from '@/components/common/IconBadge';
+import { Button } from '@/components/ui/button';
 
 export default function AdminHeader() {
   const t = useTranslations('admin.header');
@@ -21,25 +21,36 @@ export default function AdminHeader() {
           <LanguageSwitcher />
 
           {/* Notifications */}
-          <button className="relative" aria-label={t('notifications')}>
-            <IconBadge icon={Bell} variant="neutral" className="mr-0" />
+          <Button
+            variant="ghost"
+            size="icon"
+            className="relative h-9 w-9"
+            aria-label={t('notifications')}
+          >
+            <Bell className="w-5 h-5" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full"></span>
-          </button>
+          </Button>
 
           {/* User Menu */}
-          <div className="flex items-center gap-3 pl-3 border-l border-border">
-            <button className="flex items-center gap-2 text-muted-foreground hover:text-foreground" aria-label={t('profile')}>
-              <IconBadge icon={User} variant="primary" />
+          <div className="flex items-center gap-2 pl-3 border-l border-border">
+            <Button
+              variant="ghost"
+              className="flex items-center gap-2"
+              aria-label={t('profile')}
+            >
+              <User className="w-4 h-4" />
               <span className="text-sm font-medium">{t('profile')}</span>
-            </button>
+            </Button>
 
-            <button
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => signOut({ callbackUrl: '/' })}
-              className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg"
+              className="h-9 w-9 text-muted-foreground hover:text-destructive"
               title={t('signOut')}
             >
               <LogOut className="w-5 h-5" />
-            </button>
+            </Button>
           </div>
         </div>
       </div>

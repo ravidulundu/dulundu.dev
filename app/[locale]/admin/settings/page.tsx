@@ -1,5 +1,7 @@
 import { Settings, User, Bell, Shield, Database, Globe } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 const sectionConfig = [
   { icon: User, key: 'profile', color: 'blue' },
@@ -31,27 +33,27 @@ export default async function AdminSettingsPage({ params }: { params: { locale: 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">{t('title')}</h1>
-          <p className="text-muted-foreground mt-1">
-            {t('subtitle')}
-          </p>
-        </div>
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
+        <p className="text-muted-foreground mt-2">
+          {t('subtitle')}
+        </p>
       </div>
 
       {/* Coming Soon Banner */}
-      <div className="bg-gradient-to-r from-muted to-accent/20 border border-primary/30 rounded-xl p-6">
-        <div className="flex items-center gap-3 mb-2">
-          <Settings className="w-6 h-6 text-primary" />
-          <h2 className="text-xl font-semibold text-foreground">
-            {t('comingSoonTitle')}
-          </h2>
-        </div>
-        <p className="text-muted-foreground">
-          {t('comingSoonDescription')}
-        </p>
-      </div>
+      <Card className="bg-gradient-to-r from-muted to-accent/20 border-primary/30">
+        <CardContent className="pt-6">
+          <div className="flex items-center gap-3 mb-2">
+            <Settings className="w-6 h-6 text-primary" />
+            <h2 className="text-xl font-semibold">
+              {t('comingSoonTitle')}
+            </h2>
+          </div>
+          <p className="text-muted-foreground">
+            {t('comingSoonDescription')}
+          </p>
+        </CardContent>
+      </Card>
 
       {/* Settings Sections Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -60,57 +62,49 @@ export default async function AdminSettingsPage({ params }: { params: { locale: 
           const colorClass = colorClasses[section.color as keyof typeof colorClasses];
 
           return (
-            <div
+            <Card
               key={section.title}
-              className="bg-card border border-border rounded-xl p-6 hover:shadow-md transition-shadow cursor-not-allowed opacity-60"
+              className="hover:shadow-md transition-shadow cursor-not-allowed opacity-60"
             >
-              <div className={`inline-flex p-3 ${colorClass} rounded-lg mb-4`}>
-                <Icon className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                {section.title}
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                {section.description}
-              </p>
-              <div className="mt-4 text-xs text-muted-foreground italic">
-                {t('cardBadge')}
-              </div>
-            </div>
+              <CardContent className="pt-6">
+                <div className={`inline-flex p-3 ${colorClass} rounded-lg mb-4`}>
+                  <Icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">
+                  {section.title}
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  {section.description}
+                </p>
+                <div className="mt-4 text-xs text-muted-foreground italic">
+                  {t('cardBadge')}
+                </div>
+              </CardContent>
+            </Card>
           );
         })}
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-card border border-border rounded-xl p-6">
-        <h2 className="text-lg font-semibold text-foreground mb-4">{t('quickActions')}</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <button
-            disabled
-            className="px-4 py-3 bg-muted text-muted-foreground rounded-lg font-medium cursor-not-allowed"
-          >
-            {t('quickButtons.clearCache')}
-          </button>
-          <button
-            disabled
-            className="px-4 py-3 bg-muted text-muted-foreground rounded-lg font-medium cursor-not-allowed"
-          >
-            {t('quickButtons.runBackup')}
-          </button>
-          <button
-            disabled
-            className="px-4 py-3 bg-muted text-muted-foreground rounded-lg font-medium cursor-not-allowed"
-          >
-            {t('quickButtons.exportData')}
-          </button>
-          <button
-            disabled
-            className="px-4 py-3 bg-muted text-muted-foreground rounded-lg font-medium cursor-not-allowed"
-          >
-            {t('quickButtons.systemInfo')}
-          </button>
-        </div>
-      </div>
+      <Card>
+        <CardContent className="pt-6">
+          <h2 className="text-lg font-semibold mb-4">{t('quickActions')}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Button variant="secondary" disabled className="cursor-not-allowed">
+              {t('quickButtons.clearCache')}
+            </Button>
+            <Button variant="secondary" disabled className="cursor-not-allowed">
+              {t('quickButtons.runBackup')}
+            </Button>
+            <Button variant="secondary" disabled className="cursor-not-allowed">
+              {t('quickButtons.exportData')}
+            </Button>
+            <Button variant="secondary" disabled className="cursor-not-allowed">
+              {t('quickButtons.systemInfo')}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

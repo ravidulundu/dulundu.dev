@@ -16,6 +16,8 @@ import {
   SelectValue,
 } from '../ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+import { Alert, AlertDescription } from '../ui/alert';
+import { Card, CardContent } from '../ui/card';
 
 export interface ProjectTranslationInput {
   locale: string;
@@ -190,14 +192,15 @@ export default function ProjectForm({ initialData, mode, redirectPath, onSuccess
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {error && (
-        <div className="bg-destructive/10 border border-destructive/30 text-destructive px-4 py-3 rounded-lg">
-          {error}
-        </div>
+        <Alert variant="destructive">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
       )}
 
       {/* Global Fields */}
-      <div className="bg-card dark:bg-card p-6 rounded-lg shadow space-y-4">
-        <h3 className="text-lg font-semibold text-foreground dark:text-white">{t('globalTitle')}</h3>
+      <Card>
+        <CardContent className="pt-6 space-y-4">
+          <h3 className="text-lg font-semibold tracking-tight">{t('globalTitle')}</h3>
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-2">
             <Label htmlFor="slug">{t('slugLabel')}</Label>
@@ -268,16 +271,18 @@ export default function ProjectForm({ initialData, mode, redirectPath, onSuccess
 
           <div className="flex items-center justify-between rounded-lg border border-border p-4">
             <div>
-              <p className="text-sm font-medium text-foreground">Featured Project</p>
+              <p className="text-sm font-medium">Featured Project</p>
               <p className="text-sm text-muted-foreground">Highlight this project on listings</p>
             </div>
             <Switch checked={featured} onCheckedChange={setFeatured} id="featured" />
           </div>
         </div>
-      </div>
+        </CardContent>
+      </Card>
 
       {/* Language Tabs */}
-      <div className="bg-card dark:bg-card p-6 rounded-lg shadow">
+      <Card>
+        <CardContent className="pt-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
           <TabsList className="w-full justify-start">
             {locales.map((locale) => (
@@ -351,7 +356,8 @@ export default function ProjectForm({ initialData, mode, redirectPath, onSuccess
             </TabsContent>
           ))}
         </Tabs>
-      </div>
+        </CardContent>
+      </Card>
 
       {/* Actions */}
       <div className="flex justify-end space-x-3">

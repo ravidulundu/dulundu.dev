@@ -16,6 +16,8 @@ import {
   Image as ImageIcon,
 } from 'lucide-react';
 import { useCallback } from 'react';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 
 interface RichTextEditorProps {
   content: string;
@@ -92,118 +94,120 @@ export default function RichTextEditor({
   }
 
   return (
-    <div className="border border-border rounded-lg overflow-hidden">
+    <div className="border border-input rounded-lg overflow-hidden">
       {/* Toolbar */}
-      <div className="bg-muted border-b border-border p-2 flex flex-wrap gap-1">
+      <div className="bg-muted/50 border-b border-border p-2 flex flex-wrap gap-1">
         {/* Headings */}
-        <button
+        <Button
           type="button"
+          variant={editor.isActive('heading', { level: 2 }) ? 'secondary' : 'ghost'}
+          size="icon"
           onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-          className={`p-2 rounded hover:bg-muted transition-colors ${
-            editor.isActive('heading', { level: 2 }) ? 'bg-muted/60' : ''
-          }`}
+          className="h-8 w-8"
           title="Heading 2"
         >
           <Heading2 className="w-4 h-4" />
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
+          variant={editor.isActive('heading', { level: 3 }) ? 'secondary' : 'ghost'}
+          size="icon"
           onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-          className={`p-2 rounded hover:bg-muted transition-colors ${
-            editor.isActive('heading', { level: 3 }) ? 'bg-muted/60' : ''
-          }`}
+          className="h-8 w-8"
           title="Heading 3"
         >
           <Heading3 className="w-4 h-4" />
-        </button>
+        </Button>
 
-        <div className="w-px bg-border mx-1" />
+        <Separator orientation="vertical" className="h-8 mx-1" />
 
         {/* Text Formatting */}
-        <button
+        <Button
           type="button"
+          variant={editor.isActive('bold') ? 'secondary' : 'ghost'}
+          size="icon"
           onClick={() => editor.chain().focus().toggleBold().run()}
-          className={`p-2 rounded hover:bg-muted transition-colors ${
-            editor.isActive('bold') ? 'bg-muted/60' : ''
-          }`}
+          className="h-8 w-8"
           title="Bold"
         >
           <Bold className="w-4 h-4" />
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
+          variant={editor.isActive('italic') ? 'secondary' : 'ghost'}
+          size="icon"
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={`p-2 rounded hover:bg-muted transition-colors ${
-            editor.isActive('italic') ? 'bg-muted/60' : ''
-          }`}
+          className="h-8 w-8"
           title="Italic"
         >
           <Italic className="w-4 h-4" />
-        </button>
+        </Button>
 
-        <div className="w-px bg-border mx-1" />
+        <Separator orientation="vertical" className="h-8 mx-1" />
 
         {/* Lists */}
-        <button
+        <Button
           type="button"
+          variant={editor.isActive('bulletList') ? 'secondary' : 'ghost'}
+          size="icon"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={`p-2 rounded hover:bg-muted transition-colors ${
-            editor.isActive('bulletList') ? 'bg-muted/60' : ''
-          }`}
+          className="h-8 w-8"
           title="Bullet List"
         >
           <List className="w-4 h-4" />
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
+          variant={editor.isActive('orderedList') ? 'secondary' : 'ghost'}
+          size="icon"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={`p-2 rounded hover:bg-muted transition-colors ${
-            editor.isActive('orderedList') ? 'bg-muted/60' : ''
-          }`}
+          className="h-8 w-8"
           title="Ordered List"
         >
           <ListOrdered className="w-4 h-4" />
-        </button>
+        </Button>
 
-        <div className="w-px bg-border mx-1" />
+        <Separator orientation="vertical" className="h-8 mx-1" />
 
         {/* Code */}
-        <button
+        <Button
           type="button"
+          variant={editor.isActive('codeBlock') ? 'secondary' : 'ghost'}
+          size="icon"
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-          className={`p-2 rounded hover:bg-muted transition-colors ${
-            editor.isActive('codeBlock') ? 'bg-muted/60' : ''
-          }`}
+          className="h-8 w-8"
           title="Code Block"
         >
           <Code className="w-4 h-4" />
-        </button>
+        </Button>
 
-        <div className="w-px bg-border mx-1" />
+        <Separator orientation="vertical" className="h-8 mx-1" />
 
         {/* Link & Image */}
-        <button
+        <Button
           type="button"
+          variant={editor.isActive('link') ? 'secondary' : 'ghost'}
+          size="icon"
           onClick={setLink}
-          className={`p-2 rounded hover:bg-muted transition-colors ${
-            editor.isActive('link') ? 'bg-muted/60' : ''
-          }`}
+          className="h-8 w-8"
           title="Add Link"
         >
           <LinkIcon className="w-4 h-4" />
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
+          variant="ghost"
+          size="icon"
           onClick={addImage}
-          className="p-2 rounded hover:bg-muted transition-colors"
+          className="h-8 w-8"
           title="Add Image"
         >
           <ImageIcon className="w-4 h-4" />
-        </button>
+        </Button>
       </div>
 
       {/* Editor */}
-      <div className="bg-card">
+      <div>
         <EditorContent editor={editor} placeholder={placeholder} />
       </div>
     </div>

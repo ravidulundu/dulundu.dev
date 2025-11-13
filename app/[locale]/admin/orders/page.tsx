@@ -2,6 +2,16 @@ import { db } from "@/lib/db";
 import { format } from "date-fns";
 import { getTranslations } from "next-intl/server";
 import { formatCurrencyAmount } from "@/lib/currency";
+import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Card } from "@/components/ui/card";
 
 export const dynamic = 'force-dynamic';
 
@@ -38,107 +48,95 @@ export default async function OrdersPage({
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-foreground dark:text-white">{t('title')}</h1>
-        <p className="text-muted-foreground dark:text-muted-foreground mt-2">{t('subtitle')}</p>
+        <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
+        <p className="text-muted-foreground mt-2">{t('subtitle')}</p>
       </div>
 
       {/* Orders Table */}
-      <div className="bg-card dark:bg-card rounded-lg shadow overflow-hidden">
-        <table className="min-w-full divide-y divide-border dark:divide-border">
-          <thead className="bg-muted dark:bg-muted">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground/70 uppercase tracking-wider">
-                {t('table.orderId')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground/70 uppercase tracking-wider">
-                {t('table.customer')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground/70 uppercase tracking-wider">
-                {t('table.products')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground/70 uppercase tracking-wider">
-                {t('table.total')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground/70 uppercase tracking-wider">
-                {t('table.status')}
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground/70 uppercase tracking-wider">
-                {t('table.date')}
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-card dark:bg-card divide-y divide-border dark:divide-border">
+      <Card>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t('table.orderId')}</TableHead>
+              <TableHead>{t('table.customer')}</TableHead>
+              <TableHead>{t('table.products')}</TableHead>
+              <TableHead>{t('table.total')}</TableHead>
+              <TableHead>{t('table.status')}</TableHead>
+              <TableHead>{t('table.date')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {orders.length === 0 ? (
-              <tr>
-                <td colSpan={6} className="px-6 py-12 text-center text-muted-foreground dark:text-muted-foreground">
+              <TableRow>
+                <TableCell colSpan={6} className="h-24 text-center">
                   {t('empty')}
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ) : (
               orders.map((order) => (
-                <tr key={order.id} className="hover:bg-muted dark:hover:bg-muted">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-mono text-foreground dark:text-white">
+                <TableRow key={order.id}>
+                  <TableCell>
+                    <div className="font-mono text-sm">
                       #{order.id.slice(0, 8).toUpperCase()}
                     </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="text-sm font-medium text-foreground dark:text-white">
+                  </TableCell>
+                  <TableCell>
+                    <div className="font-medium">
                       {order.customerName || 'N/A'}
                     </div>
-                    <div className="text-sm text-muted-foreground dark:text-muted-foreground">
+                    <div className="text-sm text-muted-foreground">
                       {order.customerEmail}
                     </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="text-sm text-foreground dark:text-white">
+                  </TableCell>
+                  <TableCell>
+                    <div className="space-y-1">
                       {order.items.map((item) => {
                         const translation = item.product.translations.find(t => t.locale === locale) ||
                           item.product.translations.find(t => t.locale === 'en');
                         return (
-                          <div key={item.id}>
+                          <div key={item.id} className="text-sm">
                             {translation?.title || 'Product'} x{item.quantity}
                           </div>
                         );
                       })}
                     </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-semibold text-foreground dark:text-white">
+                  </TableCell>
+                  <TableCell>
+                    <div className="font-semibold">
                       {formatCurrencyAmount({
                         amount: order.total.toString(),
                         currency: order.currency,
                         locale,
                       })}
                     </div>
-                    <div className="text-xs text-muted-foreground dark:text-muted-foreground">
+                    <div className="text-xs text-muted-foreground uppercase">
                       {order.currency}
                     </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span
-                      className={`px-2 py-1 text-xs font-medium rounded ${
+                  </TableCell>
+                  <TableCell>
+                    <Badge
+                      variant={
                         order.status === 'completed'
-                          ? 'bg-primary/10 text-primary'
+                          ? 'default'
                           : order.status === 'pending'
-                            ? 'bg-secondary text-secondary-foreground'
+                            ? 'secondary'
                             : order.status === 'failed'
-                              ? 'bg-destructive/10 text-destructive'
-                              : 'bg-muted text-foreground'
-                      }`}
+                              ? 'destructive'
+                              : 'outline'
+                      }
                     >
                       {t(`statusLabels.${order.status}`)}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground dark:text-white">
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="text-sm">
                     {format(new Date(order.createdAt), 'MMM dd, yyyy HH:mm')}
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))
             )}
-          </tbody>
-        </table>
-      </div>
+          </TableBody>
+        </Table>
+      </Card>
     </div>
   );
 }

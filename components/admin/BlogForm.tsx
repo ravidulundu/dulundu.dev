@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
+import { Alert, AlertDescription } from '../ui/alert';
 
 const RichTextEditor = dynamic(() => import('./RichTextEditor'), { ssr: false });
 
@@ -166,9 +167,9 @@ export default function BlogForm({ initialData, mode, redirectPath, onSuccess }:
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {error && (
-        <div className="bg-destructive/10 border border-destructive/30 text-destructive px-4 py-3 rounded-lg">
-          {error}
-        </div>
+        <Alert variant="destructive">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
       )}
 
       {/* Global Fields */}

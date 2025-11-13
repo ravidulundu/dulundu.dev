@@ -261,6 +261,18 @@
           "title": "Proje Ekle",
           "description": "Yeni bir portföy projesi ekleyin"
         }
+      },
+      "recentOrders": {
+        "title": "Son Siparişler",
+        "viewAll": "Tümünü Gör",
+        "empty": "Henüz sipariş yok",
+        "table": {
+          "orderId": "Sipariş No",
+          "customer": "Müşteri",
+          "total": "Toplam",
+          "status": "Durum",
+          "date": "Tarih"
+        }
       }
     },
     "products": {

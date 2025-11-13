@@ -16,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
+import { Alert, AlertDescription } from '../ui/alert';
 import {
   SUPPORTED_CURRENCIES,
   getCurrencySymbol,
@@ -260,9 +261,9 @@ export default function ProductForm({ initialData, mode, redirectPath, onSuccess
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       {error && (
-        <div className="bg-destructive/10 border border-destructive/30 text-destructive px-4 py-3 rounded">
-          {error}
-        </div>
+        <Alert variant="destructive">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
       )}
 
       {/* Language Tabs */}

@@ -261,6 +261,18 @@
           "title": "Adicionar projeto",
           "description": "Mostre um novo projeto no portfólio"
         }
+      },
+      "recentOrders": {
+        "title": "Pedidos Recentes",
+        "viewAll": "Ver Todos",
+        "empty": "Nenhum pedido ainda",
+        "table": {
+          "orderId": "ID do Pedido",
+          "customer": "Cliente",
+          "total": "Total",
+          "status": "Status",
+          "date": "Data"
+        }
       }
     },
     "products": {

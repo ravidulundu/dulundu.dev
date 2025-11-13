@@ -115,5 +115,64 @@
     color: hsl(var(--foreground));
     font-family: var(--font-sans);
     letter-spacing: var(--tracking-normal);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Typography Hierarchy */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    font-size: 2.25rem; /* 36px */
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 1.875rem; /* 30px */
+  }
+
+  h3 {
+    font-size: 1.5rem; /* 24px */
+  }
+
+  h4 {
+    font-size: 1.25rem; /* 20px */
+  }
+
+  h5 {
+    font-size: 1.125rem; /* 18px */
+  }
+
+  h6 {
+    font-size: 1rem; /* 16px */
+  }
+
+  p {
+    line-height: 1.6;
+    margin-bottom: 1em;
+  }
+
+  /* Better text rendering */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+@layer utilities {
+  /* Typography Utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }
