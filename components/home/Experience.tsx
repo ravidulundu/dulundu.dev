@@ -22,9 +22,9 @@ const ExperienceItem = ({
   isFirst = false,
 }: ExperienceItemProps) => {
   return (
-    <div className="relative pl-8 not-last:pb-12 group">
+    <div className="relative pl-8 pb-12 last:pb-0">
       {/* Timeline line */}
-      <div className={`absolute left-0 top-2.5 h-full w-[2px] bg-muted ${isFirst ? 'h-[calc(100%-24px)] top-6' : ''}`}>
+      <div className="absolute left-0 top-2.5 h-full w-[2px] bg-muted last:h-0">
         <div className="absolute h-3 w-3 -left-[5px] top-0 rounded-full border-2 border-primary bg-background" />
       </div>
 

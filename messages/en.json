@@ -18,13 +18,46 @@
     "tagline": "Making websites faster. WordPress expert + full-stack developer.",
     "ctaPortfolio": "View Portfolio",
     "ctaServices": "Book a Service",
-    "typewriter1": "WordPress Expert 🚀",
-    "typewriter2": "Full-Stack Developer 💻",
-    "typewriter3": "Performance Consultant ⚡"
+    "badgeText": "Fullstack Web Developer"
   },
   "bio": {
     "introduction": "I specialize in WordPress optimization and full-stack development, helping businesses improve their website performance and build scalable web applications. From speed optimization to custom development, I deliver results that matter.",
     "experience": "3+ years of professional experience optimizing WordPress sites and building modern web applications."
+  },
+  "about": {
+    "badge": "About Me",
+    "title": "Passionate about creating impactful web experiences",
+    "description": "With over 5 years of experience in full-stack development, I specialize in building scalable web applications using modern technologies. My expertise includes React, Node.js, and cloud architecture. I'm passionate about creating elegant solutions to complex problems and sharing knowledge with the developer community.",
+    "viewGithub": "View Github",
+    "downloadCV": "Download CV"
+  },
+  "experience": {
+    "badge": "Experience",
+    "title": "Professional Journey",
+    "subtitle": "A timeline of my professional growth and key achievements",
+    "items": [
+      {
+        "title": "Senior Full Stack Developer",
+        "company": "TechCorp Solutions",
+        "period": "2021 - Present",
+        "description": "Led the development of enterprise-scale web applications, mentored junior developers, and implemented best practices for code quality and performance optimization.",
+        "technologies": "React,Node.js,TypeScript,AWS,MongoDB"
+      },
+      {
+        "title": "Full Stack Developer",
+        "company": "Digital Innovations Inc",
+        "period": "2019 - 2021",
+        "description": "Developed and maintained multiple client projects, implemented responsive designs, and integrated third-party APIs for enhanced functionality.",
+        "technologies": "React,Express.js,PostgreSQL,Docker,Redis"
+      },
+      {
+        "title": "Frontend Developer",
+        "company": "WebTech Studios",
+        "period": "2018 - 2019",
+        "description": "Created responsive and interactive user interfaces, collaborated with designers, and optimized application performance.",
+        "technologies": "React,JavaScript,SASS,Webpack,Jest"
+      }
+    ]
   },
   "skills": {
     "title": "Expertise",
@@ -46,6 +79,7 @@
     }
   },
   "featuredProjects": {
+    "badge": "Projects",
     "title": "Featured Work",
     "subtitle": "Real projects with measurable results",
     "viewCaseStudy": "View Case Study",

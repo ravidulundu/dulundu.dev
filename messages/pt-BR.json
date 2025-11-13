@@ -18,13 +18,46 @@
     "tagline": "Tornando sites mais rápidos. Especialista WordPress + desenvolvedor full-stack.",
     "ctaPortfolio": "Ver Portfólio",
     "ctaServices": "Contratar Serviço",
-    "typewriter1": "Especialista WordPress 🚀",
-    "typewriter2": "Desenvolvedor Full-Stack 💻",
-    "typewriter3": "Consultor de Performance ⚡"
+    "badgeText": "Desenvolvedor Web Fullstack"
   },
   "bio": {
     "introduction": "Especializado em otimização WordPress e desenvolvimento full-stack, ajudando empresas a melhorar o desempenho de seus sites e construir aplicações web escaláveis. Da otimização de velocidade ao desenvolvimento personalizado, entrego resultados que importam.",
     "experience": "Mais de 3 anos de experiência profissional otimizando sites WordPress e desenvolvendo aplicações web modernas."
+  },
+  "about": {
+    "badge": "Sobre Mim",
+    "title": "Apaixonado por criar experiências web impactantes",
+    "description": "Com mais de 5 anos de experiência em desenvolvimento full-stack, me especializo em construir aplicações web escaláveis usando tecnologias modernas. Minha expertise inclui React, Node.js e arquitetura em nuvem. Sou apaixonado por criar soluções elegantes para problemas complexos e compartilhar conhecimento com a comunidade de desenvolvedores.",
+    "viewGithub": "Ver Github",
+    "downloadCV": "Baixar CV"
+  },
+  "experience": {
+    "badge": "Experiência",
+    "title": "Jornada Profissional",
+    "subtitle": "Uma linha do tempo do meu crescimento profissional e conquistas principais",
+    "items": [
+      {
+        "title": "Desenvolvedor Full Stack Sênior",
+        "company": "TechCorp Solutions",
+        "period": "2021 - Presente",
+        "description": "Liderei o desenvolvimento de aplicações web de nível empresarial, mentorei desenvolvedores júnior e implementei melhores práticas para qualidade de código e otimização de desempenho.",
+        "technologies": "React,Node.js,TypeScript,AWS,MongoDB"
+      },
+      {
+        "title": "Desenvolvedor Full Stack",
+        "company": "Digital Innovations Inc",
+        "period": "2019 - 2021",
+        "description": "Desenvolvi e mantive múltiplos projetos de clientes, implementei designs responsivos e integrei APIs de terceiros para funcionalidades aprimoradas.",
+        "technologies": "React,Express.js,PostgreSQL,Docker,Redis"
+      },
+      {
+        "title": "Desenvolvedor Frontend",
+        "company": "WebTech Studios",
+        "period": "2018 - 2019",
+        "description": "Criei interfaces de usuário responsivas e interativas, colaborei com designers e otimizei o desempenho das aplicações.",
+        "technologies": "React,JavaScript,SASS,Webpack,Jest"
+      }
+    ]
   },
   "skills": {
     "title": "Especialidades",
@@ -64,6 +97,7 @@
     }
   },
   "featuredProjects": {
+    "badge": "Projetos",
     "title": "Trabalhos em Destaque",
     "subtitle": "Projetos reais com resultados mensuráveis",
     "viewCaseStudy": "Ver Estudo de Caso",
