@@ -161,23 +161,10 @@
     }
   },
   "footer": {
-    "description": "Professional WordPress & Web Development Services. Optimize, enhance, and grow your digital presence.",
-    "copyright": "All rights reserved.",
-    "services": "Services",
-    "company": "Company",
-    "legal": "Legal",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service",
-    "servicesLinks": {
-      "wordpress": "WordPress Optimization",
-      "consulting": "Consulting",
-      "products": "Digital Products"
-    },
-    "companyLinks": {
-      "portfolio": "Portfolio",
-      "blog": "Blog",
-      "contact": "Contact"
-    }
+    "about": "About",
+    "experience": "Experience",
+    "projects": "Projects",
+    "rights": "All rights reserved."
   },
   "blog": {
     "title": "Blog",

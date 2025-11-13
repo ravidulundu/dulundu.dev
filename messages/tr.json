@@ -179,23 +179,10 @@
     }
   },
   "footer": {
-    "description": "Profesyonel WordPress & Web Geliştirme Hizmetleri. Dijital varlığınızı optimize edin, geliştirin ve büyütün.",
-    "copyright": "Tüm hakları saklıdır.",
-    "services": "Hizmetler",
-    "company": "Şirket",
-    "legal": "Yasal",
-    "privacy": "Gizlilik Politikası",
-    "terms": "Kullanım Şartları",
-    "servicesLinks": {
-      "wordpress": "WordPress Optimizasyonu",
-      "consulting": "Danışmanlık",
-      "products": "Dijital Ürünler"
-    },
-    "companyLinks": {
-      "portfolio": "Portföy",
-      "blog": "Blog",
-      "contact": "İletişim"
-    }
+    "about": "Hakkımda",
+    "experience": "Deneyim",
+    "projects": "Projeler",
+    "rights": "Tüm hakları saklıdır."
   },
   "blog": {
     "title": "Blog",

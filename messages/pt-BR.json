@@ -179,23 +179,10 @@
     }
   },
   "footer": {
-    "description": "Serviços Profissionais de WordPress e Desenvolvimento Web. Otimize, aprimore e expanda sua presença digital.",
-    "copyright": "Todos os direitos reservados.",
-    "services": "Serviços",
-    "company": "Empresa",
-    "legal": "Jurídico",
-    "privacy": "Política de Privacidade",
-    "terms": "Termos de Serviço",
-    "servicesLinks": {
-      "wordpress": "Otimização WordPress",
-      "consulting": "Consultoria",
-      "products": "Produtos Digitais"
-    },
-    "companyLinks": {
-      "portfolio": "Portfólio",
-      "blog": "Blog",
-      "contact": "Contato"
-    }
+    "about": "Sobre",
+    "experience": "Experiência",
+    "projects": "Projetos",
+    "rights": "Todos os direitos reservados."
   },
   "blog": {
     "title": "Blog",

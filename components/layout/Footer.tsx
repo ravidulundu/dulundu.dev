@@ -1,81 +1,69 @@
 'use client';
 
-import { useTranslations, useLocale } from 'next-intl';
+import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
+import Image from 'next/image';
+import { BlueSkyLogo, DribbleLogo, GithubLogo, XLogo } from '@/components/icons';
+import { useLocale, useTranslations } from 'next-intl';
+
+const footerLinks = [
+  {
+    title: 'about',
+    href: '#about',
+  },
+  {
+    title: 'experience',
+    href: '#experience',
+  },
+  {
+    title: 'projects',
+    href: '#projects',
+  },
+];
 
 export default function Footer() {
-  const t = useTranslations('footer');
   const locale = useLocale();
-  const currentYear = new Date().getFullYear();
+  const t = useTranslations('footer');
 
   return (
-    <footer className="bg-foreground text-background/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-bold text-background mb-4">Dulundu.dev</h3>
-            <p className="text-background/80 max-w-md">
-              {t('description')}
-            </p>
-          </div>
+    <footer className="mt-20">
+      <div className="max-w-screen-md mx-auto">
+        <div className="py-12 flex flex-col justify-start items-center">
+          {/* Logo */}
+          <Image src="/icon.svg" alt="Dulundu.dev" width={64} height={64} className="rounded-lg" />
 
-          {/* Services */}
-          <div>
-            <h4 className="text-background font-semibold mb-4">{t('services')}</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href={`/${locale}/services`} className="hover:text-background transition-colors">
-                  {t('servicesLinks.wordpress')}
+          <ul className="mt-6 flex items-center gap-4 flex-wrap">
+            {footerLinks.map(({ title, href }) => (
+              <li key={title}>
+                <Link
+                  href={href}
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {t(title)}
                 </Link>
               </li>
-              <li>
-                <Link href={`/${locale}/services`} className="hover:text-background transition-colors">
-                  {t('servicesLinks.consulting')}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/services`} className="hover:text-background transition-colors">
-                  {t('servicesLinks.products')}
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="text-background font-semibold mb-4">{t('company')}</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href={`/${locale}/portfolio`} className="hover:text-background transition-colors">
-                  {t('companyLinks.portfolio')}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/blog`} className="hover:text-background transition-colors">
-                  {t('companyLinks.blog')}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/contact`} className="hover:text-background transition-colors">
-                  {t('companyLinks.contact')}
-                </Link>
-              </li>
-            </ul>
-          </div>
+            ))}
+          </ul>
         </div>
+        <Separator />
+        <div className="py-6 flex flex-col-reverse sm:flex-row items-center justify-between gap-x-2 gap-y-5 px-6 xl:px-0">
+          {/* Copyright */}
+          <span className="text-muted-foreground text-sm">
+            &copy; {new Date().getFullYear()} Dulundu.dev. {t('rights')}
+          </span>
 
-        {/* Bottom */}
-        <div className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-background/70 text-sm">
-            &copy; {currentYear} Dulundu.dev. {t('copyright')}
-          </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href={`/${locale}/privacy`} className="text-background/70 hover:text-background text-sm transition-colors">
-              {t('privacy')}
+          <div className="flex items-center gap-5 text-muted-foreground">
+            <Link href="https://github.com/dulundu" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+              <GithubLogo className="h-5 w-5" />
             </Link>
-            <Link href={`/${locale}/terms`} className="text-background/70 hover:text-background text-sm transition-colors">
-              {t('terms')}
+            <Link href="https://twitter.com/dulundu" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+              <XLogo className="h-5 w-5" />
+            </Link>
+            <Link href="https://bsky.app/profile/dulundu.dev" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+              <BlueSkyLogo className="h-5 w-5" />
+            </Link>
+            <Link href="https://dribbble.com/dulundu" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+              <DribbleLogo className="h-5 w-5" />
             </Link>
           </div>
         </div>
