@@ -222,6 +222,7 @@ model Order {
   user  User?       @relation(fields: [userId], references: [id])
   items OrderItem[]
 
+  @@index([userId])
   @@index([customerEmail])
   @@index([status])
   @@index([createdAt])

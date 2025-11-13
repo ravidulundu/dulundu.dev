@@ -42,7 +42,12 @@ export async function POST(req: NextRequest) {
         });
 
         // Only update if order is still pending (idempotency)
-        if (order && order.status === 'pending') {
+        if (!order) {
+          console.error(`Order not found for session ${session.id}:`, session.metadata.orderId);
+          return NextResponse.json({ error: 'Order not found' }, { status: 404 });
+        }
+
+        if (order.status === 'pending') {
           await db.order.update({
             where: { id: session.metadata.orderId },
             data: {
@@ -50,8 +55,6 @@ export async function POST(req: NextRequest) {
               stripePaymentIntent: session.payment_intent as string,
             },
           });
-        } else if (!order) {
-          console.error(`Order not found for session ${session.id}:`, session.metadata.orderId);
         } else {
           console.log(`Order ${session.metadata.orderId} already processed with status: ${order.status}`);
         }

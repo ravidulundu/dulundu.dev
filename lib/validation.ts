@@ -53,7 +53,10 @@ export function isDateInFuture(date: Date): boolean {
 }
 
 /**
- * Email validation regex (RFC 5322 simplified)
+ * Email validation regex - basic format check
+ * Checks for: non-whitespace + @ + non-whitespace + . + non-whitespace
+ * Note: This is NOT RFC 5322 compliant - it's a simplified check for basic email format
+ * For production use, consider using a library like 'validator' or 'zod' for stricter validation
  */
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -69,20 +72,20 @@ export function isValidEmail(email: string): boolean {
 
 /**
  * Validates and normalizes an email address
- * Returns normalized email or null if invalid
+ * Returns normalized email (lowercase, trimmed) or null if invalid
  */
 export function validateEmail(email: string | null | undefined): string | null {
   if (!email || typeof email !== 'string') {
     return null;
   }
 
-  const trimmed = email.trim().toLowerCase();
+  const normalized = email.trim().toLowerCase();
 
-  if (!isValidEmail(trimmed)) {
+  if (!isValidEmail(normalized)) {
     return null;
   }
 
-  return trimmed;
+  return normalized;
 }
 
 /**
@@ -98,12 +101,20 @@ export function isValidSlug(slug: string): boolean {
 
 /**
  * Sanitizes a string to create a valid slug
+ * Returns empty string if input is invalid
  */
 export function sanitizeSlug(text: string): string {
-  return text
+  if (!text || typeof text !== 'string') {
+    return '';
+  }
+
+  const slug = text
     .toLowerCase()
     .trim()
-    .replace(/[^\w\s-]/g, '') // Remove special characters
+    .replace(/[^a-z0-9\s-]/g, '') // Remove non-ASCII special characters
     .replace(/[\s_]+/g, '-') // Replace spaces and underscores with hyphens
     .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+
+  // Return 'untitled' if result is empty
+  return slug.length > 0 ? slug : 'untitled';
 }
