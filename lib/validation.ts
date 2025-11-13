@@ -72,7 +72,7 @@ export function isValidEmail(email: string): boolean {
  * Returns normalized email or null if invalid
  */
 export function validateEmail(email: string | null | undefined): string | null {
-  if (!email) {
+  if (!email || typeof email !== 'string') {
     return null;
   }
 
