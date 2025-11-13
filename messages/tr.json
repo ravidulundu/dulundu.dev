@@ -233,16 +233,23 @@
   "portfolio": {
     "title": "Portfolyo",
     "subtitle": "Tamamlanmış projelerimizi ve vaka çalışmalarımızı keşfedin",
-    "featured": "Öne Çıkan Projeler",
+    "featured": "Öne Çıkan",
     "allProjects": "Tüm Projeler",
     "noProjects": "Henüz proje bulunmuyor. Yakında tekrar kontrol edin!",
     "viewProject": "Projeyi Görüntüle",
     "backToPortfolio": "Portfolyo'ya Dön",
     "viewLive": "Canlı Projeyi Görüntüle",
+    "viewCode": "Kodu Görüntüle",
     "technologies": "Kullanılan Teknolojiler",
+    "techUsed": "teknoloji kullanıldı",
     "projectDetails": "Proje Detayları",
     "category": "Kategori",
-    "website": "Web Sitesi"
+    "website": "Web Sitesi",
+    "client": "Müşteri",
+    "challenge": "Meydan Okuma",
+    "solution": "Çözüm",
+    "results": "Sonuçlar & Etki",
+    "measurableImpact": "Elde edilen ölçülebilir iyileştirmeler"
   },
   "auth": {
     "signin": {

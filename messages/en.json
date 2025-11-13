@@ -233,16 +233,23 @@
   "portfolio": {
     "title": "Portfolio",
     "subtitle": "Explore our completed projects and case studies",
-    "featured": "Featured Projects",
+    "featured": "Featured",
     "allProjects": "All Projects",
     "noProjects": "No projects available yet. Check back soon!",
     "viewProject": "View Project",
     "backToPortfolio": "Back to Portfolio",
     "viewLive": "View Live Project",
+    "viewCode": "View Code",
     "technologies": "Technologies Used",
+    "techUsed": "technologies used",
     "projectDetails": "Project Details",
     "category": "Category",
-    "website": "Website"
+    "website": "Website",
+    "client": "Client",
+    "challenge": "The Challenge",
+    "solution": "The Solution",
+    "results": "Results & Impact",
+    "measurableImpact": "Measurable improvements achieved"
   },
   "auth": {
     "signin": {

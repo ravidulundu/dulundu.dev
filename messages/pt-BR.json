@@ -233,16 +233,23 @@
   "portfolio": {
     "title": "Portfólio",
     "subtitle": "Explore nossos projetos concluídos e estudos de caso",
-    "featured": "Projetos em Destaque",
+    "featured": "Destaque",
     "allProjects": "Todos os Projetos",
     "noProjects": "Nenhum projeto disponível ainda. Volte em breve!",
     "viewProject": "Ver Projeto",
     "backToPortfolio": "Voltar ao Portfólio",
     "viewLive": "Ver Projeto ao Vivo",
+    "viewCode": "Ver Código",
     "technologies": "Tecnologias Utilizadas",
+    "techUsed": "tecnologias utilizadas",
     "projectDetails": "Detalhes do Projeto",
     "category": "Categoria",
-    "website": "Site"
+    "website": "Site",
+    "client": "Cliente",
+    "challenge": "O Desafio",
+    "solution": "A Solução",
+    "results": "Resultados & Impacto",
+    "measurableImpact": "Melhorias mensuráveis alcançadas"
   },
   "auth": {
     "signin": {
