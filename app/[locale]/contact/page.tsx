@@ -208,7 +208,7 @@ export default function ContactPage() {
                     <h3 className="text-sm font-medium mb-1">
                       {t('info.hours')}
                     </h3>
-                    <p className="text-muted-foreground">Mon - Fri: 9:00 - 18:00 UTC</p>
+                    <p className="text-muted-foreground">{t('info.hoursValue')}</p>
                   </div>
                 </div>
               </CardContent>

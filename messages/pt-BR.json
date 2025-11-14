@@ -285,7 +285,8 @@
       "title": "Informações de Contato",
       "email": "E-mail",
       "location": "Localização",
-      "hours": "Horário Comercial"
+      "hours": "Horário Comercial",
+      "hoursValue": "Seg - Sex: 9:00 - 18:00 UTC"
     },
     "success": "Mensagem enviada com sucesso! Entraremos em contato em breve.",
     "error": "Falha ao enviar mensagem. Tente novamente ou envie um e-mail diretamente."

@@ -285,7 +285,8 @@
       "title": "İletişim Bilgileri",
       "email": "E-posta",
       "location": "Konum",
-      "hours": "Çalışma Saatleri"
+      "hours": "Çalışma Saatleri",
+      "hoursValue": "Pzt - Cum: 9:00 - 18:00 UTC"
     },
     "success": "Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.",
     "error": "Mesaj gönderilemedi. Lütfen tekrar deneyin veya doğrudan e-posta gönderin."

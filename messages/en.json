@@ -267,7 +267,8 @@
       "title": "Contact Information",
       "email": "Email",
       "location": "Location",
-      "hours": "Business Hours"
+      "hours": "Business Hours",
+      "hoursValue": "Mon - Fri: 9:00 - 18:00 UTC"
     },
     "success": "Message sent successfully! We'll get back to you soon.",
     "error": "Failed to send message. Please try again or email us directly."
