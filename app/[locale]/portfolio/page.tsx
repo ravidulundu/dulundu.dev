@@ -27,9 +27,10 @@ async function getProjects(locale: string) {
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  const t = await getTranslations('portfolio');
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'portfolio' });
 
   return {
     title: t('title'),
@@ -46,10 +47,11 @@ export async function generateMetadata({
 export default async function PortfolioPage({
   params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  const projects = await getProjects(params.locale);
-  const t = await getTranslations('portfolio');
+  const { locale } = await params;
+  const projects = await getProjects(locale);
+  const t = await getTranslations({ locale, namespace: 'portfolio' });
 
   // Separate featured projects
   const featuredProjects = projects.filter((p) => p.featured);
@@ -86,7 +88,7 @@ export default async function PortfolioPage({
                   category={project.category}
                   featured={project.featured}
                   images={(translation.images as string[]) || []}
-                  locale={params.locale}
+                  locale={locale}
                 />
               );
             })}
@@ -112,7 +114,7 @@ export default async function PortfolioPage({
                   category={project.category}
                   featured={project.featured}
                   images={(translation.images as string[]) || []}
-                  locale={params.locale}
+                  locale={locale}
                 />
               );
             })}
