@@ -61,6 +61,9 @@ BUG_FIX_IMPLEMENTATION_REPORT_*.md
 BUG_FIX_REPORT_*.md
 COMPREHENSIVE_BUG_REPORT_*.md
 FINAL_BUG_FIX_SUMMARY_*.md
+FINAL_VERIFICATION_SUMMARY.md
+SYSTEM_HEALTH_REPORT.md
+PRODUCT_FLOW_TEST_REPORT.md
 IMPLEMENTATION_REPORT.md
 SESSION-RESUME.md
 PROGRESS.md
@@ -93,3 +96,8 @@ SPECPULSE-GUIDE.md
 # Claude Code settings (local only)
 .claude/settings.local.json
 .claude/scripts/
+
+# Test artifacts (local only)
+test-screenshots/
+test-*.js
+*.test.log
