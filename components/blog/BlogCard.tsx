@@ -5,6 +5,7 @@ import { Calendar, ArrowRight, Star } from "lucide-react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from 'next-intl';
 
 interface BlogCardProps {
   post: {
@@ -21,6 +22,7 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({ post, locale }: BlogCardProps) {
+  const t = useTranslations('blog');
   const translation = post.translations[0]; // Already filtered by locale in the API
 
   if (!translation || !post.publishedAt) {
@@ -42,7 +44,7 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
             <div className="absolute top-4 right-4 z-10">
               <Badge variant="secondary" className="gap-1">
                 <Star className="w-3 h-3 fill-current" />
-                Featured
+                {t('featured')}
               </Badge>
             </div>
           )}
@@ -56,7 +58,7 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
             <div className="absolute top-4 right-4">
               <Badge variant="secondary" className="gap-1">
                 <Star className="w-3 h-3 fill-current" />
-                Featured
+                {t('featured')}
               </Badge>
             </div>
           )}
@@ -86,7 +88,7 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
       <CardFooter className="p-6 pt-0">
         <Button variant="link" asChild className="p-0 h-auto">
           <Link href={`/${locale}/blog/${post.slug}`} className="group/link">
-            Read More
+            {t('readMore')}
             <ArrowRight className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" />
           </Link>
         </Button>

@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { scaleIn, fadeInUp } from '@/lib/animations';
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 interface InteractiveProjectCardProps {
   slug: string;
@@ -36,6 +37,7 @@ export function InteractiveProjectCard({
   url,
   index = 0,
 }: InteractiveProjectCardProps) {
+  const t = useTranslations('portfolio');
   const previewImage = images && images.length > 0 ? images[0] : null;
   const [ref, inView] = useInView({
     threshold: 0.2,
@@ -94,7 +96,7 @@ export function InteractiveProjectCard({
           <Button variant="default" className="rounded-full" asChild>
             <Link href={`/${locale}/portfolio/${slug}`}>
               <ExternalLink className="mr-1 h-4 w-4" />
-              View Details
+              {t('viewDetails')}
             </Link>
           </Button>
           {url && (
@@ -105,7 +107,7 @@ export function InteractiveProjectCard({
             >
               <a href={url} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="mr-1 h-4 w-4" />
-                Live Demo
+                {t('liveDemo')}
               </a>
             </Button>
           )}

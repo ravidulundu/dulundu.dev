@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Star, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useTranslations } from 'next-intl';
 
 interface ProjectCardProps {
   slug: string;
@@ -23,6 +24,7 @@ export default function ProjectCard({
   images,
   locale,
 }: ProjectCardProps) {
+  const t = useTranslations('portfolio');
   const previewImage = images && images.length > 0 ? images[0] : null;
 
   return (
@@ -62,7 +64,7 @@ export default function ProjectCard({
             <div className="absolute top-4 right-4">
               <Badge variant="secondary" className="gap-1 shadow-lg">
                 <Star className="w-4 h-4 fill-current" />
-                Featured
+                {t('featured')}
               </Badge>
             </div>
           )}
@@ -86,7 +88,7 @@ export default function ProjectCard({
 
           {/* View Project Link */}
           <div className="flex items-center text-primary font-medium group-hover:gap-2 transition-all">
-            View Project
+            {t('viewProject')}
             <ArrowRight className="w-5 h-5 ml-1 group-hover:translate-x-1 transition-transform" />
           </div>
         </CardContent>
