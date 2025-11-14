@@ -77,6 +77,81 @@
 - **SpecPulse**: Specification-driven development workflow
 - **Git Hooks**: Otomatik kod kalite kontrolleri (opsiyonel)
 
+---
+
+## 📸 Screenshots
+
+> **Not**: Screenshot'lar yakında eklenecek. Projeyi çalıştırıp kendiniz görebilirsiniz!
+
+### 🏠 Homepage
+
+<div align="center">
+  <img src="./docs/images/homepage/hero-section.png" alt="Homepage Hero Section" width="800">
+  <p><em>Ana sayfa hero section - Modern, profesyonel tasarım</em></p>
+</div>
+
+### 🔐 Admin Dashboard
+
+<div align="center">
+  <img src="./docs/images/admin/dashboard.png" alt="Admin Dashboard" width="800">
+  <p><em>Admin dashboard - İstatistikler ve hızlı erişim kartları</em></p>
+</div>
+
+<table>
+  <tr>
+    <td width="50%">
+      <img src="./docs/images/admin/blog-editor.png" alt="Blog Editor" width="100%">
+      <p align="center"><em>TipTap Rich Text Editor</em></p>
+    </td>
+    <td width="50%">
+      <img src="./docs/images/admin/products-list.png" alt="Products List" width="100%">
+      <p align="center"><em>Ürün Yönetimi</em></p>
+    </td>
+  </tr>
+</table>
+
+### 💼 Portfolio Showcase
+
+<div align="center">
+  <img src="./docs/images/public/portfolio-showcase.png" alt="Portfolio Showcase" width="800">
+  <p><em>Portfolio showcase - Responsive galeri görünümü</em></p>
+</div>
+
+### ✨ Features
+
+<table>
+  <tr>
+    <td width="33%">
+      <img src="./docs/images/features/language-switcher.png" alt="Language Switcher" width="100%">
+      <p align="center"><em>Dil Değiştirici</em></p>
+    </td>
+    <td width="33%">
+      <img src="./docs/images/features/dark-mode.png" alt="Dark Mode" width="100%">
+      <p align="center"><em>Dark Mode</em></p>
+    </td>
+    <td width="33%">
+      <img src="./docs/images/features/responsive-design.png" alt="Responsive Design" width="100%">
+      <p align="center"><em>Responsive Tasarım</em></p>
+    </td>
+  </tr>
+</table>
+
+### 💳 Stripe Checkout
+
+<div align="center">
+  <img src="./docs/images/stripe/checkout-page.png" alt="Stripe Checkout" width="800">
+  <p><em>Stripe checkout flow - Güvenli ödeme</em></p>
+</div>
+
+> **Screenshot'lar nasıl eklenir?**
+>
+> 1. Development sunucusunu başlatın: `npm run dev`
+> 2. Sayfaları ziyaret edin ve screenshot alın
+> 3. `docs/images/` klasörüne ekleyin (structure için [docs/images/README.md](./docs/images/README.md) dosyasına bakın)
+> 4. Commit & push!
+
+---
+
 ## 🚀 Hızlı Başlangıç
 
 ### Ön Gereksinimler
