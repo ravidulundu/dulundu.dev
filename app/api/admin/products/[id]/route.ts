@@ -84,37 +84,7 @@ export async function PUT(
   try {
     const { slug, type, price, currency, status, translations, priceOverrides } = await req.json();
 
-    // Check if product exists
-    const existingProduct = await db.product.findUnique({
-      where: { id },
-    });
-
-    if (!existingProduct) {
-      return NextResponse.json(
-        { error: 'Product not found' },
-        { status: 404 }
-      );
-    }
-
-    // Check if slug is being changed and if it conflicts
-    if (slug !== existingProduct.slug) {
-      const slugConflict = await db.product.findUnique({
-        where: { slug },
-      });
-
-      if (slugConflict) {
-        return NextResponse.json(
-          { error: 'A product with this slug already exists' },
-          { status: 409 }
-        );
-      }
-    }
-
-    // Delete existing translations and create new ones
-    await db.productTranslation.deleteMany({
-      where: { productId: id },
-    });
-
+    // Validate price early
     const basePriceValue = Number(price);
     if (Number.isNaN(basePriceValue) || basePriceValue <= 0) {
       return NextResponse.json(
@@ -125,46 +95,98 @@ export async function PUT(
     const normalizedCurrency = normalizeCurrency(currency);
     const priceMap = buildPriceMap(basePriceValue, normalizedCurrency, priceOverrides);
 
-    const product = await db.product.update({
-      where: { id },
-      data: {
-        slug,
-        type,
-        price: basePriceValue,
-        currency: normalizedCurrency,
-        status,
-        translations: {
-          create: translations.map((t: any) => ({
-            locale: t.locale,
-            title: t.title,
-            description: t.description || '',
-            features: t.features || null,
-            coverImage: t.coverImage || null,
-          })),
+    // BUG-NEW-004 & BUG-NEW-008 FIX: Use transaction for atomicity
+    const result = await db.$transaction(async (tx) => {
+      // Check if product exists
+      const existingProduct = await tx.product.findUnique({
+        where: { id },
+      });
+
+      if (!existingProduct) {
+        throw new Error('Product not found');
+      }
+
+      // Check if slug is being changed and if it conflicts
+      if (slug !== existingProduct.slug) {
+        const slugConflict = await tx.product.findUnique({
+          where: { slug },
+        });
+
+        if (slugConflict) {
+          throw new Error('A product with this slug already exists');
+        }
+      }
+
+      // Delete existing translations
+      await tx.productTranslation.deleteMany({
+        where: { productId: id },
+      });
+
+      // Update product with new translations
+      const product = await tx.product.update({
+        where: { id },
+        data: {
+          slug,
+          type,
+          price: basePriceValue,
+          currency: normalizedCurrency,
+          status,
+          translations: {
+            create: translations.map((t: any) => ({
+              locale: t.locale,
+              title: t.title,
+              description: t.description || '',
+              features: t.features || null,
+              coverImage: t.coverImage || null,
+            })),
+          },
         },
-      },
-      include: {
-        translations: true,
-        prices: true,
-      },
+      });
+
+      // Sync prices within same transaction
+      await Promise.all(
+        Object.entries(priceMap).map(([currencyCode, amount]) =>
+          tx.productPrice.upsert({
+            where: {
+              productId_currency: {
+                productId: id,
+                currency: currencyCode
+              }
+            },
+            update: { amount },
+            create: {
+              productId: id,
+              currency: currencyCode,
+              amount
+            }
+          })
+        )
+      );
+
+      // Return final product with all relations
+      return tx.product.findUnique({
+        where: { id },
+        include: {
+          translations: true,
+          prices: true,
+        },
+      });
     });
 
-    await syncProductPrices(product.id, priceMap);
-
-    const productWithPrices = await db.product.findUnique({
-      where: { id: product.id },
-      include: {
-        translations: true,
-        prices: true,
-      },
-    });
-
-    return NextResponse.json(productWithPrices);
+    return NextResponse.json(result);
   } catch (error) {
-    console.error('Error updating product:', error);
+    // Sanitized error logging (BUG-NEW-009 fix)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Error updating product:', { errorMessage });
+
+    // Return appropriate error based on message
+    const statusCode = errorMessage === 'Product not found' ? 404
+      : errorMessage === 'A product with this slug already exists' ? 409
+      : 500;
+
     return NextResponse.json(
-      { error: 'Failed to update product' },
-      { status: 500 }
+      { error: errorMessage },
+      { status: statusCode }
     );
   }
 }

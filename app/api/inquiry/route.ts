@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { validateEmail } from '@/lib/validation';
+import { db } from '@/lib/db';
+
+// Input validation limits (BUG-NEW-005 fix)
+const MAX_NAME_LENGTH = 100;
+const MAX_COMPANY_LENGTH = 150;
+const MAX_DESCRIPTION_LENGTH = 5000;
 
 export async function POST(req: NextRequest) {
   try {
@@ -14,6 +20,28 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Validate field lengths (BUG-NEW-005 fix)
+    if (name.length > MAX_NAME_LENGTH) {
+      return NextResponse.json(
+        { error: `Name must be ${MAX_NAME_LENGTH} characters or less` },
+        { status: 400 }
+      );
+    }
+
+    if (company && company.length > MAX_COMPANY_LENGTH) {
+      return NextResponse.json(
+        { error: `Company name must be ${MAX_COMPANY_LENGTH} characters or less` },
+        { status: 400 }
+      );
+    }
+
+    if (description.length > MAX_DESCRIPTION_LENGTH) {
+      return NextResponse.json(
+        { error: `Description must be ${MAX_DESCRIPTION_LENGTH} characters or less` },
+        { status: 400 }
+      );
+    }
+
     // Validate email format
     const validatedEmail = validateEmail(email);
     if (!validatedEmail) {
@@ -23,32 +51,50 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // TODO: Implement email sending logic
-    // For now, just log the inquiry
-    console.log('Project Inquiry:', {
-      name,
-      email: validatedEmail,
-      company,
-      projectType,
-      budget,
-      timeline,
-      description,
-      timestamp: new Date().toISOString(),
+    // Save inquiry to database (BUG-NEW-002 fix)
+    const inquiry = await db.inquiry.create({
+      data: {
+        name: name.trim(),
+        email: validatedEmail,
+        company: company?.trim() || null,
+        projectType,
+        budget,
+        timeline,
+        description: description.trim(),
+        status: 'new',
+      },
     });
 
-    // In production, you would send an email here using a service like:
-    // - SendGrid
-    // - AWS SES
-    // - Resend
-    // - Postmark
-    // etc.
+    // TODO: Send email notification to admin
+    // Consider using Resend, SendGrid, or AWS SES
+    // await sendEmail({
+    //   to: process.env.ADMIN_EMAIL,
+    //   subject: `New Project Inquiry: ${projectType}`,
+    //   template: 'inquiry-notification',
+    //   data: { inquiry }
+    // });
+
+    // Log for immediate visibility (until email service is set up)
+    console.log('New inquiry saved:', {
+      id: inquiry.id,
+      email: validatedEmail,
+      projectType,
+      timestamp: inquiry.createdAt.toISOString(),
+    });
 
     return NextResponse.json(
-      { success: true, message: 'Inquiry submitted successfully' },
-      { status: 200 }
+      {
+        success: true,
+        message: 'Inquiry submitted successfully',
+        inquiryId: inquiry.id
+      },
+      { status: 201 }
     );
   } catch (error) {
-    console.error('Error processing inquiry:', error);
+    // Sanitized error logging (BUG-NEW-009 fix)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Error processing inquiry:', { errorMessage });
+
     return NextResponse.json(
       { error: 'Failed to process inquiry' },
       { status: 500 }

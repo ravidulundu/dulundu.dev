@@ -45,61 +45,74 @@ export async function PUT(
     const body = await req.json();
     const { slug, status, featured, publishedAt, translations } = body;
 
-    // Check if post exists
-    const existing = await db.post.findUnique({
-      where: { id },
-    });
-
-    if (!existing) {
-      return NextResponse.json({ error: 'Post not found' }, { status: 404 });
-    }
-
-    // Check if slug is taken by another post
-    if (slug && slug !== existing.slug) {
-      const slugTaken = await db.post.findUnique({
-        where: { slug },
+    // BUG-NEW-004 FIX: Use transaction for atomicity
+    const result = await db.$transaction(async (tx) => {
+      // Check if post exists
+      const existing = await tx.post.findUnique({
+        where: { id },
       });
 
-      if (slugTaken) {
-        return NextResponse.json(
-          { error: 'Slug already exists' },
-          { status: 409 }
-        );
+      if (!existing) {
+        throw new Error('Post not found');
       }
-    }
 
-    // Update post and translations
-    const post = await db.post.update({
-      where: { id },
-      data: {
-        slug: slug || existing.slug,
-        status: status || existing.status,
-        featured: featured !== undefined ? featured : existing.featured,
-        publishedAt: parseDate(publishedAt) || existing.publishedAt,
-        translations: translations
-          ? {
-              deleteMany: {}, // Delete existing translations
-              create: translations.map((t: any) => ({
-                locale: t.locale,
-                title: t.title,
-                excerpt: t.excerpt,
-                content: t.content,
-                coverImage: t.coverImage || null,
-              })),
-            }
-          : undefined,
-      },
-      include: {
-        translations: true,
-      },
+      // Check if slug is taken by another post
+      if (slug && slug !== existing.slug) {
+        const slugTaken = await tx.post.findUnique({
+          where: { slug },
+        });
+
+        if (slugTaken) {
+          throw new Error('Slug already exists');
+        }
+      }
+
+      // If translations are being updated, delete old ones first
+      if (translations) {
+        await tx.postTranslation.deleteMany({
+          where: { postId: id },
+        });
+      }
+
+      // Update post with new translations
+      return tx.post.update({
+        where: { id },
+        data: {
+          slug: slug || existing.slug,
+          status: status || existing.status,
+          featured: featured !== undefined ? featured : existing.featured,
+          publishedAt: parseDate(publishedAt) || existing.publishedAt,
+          translations: translations
+            ? {
+                create: translations.map((t: any) => ({
+                  locale: t.locale,
+                  title: t.title,
+                  excerpt: t.excerpt,
+                  content: t.content,
+                  coverImage: t.coverImage || null,
+                })),
+              }
+            : undefined,
+        },
+        include: {
+          translations: true,
+        },
+      });
     });
 
-    return NextResponse.json(post);
+    return NextResponse.json(result);
   } catch (error) {
-    console.error('Error updating post:', error);
+    // Sanitized error logging (BUG-NEW-009 fix)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Error updating post:', { errorMessage });
+
+    const statusCode = errorMessage === 'Post not found' ? 404
+      : errorMessage === 'Slug already exists' ? 409
+      : 500;
+
     return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
+      { error: errorMessage },
+      { status: statusCode }
     );
   }
 }

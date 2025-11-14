@@ -68,7 +68,7 @@ export default async function CheckoutSuccessPage({
 
   const result = await getOrderDetails(searchParams.session_id);
 
-  if (!result) {
+  if (!result || !result.order) {
     return (
       <PageWrapper>
         <div className="container mx-auto px-4 py-12 max-w-2xl">
@@ -94,6 +94,34 @@ export default async function CheckoutSuccessPage({
   }
 
   const { session, order } = result;
+
+  // BUG-NEW-006 FIX: Verify session email matches the order
+  // This provides basic protection against session ID enumeration attacks
+  // For production, consider using cryptographic tokens or requiring authentication
+  if (session.customer_email !== order.customerEmail) {
+    return (
+      <PageWrapper>
+        <div className="container mx-auto px-4 py-12 max-w-2xl">
+          <div className="bg-destructive/10 border border-destructive/30 rounded-lg p-8 text-center">
+            <h1 className="text-2xl font-bold text-destructive mb-4">
+              {t('unauthorized', { defaultMessage: 'Unauthorized' })}
+            </h1>
+            <p className="text-muted-foreground dark:text-muted-foreground/70 mb-6">
+              {t('unauthorizedDesc', {
+                defaultMessage: 'You are not authorized to view this order.',
+              })}
+            </p>
+            <Link
+              href={`/${params.locale}`}
+              className="inline-block px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors"
+            >
+              {t('backToHome', { defaultMessage: 'Back to Home' })}
+            </Link>
+          </div>
+        </div>
+      </PageWrapper>
+    );
+  }
 
   return (
     <PageWrapper>

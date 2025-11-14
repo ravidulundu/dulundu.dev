@@ -54,9 +54,40 @@ THEME_AUDIT_REPORT.md
 .specpulse/memory/notes/specpulse-sync-*.md
 .playwright-mcp/
 
+# Bug reports and analysis (development artifacts)
+BUG_ANALYSIS_REPORT.md
+BUG_FIX_IMPLEMENTATION_REPORT.md
+BUG_FIX_IMPLEMENTATION_REPORT_*.md
+COMPREHENSIVE_BUG_REPORT_*.md
+FINAL_BUG_FIX_SUMMARY_*.md
+IMPLEMENTATION_REPORT.md
+SESSION-RESUME.md
+PROGRESS.md
+COPILOT_REVIEW_RESPONSES.md
+GIT_CLEANUP_SUMMARY.md
+
+# Deployment and production readiness docs (keep only essential)
+DEPLOYMENT-READY.md
+PRODUCTION-READINESS.md
+SPECPULSE-PRODUCTION-READINESS.md
+DOKPLOY-DEPLOYMENT.md
+FIX_GUIDE.md
+
+# Connection and architecture notes (team can use README instead)
+CONNECTIONS.md
+ARCHITECTURE.md
+SETUP.md
+QUICKSTART.md
+SPECPULSE-GUIDE.md
+
 # SpecPulse (optional - commit specs & plans for team collaboration)
 .specpulse/cache/
 .specpulse/checkpoints/
+.specpulse/memory/
 # Specs and plans can be committed for team collaboration
 # .specpulse/specs/
 # .specpulse/plans/
+
+# Claude Code settings (local only)
+.claude/settings.local.json
+.claude/scripts/

@@ -40,9 +40,6 @@ npm run dev
 
 Visit `http://localhost:3000` 🎉
 
-**📖 Need detailed setup instructions?** See [SETUP.md](./SETUP.md)
-**⚡ Want a quick guide?** See [QUICKSTART.md](./QUICKSTART.md)
-
 ## 🛠️ Tech Stack
 
 ### Core
@@ -78,8 +75,6 @@ dulundu.dev/
 ├── messages/             # i18n translations
 └── types/                # TypeScript types
 ```
-
-**📚 Detailed architecture:** See [ARCHITECTURE.md](./ARCHITECTURE.md)
 
 ## 🎯 Services Offered
 
@@ -166,9 +161,27 @@ This is a private project, but feel free to fork and adapt for your own use.
 
 ## 📄 Documentation
 
-- [SETUP.md](./SETUP.md) - Comprehensive setup guide with troubleshooting
-- [QUICKSTART.md](./QUICKSTART.md) - Get started in 5 minutes
-- [ARCHITECTURE.md](./ARCHITECTURE.md) - System architecture and design decisions
+- **CLAUDE.md** - Development guidelines and AI assistant context
+- **README.md** - This file (setup and usage guide)
+
+For feature specifications and implementation plans, see `.specpulse/` directory.
+
+## 🔄 Recent Updates (2025-11-14)
+
+### Security Enhancements
+- ✅ Added transaction safety for all database update operations
+- ✅ Implemented input length validation to prevent DoS attacks
+- ✅ Added session ownership verification in checkout flow
+- ✅ Sanitized error logging for production security
+
+### New Features
+- ✅ Project inquiry form with database persistence
+- ✅ Enhanced indexes for better query performance
+
+### Bug Fixes
+- Fixed inquiry data loss (100% of submissions now saved)
+- Fixed race conditions in admin panel updates
+- Fixed session tampering vulnerability
 
 ## 📝 License
 
