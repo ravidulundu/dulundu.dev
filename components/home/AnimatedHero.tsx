@@ -42,18 +42,6 @@ export function AnimatedHero({
 
       {/* Content */}
       <div className="relative z-[1] text-center max-w-screen-md">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-        >
-          <Badge className="rounded-full border-none">
-            <Zap className="fill-current w-4 h-4 mr-1" />
-            {badgeText}
-          </Badge>
-        </motion.div>
-
         {/* Main Heading */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}

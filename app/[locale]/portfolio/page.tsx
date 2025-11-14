@@ -32,15 +32,11 @@ export async function generateMetadata({
   const t = await getTranslations('portfolio');
 
   return {
-    title: t('title', { defaultMessage: 'Portfolio' }),
-    description: t('subtitle', {
-      defaultMessage: 'Explore our completed projects and case studies',
-    }),
+    title: t('title'),
+    description: t('subtitle'),
     openGraph: {
-      title: `${t('title', { defaultMessage: 'Portfolio' })} | Ege Dulundu`,
-      description: t('subtitle', {
-        defaultMessage: 'Explore our completed projects and case studies',
-      }),
+      title: `${t('title')} | Ege Dulundu`,
+      description: t('subtitle'),
       type: 'website',
       url: `https://dulundu.dev/${params.locale}/portfolio`,
     },
@@ -65,12 +61,10 @@ export default async function PortfolioPage({
       {/* Header */}
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-foreground dark:text-white mb-4">
-          {t('title', { defaultMessage: 'Portfolio' })}
+          {t('title')}
         </h1>
         <p className="text-xl text-muted-foreground dark:text-muted-foreground/70 max-w-2xl mx-auto">
-          {t('subtitle', {
-            defaultMessage: 'Explore our completed projects and case studies',
-          })}
+          {t('subtitle')}
         </p>
       </div>
 
@@ -78,7 +72,7 @@ export default async function PortfolioPage({
       {featuredProjects.length > 0 && (
         <div className="mb-16">
           <h2 className="text-2xl font-bold text-foreground dark:text-white mb-6">
-            {t('featured', { defaultMessage: 'Featured' })}
+            {t('featured')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredProjects.map((project) => {
@@ -104,7 +98,7 @@ export default async function PortfolioPage({
       {regularProjects.length > 0 ? (
         <div>
           <h2 className="text-2xl font-bold text-foreground dark:text-white mb-6">
-            {t('allProjects', { defaultMessage: 'All Projects' })}
+            {t('allProjects')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {regularProjects.map((project) => {
@@ -128,9 +122,7 @@ export default async function PortfolioPage({
         !featuredProjects.length && (
           <div className="text-center py-12">
             <p className="text-muted-foreground dark:text-muted-foreground text-lg">
-              {t('noProjects', {
-                defaultMessage: 'No projects available yet. Check back soon!',
-              })}
+              {t('noProjects')}
             </p>
           </div>
         )

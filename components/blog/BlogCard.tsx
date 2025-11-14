@@ -42,28 +42,12 @@ export default function BlogCard({ post, locale }: BlogCardProps) {
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-300"
           />
-          {post.featured && (
-            <div className="absolute top-4 right-4 z-10">
-              <Badge variant="secondary" className="gap-1">
-                <Star className="w-3 h-3 fill-current" />
-                {t('featured')}
-              </Badge>
-            </div>
-          )}
         </div>
       ) : (
         <div className="relative h-48 bg-primary/10 flex items-center justify-center">
           <div className="text-primary/30 text-6xl font-bold">
             {translation.title.charAt(0).toUpperCase()}
           </div>
-          {post.featured && (
-            <div className="absolute top-4 right-4">
-              <Badge variant="secondary" className="gap-1">
-                <Star className="w-3 h-3 fill-current" />
-                {t('featured')}
-              </Badge>
-            </div>
-          )}
         </div>
       )}
 

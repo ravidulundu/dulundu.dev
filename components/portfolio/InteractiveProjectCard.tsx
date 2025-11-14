@@ -80,16 +80,6 @@ export function InteractiveProjectCard({
         <h3 className="text-xl font-semibold mb-2">{title}</h3>
         <p className="text-muted-foreground mb-4">{description}</p>
 
-        {/* Technologies */}
-        {technologies && technologies.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-6">
-            {technologies.map((tech, i) => (
-              <Badge key={i} variant="secondary" className="rounded-full">
-                {tech}
-              </Badge>
-            ))}
-          </div>
-        )}
 
         {/* Actions */}
         <div className="flex gap-3 mt-auto">

@@ -61,22 +61,6 @@ export default function ProjectCard({
             </div>
           )}
 
-          {/* Featured Badge */}
-          {featured && (
-            <div className="absolute top-4 right-4">
-              <Badge variant="secondary" className="gap-1 shadow-lg">
-                <Star className="w-4 h-4 fill-current" />
-                {t('featured')}
-              </Badge>
-            </div>
-          )}
-
-          {/* Category Badge */}
-          <div className="absolute bottom-4 left-4">
-            <Badge variant="default" className="shadow-lg">
-              {category.replace('-', ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
-            </Badge>
-          </div>
         </div>
 
         {/* Content */}
