@@ -6,9 +6,36 @@ import { getPreferredCurrencyFromRequest } from '@/lib/currency-preferences';
 import { defaultLocale } from '@/i18n';
 import { getTranslations } from 'next-intl/server';
 import { validateEmail } from '@/lib/validation';
+import { checkRateLimit, getClientIp, checkoutRateLimiter } from '@/lib/rate-limit';
 
 export async function POST(req: NextRequest) {
   try {
+    // BUG-NEW-001 FIX: Rate limiting protection for checkout
+    const clientIp = getClientIp(req);
+    const rateLimitResult = await checkRateLimit(
+      `checkout:${clientIp}`,
+      checkoutRateLimiter,
+      2 // 2 requests per minute
+    );
+
+    if (!rateLimitResult.success) {
+      return NextResponse.json(
+        {
+          error: 'Too many checkout attempts. Please try again later.',
+          retryAfter: Math.ceil((rateLimitResult.reset - Date.now()) / 1000),
+        },
+        {
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': rateLimitResult.limit.toString(),
+            'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
+            'X-RateLimit-Reset': rateLimitResult.reset.toString(),
+            'Retry-After': Math.ceil((rateLimitResult.reset - Date.now()) / 1000).toString(),
+          },
+        }
+      );
+    }
+
     const { productId, customerEmail, locale: localeInput, currency } = await req.json();
     const locale = localeInput || defaultLocale;
     const t = await getTranslations({ locale, namespace: 'products' });

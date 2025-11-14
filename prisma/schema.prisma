@@ -265,3 +265,17 @@ model Inquiry {
   @@index([email])
   @@map("inquiries")
 }
+
+// Newsletter subscribers
+model NewsletterSubscriber {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  status       String   @default("subscribed") // subscribed, unsubscribed
+  subscribedAt DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@map("newsletter_subscribers")
+}

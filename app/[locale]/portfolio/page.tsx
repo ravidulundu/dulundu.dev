@@ -39,7 +39,7 @@ export async function generateMetadata({
       title: `${t('title')} | Ege Dulundu`,
       description: t('subtitle'),
       type: 'website',
-      url: `https://dulundu.dev/${params.locale}/portfolio`,
+      url: `https://dulundu.dev/${locale}/portfolio`,
     },
   };
 }

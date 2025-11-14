@@ -32,13 +32,30 @@ export function NewsletterSignup() {
 
     setStatus('loading');
 
-    // TODO: Implement actual newsletter API endpoint
-    // For now, simulate success after 1 second
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setStatus('error');
+        setMessage(data.error || t('newsletterError'));
+        return;
+      }
+
       setStatus('success');
       setMessage(t('newsletterSuccess'));
       setEmail('');
-    }, 1000);
+    } catch (error) {
+      setStatus('error');
+      setMessage(t('newsletterError'));
+    }
   };
 
   return (

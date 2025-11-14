@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { validateEmail } from '@/lib/validation';
 import { db } from '@/lib/db';
+import { checkRateLimit, getClientIp, inquiryRateLimiter } from '@/lib/rate-limit';
 
 // Input validation limits (BUG-NEW-005 fix)
 const MAX_NAME_LENGTH = 100;
@@ -9,6 +10,32 @@ const MAX_DESCRIPTION_LENGTH = 5000;
 
 export async function POST(req: NextRequest) {
   try {
+    // BUG-NEW-001 FIX: Rate limiting protection
+    const clientIp = getClientIp(req);
+    const rateLimitResult = await checkRateLimit(
+      `inquiry:${clientIp}`,
+      inquiryRateLimiter,
+      5 // 5 requests per minute
+    );
+
+    if (!rateLimitResult.success) {
+      return NextResponse.json(
+        {
+          error: 'Too many requests. Please try again later.',
+          retryAfter: Math.ceil((rateLimitResult.reset - Date.now()) / 1000),
+        },
+        {
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': rateLimitResult.limit.toString(),
+            'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
+            'X-RateLimit-Reset': rateLimitResult.reset.toString(),
+            'Retry-After': Math.ceil((rateLimitResult.reset - Date.now()) / 1000).toString(),
+          },
+        }
+      );
+    }
+
     const body = await req.json();
     const { name, email, company, projectType, budget, timeline, description } = body;
 
