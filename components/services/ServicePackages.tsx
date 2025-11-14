@@ -64,13 +64,13 @@ export function ServicePackages({ locale }: ServicePackagesProps) {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-6 md:auto-rows-fr">
           {packages.map((pkg) => {
             const Icon = pkg.icon;
             return (
               <Card
                 key={pkg.id}
-                className={`relative ${
+                className={`relative h-full flex flex-col ${
                   pkg.popular ? 'border-primary shadow-lg' : ''
                 }`}
               >
@@ -99,7 +99,7 @@ export function ServicePackages({ locale }: ServicePackagesProps) {
                   </ul>
                 </CardContent>
 
-                <CardFooter>
+                <CardFooter className="mt-auto">
                   <Button className="w-full" variant={pkg.popular ? 'default' : 'outline'} asChild>
                     <Link href={`/${locale}/contact`}>
                       {t('bookNow')}
