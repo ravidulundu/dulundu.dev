@@ -6,24 +6,25 @@ import Image from 'next/image';
 import { BlueSkyLogo, DribbleLogo, GithubLogo, XLogo } from '@/components/icons';
 import { useLocale, useTranslations } from 'next-intl';
 
-const footerLinks = [
+const getFooterLinks = (locale: string) => [
   {
     title: 'about',
-    href: '#about',
+    href: `/${locale}#about`,
   },
   {
     title: 'experience',
-    href: '#experience',
+    href: `/${locale}#experience`,
   },
   {
     title: 'projects',
-    href: '#projects',
+    href: `/${locale}#projects`,
   },
 ];
 
 export default function Footer() {
   const locale = useLocale();
   const t = useTranslations('footer');
+  const footerLinks = getFooterLinks(locale);
 
   return (
     <footer className="mt-20">
