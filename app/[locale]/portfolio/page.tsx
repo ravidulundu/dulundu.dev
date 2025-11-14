@@ -61,7 +61,7 @@ export default async function PortfolioPage({
 
   return (
     <PageWrapper>
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 pt-32 pb-12">
       {/* Header */}
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-foreground dark:text-white mb-4">

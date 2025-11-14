@@ -35,7 +35,7 @@ export default async function ServicesPage({
   return (
     <PageWrapper>
       {/* Hero Section */}
-      <div className="py-20 px-4 md:px-8 bg-gradient-to-b from-background to-muted/20">
+      <div className="pt-32 pb-20 px-4 md:px-8 bg-gradient-to-b from-background to-muted/20">
         <div className="max-w-5xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
             {t('hero.title')}
