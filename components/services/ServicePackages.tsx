@@ -75,10 +75,10 @@ export function ServicePackages({ locale }: ServicePackagesProps) {
                 }`}
               >
                 <CardHeader>
-                  <div className="mb-4 inline-flex p-3 rounded-lg bg-primary/10">
-                    <Icon className="w-8 h-8 text-primary" />
+                  <div className="flex items-center gap-3 mb-3">
+                    <Icon className="w-5 h-5 text-primary flex-shrink-0" />
+                    <CardTitle className="text-xl">{pkg.name}</CardTitle>
                   </div>
-                  <CardTitle className="text-2xl">{pkg.name}</CardTitle>
                   <CardDescription className="text-base">
                     {pkg.description}
                   </CardDescription>
