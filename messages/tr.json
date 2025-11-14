@@ -18,7 +18,7 @@
     "tagline": "Web sitelerini hızlandırıyorum. WordPress uzmanı + full-stack geliştirici.",
     "ctaPortfolio": "Portföyü İncele",
     "ctaServices": "Hizmet Al",
-    "badgeText": "Full-Stack Web Developer"
+    "badgeText": "Full-Stack Web Geliştirici"
   },
   "bio": {
     "introduction": "WordPress optimizasyonu ve full-stack geliştirme konusunda uzmanlaşmış bir geliştiriciyim. İşletmelerin web sitesi performanslarını iyileştirmeleri ve ölçeklenebilir web uygulamaları oluşturmaları için çalışıyorum. Hız optimizasyonundan özel geliştirmeye, önemli sonuçlar sunuyorum.",
@@ -354,7 +354,7 @@
     "header": {
       "title": "Yönetim Paneli",
       "notifications": "Bildirimler",
-      "profile": "Profil",
+      "profile": "Yönetici",
       "signOut": "Çıkış Yap"
     },
     "dashboard": {

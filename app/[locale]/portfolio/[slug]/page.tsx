@@ -6,7 +6,6 @@ import ProjectGallery from "@/components/portfolio/ProjectGallery";
 import { ExternalLink, ArrowLeft, Github, CheckCircle2, TrendingUp } from "lucide-react";
 import PageWrapper from '@/components/layout/PageWrapper';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
@@ -121,17 +120,6 @@ export default async function ProjectDetailPage({
 
         {/* Hero Section */}
         <div className="mb-12">
-          <div className="flex flex-wrap items-center gap-3 mb-4">
-            <Badge variant="secondary" className="text-sm">
-              {project.category.replace('-', ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
-            </Badge>
-            {project.featured && (
-              <Badge variant="default" className="text-sm">
-                ⭐ {t('featured')}
-              </Badge>
-            )}
-          </div>
-
           <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
             {translation.title}
           </h1>
@@ -275,9 +263,9 @@ export default async function ProjectDetailPage({
             <h2 className="text-2xl font-bold mb-6">{t('technologies')}</h2>
             <div className="flex flex-wrap gap-2">
               {technologies.map((tech, index) => (
-                <Badge key={index} variant="outline" className="text-sm px-3 py-1">
+                <span key={index} className="text-sm px-3 py-1 border border-border rounded-md bg-muted/50">
                   {tech}
-                </Badge>
+                </span>
               ))}
             </div>
           </div>

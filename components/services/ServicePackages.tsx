@@ -3,7 +3,6 @@
 import { useTranslations } from 'next-intl';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { CheckCircle2, Zap, Shield, Code2, Activity } from 'lucide-react';
 import Link from 'next/link';
 
@@ -75,14 +74,6 @@ export function ServicePackages({ locale }: ServicePackagesProps) {
                   pkg.popular ? 'border-primary shadow-lg' : ''
                 }`}
               >
-                {pkg.popular && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-primary text-primary-foreground">
-                      {t('popular')}
-                    </Badge>
-                  </div>
-                )}
-
                 <CardHeader>
                   <div className="mb-4 inline-flex p-3 rounded-lg bg-primary/10">
                     <Icon className="w-8 h-8 text-primary" />
