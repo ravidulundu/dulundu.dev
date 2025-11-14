@@ -50,15 +50,12 @@ export function ProcessSection() {
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
-              <Card key={index} className="relative">
+              <Card key={index}>
                 <CardHeader>
-                  <div className="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-lg">
-                    {index + 1}
+                  <div className="flex items-center gap-3 mb-3">
+                    <Icon className="w-5 h-5 text-primary flex-shrink-0" />
+                    <CardTitle className="text-lg">{step.title}</CardTitle>
                   </div>
-                  <div className="mb-4 inline-flex p-3 rounded-lg bg-primary/10">
-                    <Icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <CardTitle className="text-xl">{step.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-3">
