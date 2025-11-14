@@ -17,7 +17,7 @@ export default function AdminSidebar() {
   const t = useTranslations('admin.sidebar');
   const navigation = [
     { name: t('links.dashboard'), segment: 'dashboard', icon: LayoutDashboard },
-    { name: t('links.products'), segment: 'products', icon: Package },
+    // Products removed - migrating to Services (Feature 028)
     { name: t('links.blog'), segment: 'blog', icon: FileText },
     { name: t('links.portfolio'), segment: 'portfolio', icon: Briefcase },
     { name: t('links.orders'), segment: 'orders', icon: ShoppingCart },
